@@ -1,11 +1,19 @@
-This project use [Laravel Framework](http://laravel.com/docs)
+# Introduction
+Khai Pham Arc Website
 
-## Configuration
-npm install
-composer install
-bower install
+### Installation
+`git clone https://PhuongVV@bitbucket.org/PhuongVV/decoks.git && cd decoks`
 
-cp .env.example .env
-php artisan migrate
+##### Environment
+`cp .env.example .env`
+##### Configuration
+`vim .env`
+##### Dependencies
+`composer install && npm install && bower install`
+### Migration
+`php artisan migrate:refresh --seed`
+### Assets Compiling
+`gulp or gulp watch`
 
-gulp watch
+### Notice
+Remember to run `composer dump-auto`
