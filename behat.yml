@@ -1,0 +1,17 @@
+default:
+    autoload:
+          - %paths.base%/tests/bootstrap/
+    extensions:
+        Laracasts\Behat:
+            # env_path: .env.behat
+        Behat\MinkExtension:
+            # base_url: http://decoks.dev
+            default_session: laravel
+            laravel: ~
+            selenium2: ~
+            browser_name: chrome
+    suites:
+      admin_features:
+            paths:    [ %paths.base%/tests/features/web ]
+            filters:  { role: admin }
+            contexts: [ AdminContext ]
