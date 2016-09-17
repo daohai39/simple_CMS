@@ -4,16 +4,22 @@ Khai Pham Arc Website
 ### Installation
 `git clone https://PhuongVV@bitbucket.org/PhuongVV/decoks.git && cd decoks`
 
-##### Environment
+### Environment
 `cp .env.example .env`
-##### Configuration
+### Configuration
 `vim .env`
-##### Dependencies
+### Dependencies
 `composer install && npm install && bower install`
 ### Migration
 `php artisan migrate:refresh --seed`
 ### Assets Compiling
-`gulp or gulp watch`
+`gulp`
+### Tests
+`vendor/bin/behat&&vendor/bin/phpunit`
+### Development
+`gulp watch`
+
+
 
 ### Notice
 Remember to run `composer dump-auto`
