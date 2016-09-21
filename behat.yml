@@ -5,7 +5,7 @@ default:
         Laracasts\Behat:
             # env_path: .env.behat
         Behat\MinkExtension:
-            # base_url: http://decoks.dev
+            base_url: http://decoks.dev
             default_session: laravel
             laravel: ~
             selenium2: ~

@@ -68,4 +68,17 @@ class AdminContext extends MinkContext implements Context, SnippetAcceptingConte
 
         $element->setValue($value);
     }
+
+    /**
+     * @Given the following categories exist:
+     */
+    public function theFollowingCategoriesExist(TableNode $table)
+    {
+        $hash = $table->getHash();
+        foreach ($hash as $row) {
+            factory(App\Category::class)->create([
+                'name' => $row['name'],
+            ]);
+        }
+    }
 }

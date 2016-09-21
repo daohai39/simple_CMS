@@ -9,6 +9,14 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://decoks.dev/';
 
+
+    public function mock($class)
+    {
+      $mock = Mockery::mock($class);
+      $this->app->instance($class, $mock);
+      return $mock;
+    }
+
     /**
      * Creates the application.
      *
