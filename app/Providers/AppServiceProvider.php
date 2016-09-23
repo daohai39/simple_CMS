@@ -46,7 +46,36 @@ class AppServiceProvider extends ServiceProvider
     protected function bindAppServices()
     {
         $services = [
+<<<<<<< Updated upstream
             'App\Contracts\Services\CategoryAppServiceInterface' => 'App\Services\Category\CategoryAppService'
+=======
+            'App\Contracts\Services\CategoryAppServiceInterface' => 'App\Services\Category\CategoryAppService',
+            'App\Contracts\Services\ProductAppServiceInterface' => 'App\Services\Product\ProductAppService'
+        ];
+
+        foreach($services as $abstract => $concrete) {
+            $this->app->bind($abstract, $concrete);
+        }
+    }
+
+    protected function bindDataTables()
+    {
+        $services = [
+            'App\Contracts\DataTables\CategoryDataTableInterface' => 'App\DataTables\CategoryDataTable',
+            'App\Contracts\DataTables\ProductDataTableInterface' => 'App\DataTables\ProductDataTable'
+        ];
+
+        foreach($services as $abstract => $concrete) {
+            $this->app->bind($abstract, $concrete);
+        }
+    }
+
+    protected function bindValidators()
+    {
+        $services = [
+            'App\Contracts\Validators\CategoryValidatorInterface' => 'App\Validators\CategoryValidator',
+            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
+>>>>>>> Stashed changes
         ];
 
         foreach($services as $abstract => $concrete) {
