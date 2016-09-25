@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->bindRepositories();
         $this->bindAppServices();
+        $this->bindDataTables();
+        $this->bindValidators();
     }
 
 
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $repositories = [
             'App\Contracts\Repositories\CategoryRepositoryInterface' => 'App\Repositories\Eloquent\CategoryRepository',
+            'App\Contracts\Repositories\ProductRepositoryInterface' => 'App\Repositories\Eloquent\ProductRepository',
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -46,9 +49,6 @@ class AppServiceProvider extends ServiceProvider
     protected function bindAppServices()
     {
         $services = [
-<<<<<<< Updated upstream
-            'App\Contracts\Services\CategoryAppServiceInterface' => 'App\Services\Category\CategoryAppService'
-=======
             'App\Contracts\Services\CategoryAppServiceInterface' => 'App\Services\Category\CategoryAppService',
             'App\Contracts\Services\ProductAppServiceInterface' => 'App\Services\Product\ProductAppService'
         ];
@@ -74,8 +74,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $services = [
             'App\Contracts\Validators\CategoryValidatorInterface' => 'App\Validators\CategoryValidator',
-            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
->>>>>>> Stashed changes
+            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator'
         ];
 
         foreach($services as $abstract => $concrete) {

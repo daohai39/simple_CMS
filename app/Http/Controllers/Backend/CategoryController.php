@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers\Backend;
 
+use App\Contracts\DataTables\CategoryDataTableInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Contracts\Services\CategoryAppServiceInterface;
 use App\Http\Requests;
+use App\Validators\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -11,11 +13,13 @@ class CategoryController extends BackendController
 {
     private $categories;
     private $appService;
+    private $dataTable;
 
-    public function __construct(CategoryRepositoryInterface $categories, CategoryAppServiceInterface $appService)
+    public function __construct(CategoryRepositoryInterface $categories, CategoryAppServiceInterface $appService, CategoryDataTableInterface $dataTable)
     {
         $this->categories = $categories;
         $this->appService = $appService;
+        $this->dataTable = $dataTable;
     }
 
     /**
@@ -26,11 +30,9 @@ class CategoryController extends BackendController
     public function index(Request $request)
     {
         if($request->ajax()) {
-            if($input = $request->input('q')) {
-                return response()->json($this->categories->paginateNameLike($input));
-            }
-            return response()->json($this->categories->paginateRoots());
+            return $this->dataTable->getRootData();
         }
+        return view('backend.category.index');
     }
 
     /**
@@ -38,8 +40,15 @@ class CategoryController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if($request->ajax()) {
+            if($input = $request->input('q')) {
+                return $this->categories->paginateNameLike($input);
+            }
+            return $this->categories->paginateRoots();
+        }
+
         return view('backend.category.create');
     }
 
@@ -51,8 +60,12 @@ class CategoryController extends BackendController
      */
     public function store(Request $request)
     {
-        $category = $this->appService->create($request->all());
-        return redirect()->route('admin.category.show', ['id' => $category->id]);
+        try {
+            $category = $this->appService->create($request->all());
+            return redirect()->route('admin.category.show', ['id' => $category->id]);
+        } catch(ValidationException $e) {
+            return back()->with(['errors' => $e->getErrors()]);
+        }
     }
 
     /**
@@ -61,9 +74,13 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         try {
+            // if($request->ajax()) {
+            //     return $this->dataTable->getChildrenData($id);
+            // }
+
             $category = $this->categories->find($id);
             return view('backend.category.show', compact('category'));
         } catch(ModelNotFoundException $e) {
@@ -79,7 +96,12 @@ class CategoryController extends BackendController
      */
     public function edit($id)
     {
-        //
+        try {
+            $category = $this->categories->find($id);
+            return view('backend.category.edit', compact('category'));
+        } catch(ModelNotFoundException $e) {
+            return abort(404);
+        }
     }
 
     /**
@@ -91,7 +113,12 @@ class CategoryController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->appService->update($id, $request->all());
+            return redirect()->route('admin.category.show', ['id' => $id]);
+        } catch(ModelNotFoundException $e) {
+            return abort(404);
+        }
     }
 
     /**
@@ -102,6 +129,11 @@ class CategoryController extends BackendController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->appService->delete($id);
+            return redirect()->route('admin.category.index');
+        } catch(ModelNotFoundException $e) {
+            return abort(404);
+        }
     }
 }

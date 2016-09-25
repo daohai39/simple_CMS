@@ -1,5 +1,5 @@
 <div class="item form-group">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Tên 
+  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Tên
     <span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -11,9 +11,9 @@
   <label class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục gốc</label>
   <div class="col-md-6 col-sm-6 col-xs-12">
     <select name="parent_id" class="select2_single form-control" tabindex="-1">
-      <option selected="selected" value="{{ isset($category) ? $category->parent->id : old('parent_id') }}"> 
-          {{ isset($category) ? $category->parent->name : '' }} 
-      </option>
+        <option selected="selected" value="{{ isset($category->parent) ? $category->parent->id : old('parent_id') }}">
+            {{ isset($category->parent) ? $category->parent->name : '' }}
+        </option>
     </select>
   </div>
 </div>
@@ -36,7 +36,7 @@
   select2 = new Select2("select", {
     placeholder: "Trở thành danh mục gốc",
     ajax: {
-      url: laroute.route("admin.category.index"),
+      url: laroute.route("admin.category.create"),
     }
   });
 </script>

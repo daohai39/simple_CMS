@@ -233,7 +233,7 @@ $(document).ready(function() {
                 $SIDEBAR_MENU.find('li').removeClass('active active-sm');
                 $SIDEBAR_MENU.find('li ul').slideUp();
             }
-
+            
             $li.addClass('active');
 
             $('ul:first', $li).slideDown(function() {
@@ -267,7 +267,7 @@ $(document).ready(function() {
     }).parent().addClass('active');
 
     // recompute content when resizing
-    $(window).smartresize(function(){
+    $(window).smartresize(function(){  
         setContentHeight();
     });
 
@@ -290,15 +290,15 @@ $(document).ready(function() {
         var $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
             $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-
+        
         // fix for some div with hardcoded fix class
         if ($BOX_PANEL.attr('style')) {
             $BOX_CONTENT.slideToggle(200, function(){
                 $BOX_PANEL.removeAttr('style');
             });
         } else {
-            $BOX_CONTENT.slideToggle(200);
-            $BOX_PANEL.css('height', 'auto');
+            $BOX_CONTENT.slideToggle(200); 
+            $BOX_PANEL.css('height', 'auto');  
         }
 
         $ICON.toggleClass('fa-chevron-up fa-chevron-down');
@@ -431,9 +431,9 @@ if (typeof NProgress != 'undefined') {
 }
 /**
  * Resize function without multiple trigger
- *
+ * 
  * Usage:
- * $(window).smartresize(function(){
+ * $(window).smartresize(function(){  
  *     // code here
  * });
  */
@@ -448,7 +448,7 @@ if (typeof NProgress != 'undefined') {
             function delayed () {
                 if (!execAsap)
                     func.apply(obj, args);
-                timeout = null;
+                timeout = null; 
             }
 
             if (timeout)
@@ -456,14 +456,47 @@ if (typeof NProgress != 'undefined') {
             else if (execAsap)
                 func.apply(obj, args);
 
-            timeout = setTimeout(delayed, threshold || 100);
+            timeout = setTimeout(delayed, threshold || 100); 
         };
     };
 
-    // smartresize
+    // smartresize 
     jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
+var DataTables = function(selector, options) {
+  var language = {
+  "decimal" :        ",",
+  "emptyTable" :     "Không có dữ liệu trong bảng",
+  "info" :           "Thể hiện _START_ đến _END_ trên _TOTAL_ dữ liệu",
+  "infoEmpty" :      "Thể hiện 0 đến 0 của 0 dữ liệu",
+  "infoFiltered" :   "(Lọc từ _MAX_ tổng số dữ liệu)",
+  "thousands" :      ".",
+  "lengthMenu" :     "Thể hiện _MENU_ dữ liệu",
+  "loadingRecords" : "Đang tải...",
+  "processing" :     "Đang tải...",
+  "search" :         "Tìm kiếm:",
+  "zeroRecords":    "Không có dự liệu nào được phù hợp",
+  "paginate": {
+      "first":      "Đầu tiên",
+      "last":       "Cuối cùng",
+      "next":       "Sau",
+      "previous":   "Trước"
+  },
+};
+
+  var options = $.extend(true, {
+    processing: true,
+    serverSide: true,
+    ajax: null,
+    language: language,
+  }, options);
+
+  return $(selector).DataTable(options);
+}
+
+
+
 var FormValidation = function() {
   FormValidation.prototype.validate = function(form) {
     $.listen('parsley:field:validate', function() {
@@ -483,7 +516,77 @@ var FormValidation = function() {
       }
     };
   }
-}
+};
+
+(function() {
+
+  var laravel = {
+    initialize: function() {
+      this.registerEvents();
+    },
+
+    registerEvents: function() {
+      $(document).on('click', 'a[data-method]', this.handleMethod);
+    },
+
+    handleMethod: function(e) {
+      var link = $(this);
+      var httpMethod = link.data('method').toUpperCase();
+      var form;
+
+      // If the data-method attribute is not PUT or DELETE,
+      // then we don't know what to do. Just ignore.
+      if ( $.inArray(httpMethod, ['PUT', 'DELETE']) === - 1 ) {
+        return;
+      }
+
+      // Allow user to optionally provide data-confirm="Are you sure?"
+      if ( link.data('confirm') ) {
+        if ( ! laravel.verifyConfirm(link) ) {
+          return false;
+        }
+      }
+
+      form = laravel.createForm(link);
+      form.submit();
+
+      e.preventDefault();
+    },
+
+    verifyConfirm: function(link) {
+      return confirm(link.data('confirm'));
+    },
+
+    createForm: function(link) {
+      var form =
+      $('<form>', {
+        'method': 'POST',
+        'action': link.attr('href')
+      });
+
+      var token =
+      $('<input>', {
+        'type': 'hidden',
+        'name': '_token',
+          'value': $('meta[name="csrf-token"]').attr('content')
+        });
+
+      var hiddenInput =
+      $('<input>', {
+        'name': '_method',
+        'type': 'hidden',
+        'value': link.data('method')
+      });
+
+      return form.append(token, hiddenInput)
+                 .appendTo('body');
+    }
+  };
+
+  laravel.initialize();
+
+})();
+
 var Select2 = function(selector, options) {
 	var options = $.extend(true, {
       language: "vi",
@@ -508,7 +611,7 @@ var Select2 = function(selector, options) {
             }
         },
         success: function(response) {
-            console.log(response);
+            // console.log(response);
         },
         processResults: function (data, params) {
             params.page = data.page || 1;
@@ -524,4 +627,5 @@ var Select2 = function(selector, options) {
 
     return $(selector).select2(options);
 }
+
 //# sourceMappingURL=backend.js.map

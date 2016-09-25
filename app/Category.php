@@ -8,6 +8,19 @@ class Category extends Model
 {
     protected $fillable = ['name'];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($category) {
+            $category->children()->delete();
+        });
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 
     public function parent()
     {

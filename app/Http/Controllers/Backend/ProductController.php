@@ -34,10 +34,11 @@ class ProductController extends BackendController
     public function index(Request $request)
     {
         if($request->ajax()) {
-            return $this->dataTable->getRootData();
+            return $this->dataTable->all();
         }
         return view('backend.product.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,12 +47,6 @@ class ProductController extends BackendController
      */
     public function create(Request $request)
     {
-        if($request->ajax()) {
-            if($input = $request->input('q')) {
-                return $this->products->paginateNameLike($input);
-            }
-            return $this->products->paginateRoots();
-        }
 
         return view('backend.product.create');
     }
@@ -71,6 +66,7 @@ class ProductController extends BackendController
             return back()->with(['errors' => $e->getErrors()]);
         }
 
+        //
     }
 
     /**
@@ -87,6 +83,7 @@ class ProductController extends BackendController
         } catch(ModelNotFoundException $e) {
             return abort(404);
         }
+        //
     }
 
     /**
@@ -103,6 +100,7 @@ class ProductController extends BackendController
         } catch(ModelNotFoundException $e) {
             return abort(404);
         }
+        //
     }
 
     /**
@@ -120,6 +118,7 @@ class ProductController extends BackendController
         } catch(ModelNotFoundException $e) {
             return abort(404);
         }
+        //
     }
 
     /**
@@ -136,5 +135,6 @@ class ProductController extends BackendController
         } catch(ModelNotFoundException $e) {
             return abort(404);
         }
+        //
     }
 }

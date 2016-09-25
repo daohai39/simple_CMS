@@ -35,6 +35,22 @@ var plugins = {
     {
       src: 'gentelella/vendors/parsleyjs/dist',
       output: 'parsleyjs'
+    },
+    {
+      src: 'gentelella/vendors/datatables.net',
+      output: 'datatables.net'
+    },
+    {
+      src: 'gentelella/vendors/datatables.net-bs',
+      output: 'datatables.net-bs'
+    },
+    {
+      src: 'gentelella/vendors/datatables.net-responsive',
+      output: 'datatables.net-responsive'
+    },
+    {
+      src: 'gentelella/vendors/datatables.net-responsive-bs',
+      output: 'datatables.net-responsive-bs'
     }
   ],
 }

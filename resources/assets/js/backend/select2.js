@@ -22,7 +22,7 @@ var Select2 = function(selector, options) {
             }
         },
         success: function(response) {
-            console.log(response);
+            // console.log(response);
         },
         processResults: function (data, params) {
             params.page = data.page || 1;

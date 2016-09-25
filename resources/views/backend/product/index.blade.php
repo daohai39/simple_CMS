@@ -3,6 +3,9 @@
 @section('title', 'San pham')
 @section('page_title', 'San pham')
 @section('content_header', 'San pham')
+@section('title', 'Danh Mục')
+@section('page_title', 'Danh Mục')
+@section('content_header', 'Danh Mục')
 
 @section('content')
     <table id="categories-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="50%">
@@ -11,6 +14,7 @@
                 <th>Tên</th>
                 <th>Ma san pham</th>
                 <th>Tac gia</th>
+
                 <th>Tác Vụ</th>
             </tr>
         </thead>
