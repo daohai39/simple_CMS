@@ -20,4 +20,9 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
 	{
 		return $this->paginateWhere(['parent_id', '=', null], $perpage, $columns);
 	}
+
+    public function paginateChildren($perpage = null, $columns = ['*'])
+    {
+        return $this->paginateWhere(['parent_id', '<>', null], $perpage, $columns);
+    }
 }

@@ -3,6 +3,7 @@
 @section('title', 'Tạo danh mục')
 @section('content-header', 'Tạo danh mục')
 
+
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -17,3 +18,12 @@
     </div>
 @endsection
 
+@push('pre-scripts')
+    <script src="{{ asset('assets/vendor/parsley/parsley.min.js') }}"></script>
+@endpush
+
+@push('post-scripts')
+  <script>
+    new FormValidation().validate('form');
+  </script>
+@endpush

@@ -20,8 +20,8 @@ elixir(function(mix) {
         // Compiling backend scripts
         .scripts([
           'laroute.js',
-          '../bower/AdminLTE/dist/js/app.js',
           'backend/*.js',
+          '../bower/AdminLTE/dist/js/app.js',
         ], 'public/assets/js/backend/app.js')
         // Versioning backend & frontend styles and scripts
         .version([

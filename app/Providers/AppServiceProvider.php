@@ -74,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $services = [
             'App\Contracts\Validators\CategoryValidatorInterface' => 'App\Validators\CategoryValidator',
+            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator'
         ];
 
         foreach($services as $abstract => $concrete) {

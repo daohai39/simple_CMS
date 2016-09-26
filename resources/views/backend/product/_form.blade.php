@@ -1,41 +1,53 @@
-<div class="item form-group">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Tên
-    <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <input id="name" class="form-control col-md-7 col-xs-12" name="name" required="required" minlength="3" type="text" value="{{ isset($category) ? $category->name : old('name') }}">
-  </div>
-</div>
-
-<div class="item form-group">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục gốc</label>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <select name="parent_id" class="select2_single form-control" tabindex="-1">
-    </select>
-  </div>
-</div>
-<div class="ln_solid"></div>
-
-
 @push('pre-styles')
-  <!-- Select2 -->
-  <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
 @endpush
 
 @push('pre-scripts')
-  <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
-  <script src="{{ asset('vendor/select2/js/i18n/vi.js') }}"></script>
+    <script src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/select2/i18n/vi.js') }}"></script>
 @endpush
 
+<div class="box-body">
+    {{ csrf_field() }}
+    <div class="form-group">
+        <label for="name">Tên <span required="required">*</span> </label>
+        <input type="name" name="name" required="required" class="form-control"  value="{{ isset($product) ? $product->name : old('name') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="code">Mã <span required="required">*</span> </label>
+        <input type="code" name="code" required="required" class="form-control"  value="{{ isset($product) ? $product->code : old('code') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="author">Tác giả <span required="required">*</span> </label>
+        <input type="author" name="author" required="required" class="form-control"  value="{{ isset($product) ? $product->author : old('author') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="category_id">Danh mục <span required="required">*</span> </label>
+        <select name="category_id" required="required" class="form-control select2" id="select2-ajax-product">
+            <option selected="selected" value="{{ isset($product->category) ? $product->category->id : old('category_id') }}">
+                {{ isset($product->category) ? $product->category->name : '' }}
+            </option>
+        </select>
+    </div>
+</div>
+
 @push('post-scripts')
-<!-- Select2 -->
 <script>
-  select2 = new Select2("select", {
-    placeholder: "Trở thành danh mục gốc",
-    ajax: {
-      url: laroute.route("admin.category.create"),
-    }
-  });
+    select2 = new Select2("select", {
+        placeholder: "Chọn danh mục",
+        ajax: {
+            url: laroute.route("admin.category.create"),
+            data: function (params) {
+                return {
+                    q: params.term,
+                    page: params.page,
+                    type: 'children',
+                }
+            }
+        }
+    });
 </script>
-<!-- /Select2 -->
 @endpush

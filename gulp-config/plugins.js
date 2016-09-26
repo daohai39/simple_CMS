@@ -1,6 +1,10 @@
 const plugins = {
   bower: [
     {
+      src: 'parsleyjs/dist',
+      output: 'parsley'
+    },
+    {
       src: 'AdminLTE/plugins/slimScroll',
       output: 'slimscroll'
     },

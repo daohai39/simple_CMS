@@ -14,7 +14,7 @@
             <h3 class="box-title">Danh sách danh mục</h3>
         </div>
         <div class="box-body">
-            <table id="categories-table" class="table dt-responsive nowrap" cellspacing="0">
+            <table id="categories-table" class="table dt-responsive nowrap" cellspacing="0"  width="100%">
                 <thead>
                     <tr>
                         <th>Tên</th>

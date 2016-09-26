@@ -11,8 +11,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Category::class, 10)->create()->each(function($category) {
-        	$category->children()->saveMany(factory(App\Category::class, 10)->make());
+        factory(App\Category::class, 30)->create()->each(function($category) {
+        	$category->children()->saveMany(factory(App\Category::class, 30)->make());
         });
     }
 }

@@ -6,7 +6,6 @@ use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Contracts\Services\CategoryAppServiceInterface;
 use App\Http\Requests;
 use App\Validators\ValidationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class CategoryController extends BackendController
@@ -43,10 +42,12 @@ class CategoryController extends BackendController
     public function create(Request $request)
     {
         if($request->ajax()) {
-            if($input = $request->input('q')) {
+            if($input = $request->input('q'))
                 return $this->categories->paginateNameLike($input);
-            }
-            return $this->categories->paginateRoots();
+            else if($request->input('type') == 'root')
+                return $this->categories->paginateRoots();
+            else if($request->input('type') == 'children')
+                return $this->categories->paginateChildren();
         }
 
         return view('backend.category.create');

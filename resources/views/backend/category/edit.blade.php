@@ -18,3 +18,13 @@
     </div>
 @endsection
 
+@push('pre-scripts')
+    <script src="{{ asset('assets/vendor/parsley/parsley.min.js') }}"></script>
+@endpush
+
+@push('post-scripts')
+  <script>
+    new FormValidation().validate('form');
+  </script>
+@endpush
+

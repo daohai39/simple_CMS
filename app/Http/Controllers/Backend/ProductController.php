@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Contracts\DataTables\ProductDataTableInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;
 use App\Contracts\Services\ProductAppServiceInterface;
-use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Validators\ValidationException;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+
+class ProductController extends BackendController
 {
 
     private $products;
@@ -29,19 +30,23 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()) {
+            return $this->dataTable->getData();
+        }
+        return view('backend.product.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('backend.product.create');
     }
 
     /**
@@ -52,7 +57,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $product = $this->appService->create($request->all());
+            return redirect()->route('admin.product.index');
+        } catch(ValidationException $e) {
+            return back()->with(['errors' => $e->getErrors()]);
+        }
     }
 
     /**
@@ -63,7 +73,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->products->find($id);
+        return view('backend.product.show', compact('product'));
     }
 
     /**
@@ -74,7 +85,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = $this->products->find($id);
+        return view('backend.product.edit', compact('product'));
     }
 
     /**
@@ -86,7 +98,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->appService->update($id, $request->all());
+            return redirect()->route('admin.product.index');
+        } catch(ValidationException $e) {
+            return back()->with(['errors' => $e->getErrors()]);
+        }
     }
 
     /**
@@ -97,6 +114,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->appService->delete($id);
+            return redirect()->route('admin.product.index');
+        } catch(ValidationException $e) {
+            return back()->with(['errors' => $e->getErrors()]);
+        }
     }
 }

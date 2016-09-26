@@ -6,6 +6,13 @@ $factory->define(App\Category::class, function(Faker\Generator $faker) {
 	];
 });
 
+$factory->define(App\Product::class, function(Faker\Generator $faker) {
+    return [
+        'name' => $faker->words(3, true),
+        'code' => $faker->postcode,
+        'author' => $faker->name,
+    ];
+});
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;

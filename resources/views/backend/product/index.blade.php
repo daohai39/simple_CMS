@@ -1,41 +1,49 @@
 @extends('layouts.backend')
 
-@section('title', 'Danh Mục')
-@section('page_title', 'Danh Mục')
-@section('content_header', 'Danh Mục')
-
-@section('content')
-    <table id="categories-table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="50%">
-        <thead>
-            <tr>
-                <th>Tên</th>
-                <th>Tác Vụ</th>
-            </tr>
-        </thead>
-    </table>
-@endsection
-
 @push('pre-styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href='{{ asset("assets/vendor/datatables-bs/css/dataTables.bootstrap.min.css") }}'>
+<link rel="stylesheet" type="text/css" href='{{ asset("assets/vendor/datatables-responsive-bs/css/responsive.bootstrap.min.css") }}'>
 @endpush
 
+@section('title', 'Sản Phẩm')
+@section('content-header', 'Sản Phẩm')
+
+@section('content')
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Danh Sách Sản Phẩm</h3>
+        </div>
+        <div class="box-body">
+            <table id="products-table" class="table dt-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Mã</th>
+                        <th>Tác Vụ</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+@endsection
+
 @push('pre-scripts')
-    <script type="text/javascript" src="{{ asset('vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+<script src='{{ asset("assets/vendor/datatables/js/jquery.dataTables.min.js") }}' type="text/javascript"></script>
+<script src='{{ asset("assets/vendor/datatables-responsive/js/dataTables.responsive.min.js") }}' type="text/javascript"></script>
+<script src='{{ asset("assets/vendor/datatables-bs/js/dataTables.bootstrap.min.js") }}' type="text/javascript"></script>
+<script src='{{ asset("assets/vendor/datatables-responsive-bs/js/responsive.bootstrap.js") }}' type="text/javascript"></script>
 @endpush
 
 @push('post-scripts')
-    <script>
-        // $('#categories-table').DataTable();
-        new DataTables("#categories-table", {
-            ajax: laroute.route('admin.category.index'),
-            columns: [
-                { data: 'name', name: 'name' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false}
-            ]
-        });
-    </script>
+<script>
+    var table = new DataTables("#products-table", {
+        ajax: laroute.route('admin.product.index'),
+        columns: [
+            { data: 'name', name: 'name' },
+            {data: 'code', name: 'code'},
+            { data: 'actions', name: 'actions', orderable: false, searchable: false}
+        ],
+        order: [[1, 'asc']]
+    });
+</script>
 @endpush

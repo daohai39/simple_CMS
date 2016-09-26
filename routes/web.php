@@ -6,4 +6,6 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
 	Route::resource('category', 'CategoryController');
+	Route::resource('product', 'ProductController');
 });
+
