@@ -76,16 +76,8 @@ class CategoryController extends BackendController
      */
     public function show(Request $request, $id)
     {
-        try {
-            // if($request->ajax()) {
-            //     return $this->dataTable->getChildrenData($id);
-            // }
-
-            $category = $this->categories->find($id);
-            return view('backend.category.show', compact('category'));
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
-        }
+        $category = $this->categories->find($id);
+        return view('backend.category.show', compact('category'));
     }
 
     /**
@@ -96,12 +88,8 @@ class CategoryController extends BackendController
      */
     public function edit($id)
     {
-        try {
-            $category = $this->categories->find($id);
-            return view('backend.category.edit', compact('category'));
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
-        }
+        $category = $this->categories->find($id);
+        return view('backend.category.edit', compact('category'));
     }
 
     /**
@@ -116,8 +104,8 @@ class CategoryController extends BackendController
         try {
             $this->appService->update($id, $request->all());
             return redirect()->route('admin.category.show', ['id' => $id]);
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
+        } catch(ValidationException $e) {
+            return back()->with(['errors' => $e->getErrors()]);
         }
     }
 
@@ -132,8 +120,8 @@ class CategoryController extends BackendController
         try {
             $this->appService->delete($id);
             return redirect()->route('admin.category.index');
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
+        } catch(ValidationException $e) {
+            return back()->with(['errors' => $e->getErrors()]);
         }
     }
 }

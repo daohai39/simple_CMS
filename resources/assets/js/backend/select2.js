@@ -36,5 +36,5 @@ var Select2 = function(selector, options) {
       }
     }, options);
 
-    return $(selector).select2(options);
+    $(selector).select2(options);
 }

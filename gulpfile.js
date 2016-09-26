@@ -1,49 +1,32 @@
-var elixir = require('laravel-elixir');
-var plugins = require('./npm/plugins');
+const elixir = require('laravel-elixir');
+require('laravel-elixir-vue');
 
-require('./npm/elixir-extensions')
-
-var directories = {
-    bower: {
-        in:'resources/assets/bower',
-        out:'public/vendor'
-    }
-}
-
-
-
+const plugins = require('./gulp-config/plugins');
+const directories = require('./gulp-config/directories');
+require('./gulp-config/elixir-extensions');
 
 
 elixir(function(mix) {
-    mix .bower(plugins.bower, directories.bower.in, directories.bower.out)
+      // Generate laroute.js
+    mix.laroute()
+       // Copy all bower plugins to public directory
+       .bower(plugins.bower, directories.bower.src, directories.bower.output)
         // Compiling backend styles
-        .sass([
-            '../bower/gentelella/src/scss/*.scss',
-            'backend/*.scss',
-            ],'public/css/backend.css')
-        // Compiling frontend styles
-        .sass(
-            'frontend/*.scss',
-            'public/css/frontend.css'
-        )
+        .styles([
+          '../bower/AdminLTE/dist/css/AdminLTE.css',
+          '../bower/AdminLTE/dist/css/skins/skin-blue.css',
+          'backend/*.css'
+        ],'public/assets/css/backend/app.css')
         // Compiling backend scripts
         .scripts([
-            'laroute.js',
-            '../bower/gentelella/src/js/*.js',
-            'backend/*.js',
-        ], 'public/js/backend.js')
-        // Compiling frontend scripts
-        .scripts([
-            'laroute.js',
-            'frontend/*.js',
-        ], 'public/js/frontend.js')
-
+          'laroute.js',
+          '../bower/AdminLTE/dist/js/app.js',
+          'backend/*.js',
+        ], 'public/assets/js/backend/app.js')
         // Versioning backend & frontend styles and scripts
         .version([
-            'js/backend.js',
-            'js/frontend.js',
-            'css/backend.css',
-            'css/frontend.css',
+            'assets/js/backend/app.js',
+            'assets/css/backend/app.css',
         ])
         .browserSync({
             proxy: 'http://decoks.dev'

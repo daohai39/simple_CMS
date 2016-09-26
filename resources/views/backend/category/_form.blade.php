@@ -1,44 +1,35 @@
-<div class="item form-group">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Tên
-    <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <input id="name" class="form-control col-md-7 col-xs-12" name="name" required="required" minlength="3" type="text" value="{{ isset($category) ? $category->name : old('name') }}">
-  </div>
-</div>
-
-<div class="item form-group">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục gốc</label>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <select name="parent_id" class="select2_single form-control" tabindex="-1">
-        <option selected="selected" value="{{ isset($category->parent) ? $category->parent->id : old('parent_id') }}">
-            {{ isset($category->parent) ? $category->parent->name : '' }}
-        </option>
-    </select>
-  </div>
-</div>
-<div class="ln_solid"></div>
-
-
 @push('pre-styles')
-  <!-- Select2 -->
-  <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
 @endpush
 
 @push('pre-scripts')
-  <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
-  <script src="{{ asset('vendor/select2/js/i18n/vi.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
 @endpush
 
+<div class="box-body">
+    {{ csrf_field() }}
+    <div class="form-group">
+        <label for="parent_id">Danh mục cha</label>
+        <select name="parent_id" class="form-control select2" id="select2-ajax-category">
+            <option selected="selected" value="{{ isset($category->parent) ? $category->parent->id : old('parent_id') }}">
+                {{ isset($category->parent) ? $category->parent->name : '' }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="name">Tên</label>
+        <input type="name" name="name" class="form-control" placeholder="Tên danh mục..." value="{{ isset($category) ? $category->name : old('name') }}">
+    </div>
+</div>
+
 @push('post-scripts')
-<!-- Select2 -->
 <script>
   select2 = new Select2("select", {
     placeholder: "Trở thành danh mục gốc",
+    allowClear: true,
     ajax: {
       url: laroute.route("admin.category.create"),
     }
   });
 </script>
-<!-- /Select2 -->
 @endpush
