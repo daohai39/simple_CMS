@@ -180,6 +180,8 @@ return [
 
         Yajra\Datatables\DatatablesServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Cartalyst\Tags\TagsServiceProvider::class,
 
     ],
 

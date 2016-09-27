@@ -20,12 +20,13 @@ class CategoryAppService implements CategoryAppServiceInterface
 	public function create(array $attributes)
 	{
         $this->validator->validate('create', $attributes);
-		$category = Category::create($attributes);
+        $category = Category::create($attributes);
+
         if( ! empty($attributes['parent_id']) ) {
             $parent = $this->categories->find($attributes['parent_id']);
-            $category->parent()->associate($parent);
+            $parent->appendNode($category);
         }
-        $category->save();
+
         return $category;
 	}
 
@@ -33,14 +34,15 @@ class CategoryAppService implements CategoryAppServiceInterface
     {
         $this->validator->validate('update', $attributes);
         $category = $this->categories->find($id);
+
         if( ! empty($attributes['parent_id']) ) {
             $parent = $this->categories->find($attributes['parent_id']);
-            $category->parent()->associate($parent);
+            $parent->appendNode($category);
         } else {
-            $category->parent()->dissociate();
+            $category->saveAsRoot();
         }
-        $category->update($attributes);
-        return $category;
+
+        return $category->update($attributes);
     }
 
     public function delete($id)

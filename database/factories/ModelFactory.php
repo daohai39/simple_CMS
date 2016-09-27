@@ -1,5 +1,6 @@
 <?php
 
+
 $factory->define(App\Category::class, function(Faker\Generator $faker) {
 	return [
 		'name' => $faker->words(3, true),
@@ -11,6 +12,7 @@ $factory->define(App\Product::class, function(Faker\Generator $faker) {
         'name' => $faker->words(3, true),
         'code' => $faker->postcode,
         'author' => $faker->name,
+        'description' => $faker->paragraphs(3, true)
     ];
 });
 

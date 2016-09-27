@@ -59,7 +59,7 @@ class ProductController extends BackendController
     {
         try {
             $product = $this->appService->create($request->all());
-            return redirect()->route('admin.product.index');
+            return redirect()->route('admin.product.edit', ['id' => $product->id]);
         } catch(ValidationException $e) {
             return back()->with(['errors' => $e->getErrors()]);
         }
@@ -99,8 +99,8 @@ class ProductController extends BackendController
     public function update(Request $request, $id)
     {
         try {
-            $this->appService->update($id, $request->all());
-            return redirect()->route('admin.product.index');
+            $product = $this->appService->update($id, $request->all());
+            return redirect()->route('admin.product.edit', ['id' => $id]);
         } catch(ValidationException $e) {
             return back()->with(['errors' => $e->getErrors()]);
         }

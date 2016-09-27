@@ -1,11 +1,12 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
-	Route::resource('category', 'CategoryController');
-	Route::resource('product', 'ProductController');
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
+    Route::get('/', ['as' => 'dashboard', 'uses' => 'BackendController@dashboard']);
+
+    Route::resource('category', 'CategoryController');
+    Route::resource('tag','TagController');
+    Route::resource('product', 'ProductController');
 });
 

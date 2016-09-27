@@ -6,6 +6,7 @@ use App\Contracts\Repositories\ProductRepositoryInterface;
 use App\Contracts\Services\ProductAppServiceInterface;
 use App\Contracts\Validators\ProductValidatorInterface;
 use App\Product;
+use App\Tag;
 
 class ProductAppService implements ProductAppServiceInterface
 {
@@ -27,6 +28,8 @@ class ProductAppService implements ProductAppServiceInterface
         $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
         $product->save();
+        $product->tag($attributes['tags']);
+
         return $product;
 	}
 
@@ -36,6 +39,8 @@ class ProductAppService implements ProductAppServiceInterface
         $product = $this->products->find($id);
         $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
+        $product->tag($attributes['tags']);
+
         return $product->update($attributes);
     }
 

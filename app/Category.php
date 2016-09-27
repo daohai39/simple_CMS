@@ -1,35 +1,32 @@
 <?php
-
 namespace App;
 
+use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
+    use NodeTrait, Sluggable;
+
     protected $fillable = ['name'];
 
-    public static function boot()
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
     {
-        parent::boot();
-        static::deleting(function($category) {
-            $category->children()->delete();
-        });
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 
-
-    public function product()
+    public function products()
     {
         return $this->hasMany(Product::class);
-    }
-
-
-    public function parent()
-    {
-    	return $this->belongsTo(Category::class, 'parent_id');
-    }
-
-    public function children()
-    {
-    	return $this->hasMany(Category::class, 'parent_id');
     }
 }

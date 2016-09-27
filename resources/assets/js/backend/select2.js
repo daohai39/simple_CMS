@@ -1,5 +1,6 @@
 var Select2 = function(selector, options) {
 	var options = $.extend(true, {
+      tags: false,
       language: "vi",
       escapeMarkup: function (markup) { return markup; },
       templateResult: function formatResult (obj) {

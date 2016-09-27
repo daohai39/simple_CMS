@@ -6,7 +6,11 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-abstract class BackendController extends Controller
+class BackendController extends Controller
 {
-    
+
+    public function dashboard(Request $request)
+    {
+        return view('backend.dashboard');
+    }
 }

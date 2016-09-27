@@ -63,7 +63,7 @@ class CategoryController extends BackendController
     {
         try {
             $category = $this->appService->create($request->all());
-            return redirect()->route('admin.category.show', ['id' => $category->id]);
+            return redirect()->route('admin.category.edit', ['id' => $category->id]);
         } catch(ValidationException $e) {
             return back()->with(['errors' => $e->getErrors()]);
         }
@@ -104,7 +104,7 @@ class CategoryController extends BackendController
     {
         try {
             $this->appService->update($id, $request->all());
-            return redirect()->route('admin.category.show', ['id' => $id]);
+            return redirect()->route('admin.category.edit', ['id' => $id]);
         } catch(ValidationException $e) {
             return back()->with(['errors' => $e->getErrors()]);
         }

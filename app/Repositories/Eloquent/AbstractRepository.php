@@ -18,9 +18,9 @@ abstract class AbstractRepository implements AbstractRepositoryInterface
 		return $this->model()->findOrFail($id, $columns);
 	}
 
-	public function paginate($id, $perpage = null, $columns = ['*'])
+	public function paginate($perpage = null, $columns = ['*'])
 	{
-		return $this->paginateWhere(['id', '=', $id], $perpage, $columns);
+		return $this->model()->paginate($perpage, $columns);
 	}
 
 	public function paginateWhere($where, $perpage = null, $columns = ['*'])

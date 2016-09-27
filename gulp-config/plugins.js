@@ -1,6 +1,14 @@
 const plugins = {
   bower: [
     {
+      src: 'summernote/dist',
+      output: 'summernote'
+    },
+    {
+      src: 'AdminLTE/plugins/iCheck',
+      output: 'icheck'
+    },
+    {
       src: 'parsleyjs/dist',
       output: 'parsley'
     },
