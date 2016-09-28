@@ -61,12 +61,9 @@ class CategoryController extends BackendController
      */
     public function store(Request $request)
     {
-        try {
-            $category = $this->appService->create($request->all());
-            return redirect()->route('admin.category.edit', ['id' => $category->id]);
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $category = $this->appService->create($request->all());
+        flash('Tạo danh mục thành công', 'success');
+        return redirect()->route('admin.category.edit', ['id' => $category->id]);
     }
 
     /**
@@ -102,12 +99,9 @@ class CategoryController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        try {
-            $this->appService->update($id, $request->all());
-            return redirect()->route('admin.category.edit', ['id' => $id]);
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $this->appService->update($id, $request->all());
+        flash('Sửa danh mục thành công', 'success');
+        return redirect()->route('admin.category.edit', ['id' => $id]);
     }
 
     /**
@@ -118,11 +112,8 @@ class CategoryController extends BackendController
      */
     public function destroy($id)
     {
-        try {
-            $this->appService->delete($id);
-            return redirect()->route('admin.category.index');
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $this->appService->delete($id);
+        flash('Xoá danh mục thành công', 'success');
+        return redirect()->route('admin.category.index');
     }
 }

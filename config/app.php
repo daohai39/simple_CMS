@@ -182,6 +182,7 @@ return [
         Lord\Laroute\LarouteServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Cartalyst\Tags\TagsServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 

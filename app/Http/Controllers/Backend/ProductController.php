@@ -57,12 +57,9 @@ class ProductController extends BackendController
      */
     public function store(Request $request)
     {
-        try {
-            $product = $this->appService->create($request->all());
-            return redirect()->route('admin.product.edit', ['id' => $product->id]);
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $product = $this->appService->create($request->all());
+        flash('Sản phẩm tạo thành công', 'success');
+        return redirect()->route('admin.product.edit', ['id' => $product->id]);
     }
 
     /**
@@ -98,12 +95,9 @@ class ProductController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        try {
-            $product = $this->appService->update($id, $request->all());
-            return redirect()->route('admin.product.edit', ['id' => $id]);
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $product = $this->appService->update($id, $request->all());
+        flash('Sản phẩm sửa thành công', 'success');
+        return redirect()->route('admin.product.edit', ['id' => $id]);
     }
 
     /**
@@ -114,11 +108,8 @@ class ProductController extends BackendController
      */
     public function destroy($id)
     {
-        try {
-            $this->appService->delete($id);
-            return redirect()->route('admin.product.index');
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $this->appService->delete($id);
+        flash('Sản phẩm xoá thành công', 'success');
+        return redirect()->route('admin.product.index');
     }
 }

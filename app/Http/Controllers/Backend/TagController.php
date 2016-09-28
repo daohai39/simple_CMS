@@ -17,9 +17,7 @@ class TagController extends BackendController
     private $appService;
     private $dataTable;
 
-    public function __construct(TagRepositoryInterface $tags,
-        TagAppServiceInterface $appService,
-        TagDataTableInterface $dataTable)
+    public function __construct(TagRepositoryInterface $tags, TagAppServiceInterface $appService, TagDataTableInterface $dataTable)
     {
         $this->tags = $tags;
         $this->appService = $appService;
@@ -33,8 +31,9 @@ class TagController extends BackendController
      */
     public function index(Request $request)
     {
-        if($request->ajax())
+        if($request->ajax()) {
             return $this->dataTable->getData();
+        }
         return view('backend.tag.index');
     }
 
@@ -46,8 +45,9 @@ class TagController extends BackendController
     public function create(Request $request)
     {
         if($request->ajax()) {
-            if($input = $request->input('q'))
+            if($input = $request->input('q')) {
                 return $this->tags->paginateNameLike($input);
+            }
             return $this->tags->paginate();
         }
         return view('backend.tag.create');
@@ -61,12 +61,8 @@ class TagController extends BackendController
      */
     public function store(Request $request)
     {
-        try {
-            $tag = $this->appService->create($request->all());
-            return redirect()->route('admin.tag.edit', ['id' => $tag->id]);
-        } catch(ValidationException $e) {
-            return back()->with(['errors' => $e->getErrors()]);
-        }
+        $tag = $this->appService->create($request->all());
+        return redirect()->route('admin.tag.edit', ['id' => $tag->id]);
     }
 
     /**
@@ -77,13 +73,8 @@ class TagController extends BackendController
      */
     public function show($id)
     {
-        //
-        try {
-            $tag = $this->tags->find($id);
-            return view('backend.tag.show', compact('tag'));
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
-        }
+        $tag = $this->tags->find($id);
+        return view('backend.tag.show', compact('tag'));
     }
 
     /**
@@ -94,13 +85,8 @@ class TagController extends BackendController
      */
     public function edit($id)
     {
-        //
-        try {
-            $tag = $this->tags->find($id);
-            return view('backend.tag.edit', compact('tag'));
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
-        }
+        $tag = $this->tags->find($id);
+        return view('backend.tag.edit', compact('tag'));
     }
 
     /**
@@ -112,13 +98,8 @@ class TagController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        //
-         try {
-            $tag = $this->appService->update($id, $request->all());
-            return redirect()->route('admin.tag.edit', ['id' => $tag->id]);
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
-        }
+        $tag = $this->appService->update($id, $request->all());
+        return redirect()->route('admin.tag.edit', ['id' => $tag->id]);
     }
 
     /**
@@ -129,12 +110,7 @@ class TagController extends BackendController
      */
     public function destroy($id)
     {
-        //
-        try {
-            $this->appService->delete($id);
-            return redirect()->route('admin.tag.index');
-        } catch(ModelNotFoundException $e) {
-            return abort(404);
-        }
+        $this->appService->delete($id);
+        return redirect()->route('admin.tag.index');
     }
 }

@@ -191,6 +191,8 @@ $.ajaxSetup({
     }
 });
 
+$('div.alert').not('.alert-danger ').not('.alert-important').delay(3000).fadeOut(350);
+
 var DataTables = function(selector, options) {
   var language = {
   "decimal" :        ",",

@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('author');
             $table->longText('description')->nullable()->default(null);
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

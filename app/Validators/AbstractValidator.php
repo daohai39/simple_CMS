@@ -15,11 +15,7 @@ abstract class AbstractValidator
 
     public function validate(String $action, array $data, $id = null)
     {
-        $validation = $this->validator->make($data, $this->getRules($action, $id));
-
-        if ( $validation->fails() ) {
-            throw new ValidationException( $validation->errors() );
-        }
+        $validation = $this->validator->make($data, $this->getRules($action, $id))->validate();
     }
 
     private function getRules(String $action, $id = null)

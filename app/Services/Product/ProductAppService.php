@@ -39,7 +39,7 @@ class ProductAppService implements ProductAppServiceInterface
         $this->validator->validate('update', $attributes, $id);
         $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
-        $product->tag($attributes['tags']);
+        $product->tag( $tags = empty($attributes['tags']) ? [] : $attributes['tags'] );
 
         return $product->update($attributes);
     }
