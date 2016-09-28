@@ -5,9 +5,7 @@ use Illuminate\Validation\Factory as ValidatorFactory;
 
 abstract class AbstractValidator
 {
-    protected $validation;
     protected $validator;
-    protected $rules = array();
 
     public function __construct(ValidatorFactory $validator)
     {
@@ -15,21 +13,24 @@ abstract class AbstractValidator
     }
 
 
-    public function validate(String $action, array $data)
+    public function validate(String $action, array $data, $id = null)
     {
-        $this->validation = $this->validator->make($data, $this->getRules($action));
+        $validation = $this->validator->make($data, $this->getRules($action, $id));
 
-        if ( $this->validation->fails() ) {
-            throw new ValidationException( $this->validation->errors() );
+        if ( $validation->fails() ) {
+            throw new ValidationException( $validation->errors() );
         }
     }
 
-    private function getRules(String $action)
+    private function getRules(String $action, $id = null)
     {
-        if(! array_key_exists($action, $this->rules)) {
+        $id = ($id == null) ? '' : $id;
+        if( !array_key_exists($action, $this->rules($id)) ) {
             throw new \InvalidArgumentException("Action: {$action} not exist in rules");
         }
 
-        return $this->rules[$action];
+        return $this->rules($id)[$action];
     }
+
+    abstract protected function rules($id = null);
 }

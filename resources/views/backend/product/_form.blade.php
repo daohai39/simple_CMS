@@ -1,4 +1,5 @@
 <div class="box-body">
+    @include('errors.validation-errors')
     {{ csrf_field() }}
     <div class="form-group">
         <label for="name">Tên <span required="required">*</span> </label>

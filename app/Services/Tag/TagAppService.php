@@ -25,8 +25,8 @@ class TagAppService implements TagAppServiceInterface
 
     public function update($id, array $attributes)
     {
-        $this->validator->validate('update', $attributes);
         $tag = $this->tags->find($id);
+        $this->validator->validate('update', $attributes, $id);
         $tag->update($attributes);
         return $tag;
     }

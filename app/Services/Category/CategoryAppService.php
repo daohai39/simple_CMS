@@ -32,8 +32,8 @@ class CategoryAppService implements CategoryAppServiceInterface
 
     public function update($id, $attributes)
     {
-        $this->validator->validate('update', $attributes);
         $category = $this->categories->find($id);
+        $this->validator->validate('update', $attributes, $id);
 
         if( ! empty($attributes['parent_id']) ) {
             $parent = $this->categories->find($attributes['parent_id']);

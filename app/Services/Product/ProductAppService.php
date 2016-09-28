@@ -35,8 +35,8 @@ class ProductAppService implements ProductAppServiceInterface
 
     public function update($id, array $attributes)
     {
-        $this->validator->validate('update', $attributes);
         $product = $this->products->find($id);
+        $this->validator->validate('update', $attributes, $id);
         $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
         $product->tag($attributes['tags']);
