@@ -8,5 +8,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
     Route::resource('category', 'CategoryController');
     Route::resource('tag','TagController');
     Route::resource('product', 'ProductController');
+
+    Route::resource('upload','MediaController');
+
 });
+
+
 

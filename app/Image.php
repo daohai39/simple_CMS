@@ -2,34 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Plank\Mediable\Media;
 
-class Image extends Model
+class Image extends Media
 {
-     protected $fillable = ['title', 'src', 'role'];
 
-
-    public function imageable()
-    {
-        return $this->morphTo();
-    }
-
-    public function scopeFeatured($query)
-    {
-        $query->where('role', 'featured');
-    }
-
-    public function scopeNormal($query)
-    {
-        $query->whereNull('role')->orWhere('role', '');
-    }
-
-    public function setFeaturedAttribute($value)
-    {
-        if ($value) {
-            $this->attributes['role'] = 'featured';
-            return;
-        }
-        $this->attributes['role'] = '';
-    }
 }
+
