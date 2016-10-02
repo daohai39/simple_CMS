@@ -5,10 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cartalyst\Tags\TaggableTrait;
 use Cartalyst\Tags\TaggableInterface;
+use Plank\Mediable\Mediable;
 
 class Post extends Model implements TaggableInterface
 {
-    use Sluggable, TaggableTrait;
+    use Sluggable, TaggableTrait, Mediable;
 
     const STATUS_DRAFT = 'DRAFT';
     const STATUS_PUBLISH = 'PUBLISH';
@@ -47,7 +48,7 @@ class Post extends Model implements TaggableInterface
         if(! $value) {
             return str_limit($this->attributes['description'], 150);
         }
-        return $value;
+        return str_limit($value, 150);
     }
 
     public function setMetaDescriptionAttribute($value)

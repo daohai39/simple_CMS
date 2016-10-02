@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\ProductRepositoryInterface' => 'App\Repositories\Eloquent\ProductRepository',
             'App\Contracts\Repositories\TagRepositoryInterface' => 'App\Repositories\Eloquent\TagRepository',
             'App\Contracts\Repositories\PostRepositoryInterface' => 'App\Repositories\Eloquent\PostRepository',
+            'App\Contracts\Repositories\MediaRepositoryInterface' => 'App\Repositories\Eloquent\MediaRepository',
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -55,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Services\ProductAppServiceInterface' => 'App\Services\Product\ProductAppService',
             'App\Contracts\Services\TagAppServiceInterface' => 'App\Services\Tag\TagAppService',
             'App\Contracts\Services\PostAppServiceInterface' => 'App\Services\Post\PostAppService',
+            'App\Contracts\Services\MediaAppServiceInterface' => 'App\Services\Media\MediaAppService',
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -83,6 +85,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Validators\TagValidatorInterface' => 'App\Validators\TagValidator',
             'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
             'App\Contracts\Validators\PostValidatorInterface' => 'App\Validators\PostValidator',
+            'App\Contracts\Validators\MediaValidatorInterface' => 'App\Validators\MediaValidator',
         ];
 
         foreach($services as $abstract => $concrete) {

@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -183,6 +184,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Cartalyst\Tags\TagsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Plank\Mediable\MediableServiceProvider::class,
 
     ],
 
@@ -230,6 +232,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'MediaUploader' => Plank\Mediable\MediaUploaderFacade::class,
 
     ],
 

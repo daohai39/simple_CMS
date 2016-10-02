@@ -5,10 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cartalyst\Tags\TaggableTrait;
 use Cartalyst\Tags\TaggableInterface;
+use Plank\Mediable\Mediable;
 
 class Product extends Model implements TaggableInterface
 {
-    use Sluggable, TaggableTrait;
+    use Sluggable, TaggableTrait, Mediable;
 
     protected $fillable = ['name', 'code', 'author', 'description', 'meta_title', 'meta_description', 'featured'];
 
@@ -27,12 +28,6 @@ class Product extends Model implements TaggableInterface
                 'source' => 'name'
             ]
         ];
-    }
-
-
-    public function images()
-    {
-        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function category()
