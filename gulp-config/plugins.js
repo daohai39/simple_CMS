@@ -1,6 +1,14 @@
 const plugins = {
   bower: [
     {
+      src: 'bootstrap-toggle/js',
+      output: 'bootstrap-toggle/js'
+    },
+    {
+      src: 'bootstrap-toggle/css',
+      output: 'bootstrap-toggle/css'
+    },
+    {
       src: 'summernote/dist',
       output: 'summernote'
     },

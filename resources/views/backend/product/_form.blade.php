@@ -39,17 +39,37 @@
         <label for="content">Miêu tả</label>
         <textarea id="summernote" name="description">{{ isset($product) ? $product->description : '' }}</textarea>
     </div>
+
+    <div class="form-group">
+        <label for="meta_title">Meta_title</label>
+        <input type="text" name="meta_title" required="required" class="form-control" value="{{ isset($product) ? $product->meta_title : old('meta_title') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="meta_description">Meta_description</label>
+        <textarea name="meta_description" class="form-control">{{ isset($product) ? $product->meta_description : old('meta_description') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="featured">Featured</label>
+        <div class="checkbox">
+            <input type="hidden" name="featured" value="off">
+            <input type="checkbox" name="featured" <?php if(isset($product) && $product->featured == true) echo "checked"?> data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success">
+        </div>
+    </div>
 </div>
 
 @push('pre-styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/summernote/summernote.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-toggle/css/bootstrap-toggle.min.css') }}">
 @endpush
 
 @push('pre-scripts')
     <script src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/select2/i18n/vi.js') }}"></script>
     <script src="{{ asset('assets/vendor/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
 @endpush
 
 @push('post-scripts')

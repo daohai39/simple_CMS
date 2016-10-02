@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Post;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
@@ -15,6 +16,14 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('slug')->unique();
+            $table->text('description');
+            $table->text('meta_description')->nullable()->default(null);
+            $table->longText('content');
+            $table->boolean('featured')->default(false);
+            $table->string('status')->default(Post::STATUS_DRAFT);
             $table->timestamps();
         });
     }

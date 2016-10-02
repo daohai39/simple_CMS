@@ -1,5 +1,15 @@
 <?php
 
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title'            => $faker->sentence,
+        'description'      => $faker->paragraph,
+        'content'          => $faker->paragraph,
+        'featured'         => $faker->randomElement( [true, false] ),
+        'status'           => $faker->randomElement( [App\Post::STATUS_PUBLISH, App\Post::STATUS_DRAFT] ),
+    ];
+});
+
 
 $factory->define(App\Category::class, function(Faker\Generator $faker) {
 	return [

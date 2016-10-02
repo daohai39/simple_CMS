@@ -11,11 +11,6 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
     public function sluggable()
     {
         return [

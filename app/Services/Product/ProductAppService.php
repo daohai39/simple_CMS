@@ -23,6 +23,8 @@ class ProductAppService implements ProductAppServiceInterface
 
 	public function create(array $attributes)
 	{
+        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+
         $this->validator->validate('create', $attributes);
 		$product =  new Product($attributes);
         $category = $this->categories->find($attributes['category_id']);
@@ -35,6 +37,8 @@ class ProductAppService implements ProductAppServiceInterface
 
     public function update($id, array $attributes)
     {
+        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+
         $product = $this->products->find($id);
         $this->validator->validate('update', $attributes, $id);
         $category = $this->categories->find($attributes['category_id']);
