@@ -2,17 +2,17 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="name">Tên <span required="required">*</span> </label>
-        <input type="name" name="name" required="required" class="form-control"  value="{{ isset($product) ? $product->name : old('name') }}">
+        <input type="text" name="name" required="required" class="form-control"  value="{{ isset($product) ? $product->name : old('name') }}">
     </div>
 
     <div class="form-group">
         <label for="code">Mã <span required="required">*</span> </label>
-        <input type="code" name="code" required="required" class="form-control"  value="{{ isset($product) ? $product->code : old('code') }}">
+        <input type="text" name="code" required="required" class="form-control"  value="{{ isset($product) ? $product->code : old('code') }}">
     </div>
 
     <div class="form-group">
         <label for="author">Tác giả <span required="required">*</span> </label>
-        <input type="author" name="author" required="required" class="form-control"  value="{{ isset($product) ? $product->author : old('author') }}">
+        <input type="text" name="author" required="required" class="form-control"  value="{{ isset($product) ? $product->author : old('author') }}">
     </div>
 
     <div class="form-group">

@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\CategoryRepositoryInterface' => 'App\Repositories\Eloquent\CategoryRepository',
             'App\Contracts\Repositories\ProductRepositoryInterface' => 'App\Repositories\Eloquent\ProductRepository',
             'App\Contracts\Repositories\TagRepositoryInterface' => 'App\Repositories\Eloquent\TagRepository',
+            'App\Contracts\Repositories\SettingRepositoryInterface' => 'App\Repositories\Eloquent\SettingRepository'
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -52,7 +53,8 @@ class AppServiceProvider extends ServiceProvider
         $services = [
             'App\Contracts\Services\CategoryAppServiceInterface' => 'App\Services\Category\CategoryAppService',
             'App\Contracts\Services\ProductAppServiceInterface' => 'App\Services\Product\ProductAppService',
-            'App\Contracts\Services\TagAppServiceInterface' => 'App\Services\Tag\TagAppService'
+            'App\Contracts\Services\TagAppServiceInterface' => 'App\Services\Tag\TagAppService',
+            'App\Contracts\Services\SettingAppServiceInterface' => 'App\Services\Setting\SettingAppService',
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -65,7 +67,8 @@ class AppServiceProvider extends ServiceProvider
         $services = [
             'App\Contracts\DataTables\CategoryDataTableInterface' => 'App\DataTables\CategoryDataTable',
             'App\Contracts\DataTables\ProductDataTableInterface' => 'App\DataTables\ProductDataTable',
-            'App\Contracts\DataTables\TagDataTableInterface' => 'App\DataTables\TagDataTable'
+            'App\Contracts\DataTables\TagDataTableInterface' => 'App\DataTables\TagDataTable',
+            'App\Contracts\DataTables\SettingDataTableInterface' => 'App\DataTables\SettingDataTable'
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -78,7 +81,8 @@ class AppServiceProvider extends ServiceProvider
         $services = [
             'App\Contracts\Validators\CategoryValidatorInterface' => 'App\Validators\CategoryValidator',
             'App\Contracts\Validators\TagValidatorInterface' => 'App\Validators\TagValidator',
-            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator'
+            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
+            'App\Contracts\Validators\SettingValidatorInterface' => 'App\Validators\SettingValidator'
         ];
 
         foreach($services as $abstract => $concrete) {

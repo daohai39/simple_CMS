@@ -44,6 +44,19 @@
                     <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-list-ol"></i>Danh sách</a></li>
                 </ul>
             </li>
+
+               <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-cog"></i>
+                    <span>Cài Đặt</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.setting.index') }}"><i class="fa fa-list-ol"></i>Danh sách</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->
