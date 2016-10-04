@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
-@section('title', 'Tạo bài viết')
-@section('content-header', 'Tạo bài viết')
+@section('title', 'Create Post')
+@section('content-header', 'Create Post')
 
 
 @section('content')
@@ -10,8 +10,8 @@
             <form action="{{ route('admin.post.store') }}" method="POST" class="form-horizontal">
                 @include('backend.post._form')
                 <div class="box-footer">
-                    <a href="javascript:window.history.back()" class="btn btn-default">Hủy</a>
-                    <button type="submit" class="btn btn-primary pull-right">Tạo</button>
+                    <a href="javascript:window.history.back()" class="btn btn-default">Cancel</a>
+                    <button type="submit" class="btn btn-primary pull-right">Create</button>
                 </div>
             </form>
         </div>

@@ -42,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\TagRepositoryInterface' => 'App\Repositories\Eloquent\TagRepository',
             'App\Contracts\Repositories\PostRepositoryInterface' => 'App\Repositories\Eloquent\PostRepository',
             'App\Contracts\Repositories\MediaRepositoryInterface' => 'App\Repositories\Eloquent\MediaRepository',
+            'App\Contracts\Repositories\SettingRepositoryInterface' => 'App\Repositories\Eloquent\SettingRepository'
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -57,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Services\TagAppServiceInterface' => 'App\Services\Tag\TagAppService',
             'App\Contracts\Services\PostAppServiceInterface' => 'App\Services\Post\PostAppService',
             'App\Contracts\Services\MediaAppServiceInterface' => 'App\Services\Media\MediaAppService',
+            'App\Contracts\Services\SettingAppServiceInterface' => 'App\Services\Setting\SettingAppService',
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -71,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\DataTables\ProductDataTableInterface' => 'App\DataTables\ProductDataTable',
             'App\Contracts\DataTables\TagDataTableInterface' => 'App\DataTables\TagDataTable',
             'App\Contracts\DataTables\PostDataTableInterface' => 'App\DataTables\PostDataTable',
+            'App\Contracts\DataTables\SettingDataTableInterface' => 'App\DataTables\SettingDataTable'
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -86,6 +89,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
             'App\Contracts\Validators\PostValidatorInterface' => 'App\Validators\PostValidator',
             'App\Contracts\Validators\MediaValidatorInterface' => 'App\Validators\MediaValidator',
+            'App\Contracts\Validators\SettingValidatorInterface' => 'App\Validators\SettingValidator'
         ];
 
         foreach($services as $abstract => $concrete) {

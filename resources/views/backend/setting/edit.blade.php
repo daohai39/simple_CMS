@@ -1,14 +1,14 @@
 @extends('layouts.backend')
 
-@section('title', 'Edit Category')
-@section('content-header', 'Edit Category')
+@section('title', 'Edit Setting')
+@section('content-header', 'Edit Setting')
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <form action="{{ route('admin.category.update', ['id' => $category->id]) }}" method="POST" class="form-horizontal">
+        <div class="col-md-12">
+            <form action="{{ route('admin.setting.update', ['id' => $setting->id]) }}" method="POST" class="form-horizontal">
                 <input type="hidden" name="_method" value="PATCH">
-                @include('backend.category._form')
+                @include('backend.setting._form')
                 <div class="box-footer">
                     <a href="javascript:window.history.back()" class="btn btn-default">Cancel</a>
                     <button type="submit" class="btn btn-primary pull-right">Edit</button>
@@ -27,4 +27,3 @@
     new FormValidation().validate('form');
   </script>
 @endpush
-

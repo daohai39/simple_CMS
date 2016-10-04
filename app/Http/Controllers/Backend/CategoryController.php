@@ -62,7 +62,7 @@ class CategoryController extends BackendController
     public function store(Request $request)
     {
         $category = $this->appService->create($request->all());
-        flash('Tạo danh mục thành công', 'success');
+        flash('Created Successfully', 'success');
         return redirect()->route('admin.category.edit', ['id' => $category->id]);
     }
 
@@ -100,7 +100,7 @@ class CategoryController extends BackendController
     public function update(Request $request, $id)
     {
         $this->appService->update($id, $request->all());
-        flash('Sửa danh mục thành công', 'success');
+        flash('Edited Successfully', 'success');
         return redirect()->route('admin.category.edit', ['id' => $id]);
     }
 
@@ -113,7 +113,7 @@ class CategoryController extends BackendController
     public function destroy($id)
     {
         $this->appService->delete($id);
-        flash('Xoá danh mục thành công', 'success');
+        flash('Deleted Successfully', 'success');
         return redirect()->route('admin.category.index');
     }
 }

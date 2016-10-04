@@ -5,58 +5,38 @@
         <ul class="sidebar-menu">
             <li class="header">Dashboard</li>
             <li class="treeview">
-                <a href="#">
+                <a href="{{ route('admin.category.index') }}">
                     <i class="fa fa-list"></i>
-                    <span>Danh Mục</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+                    <span>Category</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.category.index') }}"><i class="fa fa-list-ol"></i>Danh sách</a></li>
-                    <li><a href="{{ route('admin.category.create') }}"><i class="fa fa-plus-circle"></i>Tạo</a></li>
-                </ul>
             </li>
 
             <li class="treeview">
-                <a href="#">
+                <a href="{{ route('admin.product.index') }}">
                     <i class="fa fa-shopping-cart"></i>
-                    <span>Sản Phẩm</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+                    <span>Product</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.product.index') }}"><i class="fa fa-list-ol"></i>Danh sách</a></li>
-                    <li><a href="{{ route('admin.product.create') }}"><i class="fa fa-plus-circle"></i>Tạo</a></li>
-                </ul>
             </li>
 
-            <li class="treeview">
-                <a href="#">
+            <!-- <li class="treeview">
+                <a href="{{ route('admin.tag.index') }}">
                     <i class="fa fa-tags"></i>
-                    <span>Thẻ</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+                    <span>Tag</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-list-ol"></i>Danh sách</a></li>
-                </ul>
+            </li> -->
+
+            <li class="treeview">
+                <a href="{{ route('admin.post.index') }}">
+                    <i class="fa fa-book"></i>
+                    <span>Post</span>
+                </a>
             </li>
 
             <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-book"></i>
-                    <span>Bài Đăng</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+                <a href="{{ route('admin.setting.index') }}">
+                    <i class="fa fa-cog"></i>
+                    <span>Setting</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.post.index') }}"><i class="fa fa-list-ol"></i>Danh sách</a></li>
-                    <li><a href="{{ route('admin.post.create') }}"><i class="fa fa-plus-circle"></i>Tạo</a></li>
-                </ul>
             </li>
         </ul>
     </section>

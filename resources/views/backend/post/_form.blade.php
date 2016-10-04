@@ -1,18 +1,18 @@
 <div class="box-body">
     {{ csrf_field() }}
     <div class="form-group">
-        <label for="title">Tiêu đề *</label>
+        <label for="title">Title *</label>
         <input type="text" name="title" required="required" class="form-control" value="{{ isset($post) ? $post->title : old('title') }}">
     </div>
 
     <div class="form-group">
-        <label for="description">Miêu tả</label>
-        <textarea name="description" class="form-control">{{ isset($post) ? $post->description : old('description') }}</textarea>
+        <label for="content">Content *</label>
+        <textarea id="summernote" name="content" required="required" class="form-control">{{ isset($post) ? $post->content : old('content') }}</textarea>
     </div>
 
     <div class="form-group">
-        <label for="content">Nội dung *</label>
-        <textarea id="summernote" name="content" required="required" class="form-control">{{ isset($post) ? $post->content : old('content') }}</textarea>
+        <label for="description">Description</label>
+        <textarea name="description" class="form-control">{{ isset($post) ? $post->description : old('description') }}</textarea>
     </div>
 
     <div class="form-group">

@@ -59,10 +59,10 @@ abstract class AbstractDataTable
 
     private function updateAction($model)
     {
-        return '<a href="'.route('admin.'.$this->resource.'.edit', ['id' => $model->id]).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Sửa</a>';
+        return '<a href="'.route('admin.'.$this->resource.'.edit', ['id' => $model->id]).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Edit</a>';
     }
     private function deleteAction($model)
     {
-        return '<a href="'.route('admin.'.$this->resource.'.destroy', ['id' => $model->id]).'" class="btn btn-xs btn-danger" data-method="DELETE" data-confirm="Bạn có chắc chắn xoá đối tượng này?"><i class="glyphicon glyphicon-remove"></i>Xoá</a>';
+        return '<a href="'.route('admin.'.$this->resource.'.destroy', ['id' => $model->id]).'" class="btn btn-xs btn-danger" data-method="DELETE" data-confirm="Are you sure?"><i class="glyphicon glyphicon-remove"></i>Delete</a>';
     }
 }

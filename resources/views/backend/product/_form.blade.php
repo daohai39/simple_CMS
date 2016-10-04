@@ -1,22 +1,22 @@
 <div class="box-body">
     {{ csrf_field() }}
     <div class="form-group">
-        <label for="name">Tên <span required="required">*</span> </label>
-        <input type="name" name="name" required="required" class="form-control"  value="{{ isset($product) ? $product->name : old('name') }}">
+        <label for="name">Name <span required="required">*</span> </label>
+        <input type="text" name="name" required="required" class="form-control"  value="{{ isset($product) ? $product->name : old('name') }}">
     </div>
 
     <div class="form-group">
-        <label for="code">Mã <span required="required">*</span> </label>
-        <input type="code" name="code" required="required" class="form-control"  value="{{ isset($product) ? $product->code : old('code') }}">
+        <label for="code">Code <span required="required">*</span> </label>
+        <input type="text" name="code" required="required" class="form-control"  value="{{ isset($product) ? $product->code : old('code') }}">
     </div>
 
     <div class="form-group">
-        <label for="author">Tác giả <span required="required">*</span> </label>
-        <input type="author" name="author" required="required" class="form-control"  value="{{ isset($product) ? $product->author : old('author') }}">
+        <label for="author">Author <span required="required">*</span> </label>
+        <input type="text" name="author" required="required" class="form-control"  value="{{ isset($product) ? $product->author : old('author') }}">
     </div>
 
     <div class="form-group">
-        <label for="category_id">Danh mục <span required="required">*</span> </label>
+        <label for="category_id">Category <span required="required">*</span> </label>
         <select name="category_id" required="required" class="form-control select2" id="select2-product-category">
             <option selected="selected" value="{{ isset($product->category) ? $product->category->id : old('category_id') }}">
                 {{ isset($product->category) ? $product->category->name : '' }}
@@ -25,7 +25,7 @@
     </div>
 
     <div class="form-group">
-        <label for="tags">Tag</label>
+        <label for="tags">Tags</label>
         <select name="tags[]" multiple="multiple" class="form-control select2" id="select2-product-tags">
                 @if(isset($product))
                     @foreach($product->tags as $tag)
@@ -36,18 +36,8 @@
     </div>
 
     <div class="form-group">
-        <label for="content">Miêu tả</label>
+        <label for="content">Description</label>
         <textarea id="summernote" name="description"> {!! isset($product) ? $product->description : '' !!} </textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="meta_title">Meta_title</label>
-        <input type="text" name="meta_title" class="form-control" value="{{ isset($product) ? $product->meta_title : old('meta_title') }}">
-    </div>
-
-    <div class="form-group">
-        <label for="meta_description">Meta_description</label>
-        <textarea name="meta_description" class="form-control"> {!! $product->meta_description or old('meta_description')  !!} </textarea>
     </div>
 
     <div class="form-group">
@@ -65,6 +55,16 @@
             :images="images"
             @endif
         ></dropzone>
+    </div>
+
+    <div class="form-group">
+        <label for="meta_title">Meta_title</label>
+        <input type="text" name="meta_title" class="form-control" value="{{ isset($product) ? $product->meta_title : old('meta_title') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="meta_description">Meta_description</label>
+        <textarea name="meta_description" class="form-control"> {!! $product->meta_description or old('meta_description')  !!} </textarea>
     </div>
 </div>
 
@@ -85,7 +85,6 @@
 
 @push('pre-scripts')
     <script src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/select2/i18n/vi.js') }}"></script>
     <script src="{{ asset('assets/vendor/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
 @endpush

@@ -58,7 +58,7 @@ class ProductController extends BackendController
     public function store(Request $request)
     {
         $product = $this->appService->create($request->all());
-        flash('Sản phẩm tạo thành công', 'success');
+        flash('Created Successfully', 'success');
         return redirect()->route('admin.product.edit', ['id' => $product->id]);
     }
 
@@ -96,7 +96,7 @@ class ProductController extends BackendController
     public function update(Request $request, $id)
     {
         $product = $this->appService->update($id, $request->all());
-        flash('Sản phẩm sửa thành công', 'success');
+        flash('Edited Successfully', 'success');
         return redirect()->route('admin.product.edit', ['id' => $id]);
     }
 
@@ -109,7 +109,7 @@ class ProductController extends BackendController
     public function destroy($id)
     {
         $this->appService->delete($id);
-        flash('Sản phẩm xoá thành công', 'success');
+        flash('Deleted Successfully', 'success');
         return redirect()->route('admin.product.index');
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
-@section('title', 'Tạo sản phẩm')
-@section('content-header', 'Tạo sản phẩm')
+@section('title', 'Create Product')
+@section('content-header', 'Create Product')
 
 @section('content')
     <div class="row">
@@ -9,8 +9,8 @@
             <form action="{{ route('admin.product.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                 @include('backend.product._form')
                 <div class="box-footer">
-                    <a href="javascript:window.history.back()" class="btn btn-default">Hủy</a>
-                    <button type="submit" class="btn btn-primary pull-right">Tạo</button>
+                    <a href="javascript:window.history.back()" class="btn btn-default">Cancel</a>
+                    <button type="submit" class="btn btn-primary pull-right">Create</button>
                 </div>
             </form>
         </div>

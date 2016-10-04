@@ -21,7 +21,7 @@ class PostAppService implements PostAppServiceInterface
 	{
         $this->validator->validate('create', $attributes);
         $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
-        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLIC : Post::STATUS_DRAFT;
+        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
 		return Post::create($attributes);
 	}
 
@@ -30,7 +30,7 @@ class PostAppService implements PostAppServiceInterface
         $post = $this->posts->find($id);
         $this->validator->validate('update', $attributes, $id);
         $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
-        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLIC : Post::STATUS_DRAFT;
+        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
         $post->update($attributes);
         return $post;
     }

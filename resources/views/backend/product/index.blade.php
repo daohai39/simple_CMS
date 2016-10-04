@@ -5,21 +5,21 @@
 <link rel="stylesheet" type="text/css" href='{{ asset("assets/vendor/datatables-responsive-bs/css/responsive.bootstrap.min.css") }}'>
 @endpush
 
-@section('title', 'Sản Phẩm')
-@section('content-header', 'Sản Phẩm')
+@section('title', 'Product')
+@section('content-header', 'Product')
 
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Danh Sách Sản Phẩm</h3>
+            <a href="{{ route('admin.product.create') }}" class="btn btn-xs btn-primary">Add New</a>
         </div>
         <div class="box-body">
             <table id="products-table" class="table dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Tên</th>
-                        <th>Mã</th>
-                        <th>Tác Vụ</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
             </table>

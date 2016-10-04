@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
-@section('title', 'Sửa bài viết')
-@section('content-header', 'Sửa bài viết')
+@section('title', 'Edit Post')
+@section('content-header', 'Edit Post')
 
 @section('content')
     <div class="row">
@@ -10,8 +10,8 @@
                 <input type="hidden" name="_method" value="PATCH">
                 @include('backend.post._form')
                 <div class="box-footer">
-                    <a href="javascript:window.history.back()" class="btn btn-default">Hủy</a>
-                    <button type="submit" class="btn btn-primary pull-right">Sửa</button>
+                    <a href="javascript:window.history.back()" class="btn btn-default">Cancel</a>
+                    <button type="submit" class="btn btn-primary pull-right">Edit</button>
                 </div>
             </form>
         </div>

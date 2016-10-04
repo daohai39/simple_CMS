@@ -5,20 +5,20 @@
 <link rel="stylesheet" type="text/css" href='{{ asset("assets/vendor/datatables-responsive-bs/css/responsive.bootstrap.min.css") }}'>
 @endpush
 
-@section('title', 'Danh Mục')
-@section('content-header', 'Danh Mục')
+@section('title', 'Category')
+@section('content-header', 'Category')
 
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Danh sách danh mục</h3>
+            <a href="{{ route('admin.category.create') }}" class="btn btn-xs btn-primary">Add New</a>
         </div>
         <div class="box-body">
             <table id="categories-table" class="table dt-responsive nowrap" cellspacing="0"  width="100%">
                 <thead>
                     <tr>
-                        <th>Tên</th>
-                        <th>Tác Vụ</th>
+                        <th>Name</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
             </table>
