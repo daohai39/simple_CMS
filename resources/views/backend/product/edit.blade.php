@@ -6,7 +6,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('admin.product.update', ['id' => $product->id]) }}" method="POST" class="form-horizontal">
+            <form action="{{ route('admin.product.update', ['id' => $product->id]) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="PATCH">
                 @include('backend.product._form')
                 <div class="box-footer">

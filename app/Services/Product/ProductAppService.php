@@ -31,6 +31,7 @@ class ProductAppService implements ProductAppServiceInterface
         $product->category()->associate($category);
         $product->save();
         $product->tag($attributes['tags']);
+        $product->attachMedia($attributes['images_id'], 'gallery');
 
         return $product;
 	}

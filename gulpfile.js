@@ -23,6 +23,8 @@ elixir(function(mix) {
           'backend/*.js',
           '../bower/AdminLTE/dist/js/app.js',
         ], 'public/assets/js/backend/app.js')
+
+        .webpack('vue/backend/form.js', 'public/assets/js/backend/form.js')
         // Versioning backend & frontend styles and scripts
         .version([
             'assets/js/backend/app.js',

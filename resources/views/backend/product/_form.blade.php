@@ -37,17 +37,17 @@
 
     <div class="form-group">
         <label for="content">Miêu tả</label>
-        <textarea id="summernote" name="description">{{ isset($product) ? $product->description : '' }}</textarea>
+        <textarea id="summernote" name="description"> {!! isset($product) ? $product->description : '' !!} </textarea>
     </div>
 
     <div class="form-group">
         <label for="meta_title">Meta_title</label>
-        <input type="text" name="meta_title" required="required" class="form-control" value="{{ isset($product) ? $product->meta_title : old('meta_title') }}">
+        <input type="text" name="meta_title" class="form-control" value="{{ isset($product) ? $product->meta_title : old('meta_title') }}">
     </div>
 
     <div class="form-group">
         <label for="meta_description">Meta_description</label>
-        <textarea name="meta_description" class="form-control">{{ isset($product) ? $product->meta_description : old('meta_description') }}</textarea>
+        <textarea name="meta_description" class="form-control"> {!! $product->meta_description or old('meta_description')  !!} </textarea>
     </div>
 
     <div class="form-group">
@@ -57,7 +57,25 @@
             <input type="checkbox" name="featured" <?php if(isset($product) && $product->featured == true) echo "checked"?> data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success">
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="images[]">Images</label>
+        <dropzone
+            @if(isset($product))
+            :images="images"
+            @endif
+        ></dropzone>
+    </div>
 </div>
+
+@push('head-scripts')
+    <script>
+        var product;
+        @if(isset($product))
+        images = {!! $product->getMedia('gallery') !!}
+        @endif
+    </script>
+@endpush
 
 @push('pre-styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
@@ -73,6 +91,7 @@
 @endpush
 
 @push('post-scripts')
+<script src="{{ asset('assets/js/backend/form.js') }}"></script>
 <script>
     $('#summernote').summernote({
         height: 300,                 // set editor height

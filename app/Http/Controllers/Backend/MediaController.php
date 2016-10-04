@@ -28,7 +28,7 @@ class MediaController extends BackendController
      */
     public function storeImage(Request $request)
     {
-        $media = $this->appService->uploadImage($request->file('image'));
+        $media = $this->appService->uploadImage($request->file('images'));
 
         if($request->ajax()) {
             return $media;
@@ -43,6 +43,6 @@ class MediaController extends BackendController
      */
     public function destroy($id)
     {
-        return $this->appService->delete($id);
+        $this->appService->delete($id);
     }
 }
