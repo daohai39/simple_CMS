@@ -26,13 +26,13 @@ class SettingSeeder extends Seeder
         factory(App\Setting::class)->make()->fill([
             'name' => 'Phone',
             'value' => '0123456789',
-            'type' => 'number',
+            'type' => 'text',
         ])->save();
 
         factory(App\Setting::class)->make()->fill([
             'name' => 'Hotline',
             'value' => '0123456789',
-            'type' => 'number',
+            'type' => 'text',
         ])->save();
 
         factory(App\Setting::class)->make()->fill([

@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
-@section('title', 'Sửa Cài Đặt')
-@section('content-header', 'Sửa Cài Đặt')
+@section('title', 'Sửa '.$setting->name)
+@section('content-header', 'Sửa '.$setting->name)
 
 @section('content')
     <div class="row">

@@ -9,8 +9,6 @@ class SettingValidator extends AbstractValidator implements SettingValidatorInte
     {
         return [
             'update' => [
-                'name' => 'required | min:3 | unique:settings,name,'.$id,
-                'value' => 'required| min:5,'.$id,
             ],
         ];
     }

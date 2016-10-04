@@ -31,6 +31,7 @@ class SettingController extends Controller
     {
         //
           if($request->ajax()) {
+            // dd($request);
             return $this->dataTable->getData();
         }
         return view('backend.setting.index');
@@ -74,7 +75,7 @@ class SettingController extends Controller
     {
         //
         $setting = $this->appService->update($id, $request->all());
-        flash('sửa thành công', 'success');
+        flash('Sửa thành công', 'success');
         return redirect()->route('admin.setting.edit', ['id' => $setting->id]);
     }
 

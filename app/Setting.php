@@ -12,6 +12,6 @@ class Setting extends Model
     const TYPE_TEXTAREA = 'textarea';
     const TYPE_NUMBER = 'number';
 
-    protected $fillable = ['name','value','type'];
-
+    protected $fillable = ['value'];
+    
 }

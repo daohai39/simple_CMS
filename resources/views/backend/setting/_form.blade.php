@@ -2,18 +2,18 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label for="name">Tên <span required="required">*</span> </label>
-        <input type="name" name="name" required="required" class="form-control"  value="{{ isset($setting) ? $setting->name : old('name') }}">
-    </div>
-
-     <div class="form-group">
-        <label for="type">Loai<span required="required">*</span> </label>
-         <select name="type" class="form-control select2">
-            <option selected="selected" value="{{ $setting->type }}">{{ $setting->type }}</option>
-        </select>
+        <input type="name" name="name" required="required" class="form-control"  value="{{ isset($setting) ? $setting->name : old('name') }}" disabled="true">
     </div>
 
     <div class="form-group" id="setting-value">
         <label for="value">Miêu tả</label>
+        @if ($setting->type == 'textarea')
+            <textarea id="summernote" name="value">{{ isset($setting) ? $setting->value : '' }}</textarea>
+        @elseif ($setting->type == 'text')
+            <input type="text" name="value" id="text" class="form-control"  value="{{ isset($setting) ? $setting->value : old('value') }}">
+        @else
+            <input type="number" name="value" id="number" class="form-control"  value="{{ isset($setting) ? $setting->value : old('value') }}">
+        @endif
     </div>
 </div>
 
@@ -30,28 +30,11 @@
 
 @push('post-scripts')
 <script>
-    // $('#summernote').summernote({
-    //     height: 300,                 // set editor height
-    //     minHeight: null,             // set minimum height of editor
-    //     maxHeight: null,             // set maximum height of editor
-    // });
-    // new Select2("select", {
-    //     placeholder: "Chọn loai du lieu",
-    //     ajax: {
-    //         url: laroute.route("admin.setting.index"),
-    //         data: function (params) {
-    //             return {
-    //                 q: params.term,
-    //                 page: params.page,
-    //             }
-    //         }
-    //     }
-    // });
-    // $(document).on('change', '#setting_id', function() {
-    //   var target = $(this).data('target');
-    //   var show = $("option:selected", this).data('show');
-    //   $(target).children().addClass('hide');
-    //   $(show).removeClass('hide');
-    // });
+    $('#summernote').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+    });
+
 </script>
 @endpush

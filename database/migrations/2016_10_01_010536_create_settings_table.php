@@ -20,7 +20,6 @@ class CreateSettingsTable extends Migration
             $table->string('type')->default(Setting::TYPE_TEXT);
             $table->text('value')->nullable();
             $table->boolean('default')->default(false);
-            // $table->key()->unique();
             $table->timestamps();   
         });
     }
