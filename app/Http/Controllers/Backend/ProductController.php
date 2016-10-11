@@ -83,6 +83,7 @@ class ProductController extends BackendController
     public function edit($id)
     {
         $product = $this->products->find($id);
+        $product->load('images');
         return view('backend.product.edit', compact('product'));
     }
 

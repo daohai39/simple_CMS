@@ -31,4 +31,24 @@ class MediaAppService implements MediaAppServiceInterface
         $media = $this->medias->find($id);
         return $media->delete();
     }
+
+    public function setThumbnail($attributes)
+    {
+        $resource = ucfirst($attributes['resource']);
+        $newThumbnail = $this->medias->find($attributes['image_id']);
+
+        $itemRepository = app('App\Contracts\Repositories\\'.$resource.'RepositoryInterface');
+        $item = $itemRepository->find($attributes['item_id']);
+
+
+        if( $oldThumbnail = $item->getMedia('thumbnail') ) {
+            $item->detachMedia($oldThumbnail, 'thumbnail');
+            $item->attachMedia($oldThumbnail, 'gallery');
+        }
+
+        $item->detachMedia($newThumbnail, 'gallery');
+        $item->attachMedia($newThumbnail, 'thumbnail');
+
+        return $newThumbnail;
+    }
 }

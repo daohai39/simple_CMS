@@ -2,7 +2,6 @@
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -29,16 +28,40 @@ class AdminContext extends MinkContext implements Context, SnippetAcceptingConte
     {
     }
 
+    /**
+     * @Given an admin has signed in
+     */
+    public function anAdminHasSignedIn()
+    {
+        $user = factory(App\User::class)->create([
+            'email' => 'admin@decoks.dev',
+            'password' => bcrypt('admin@decoks.dev')
+        ]);
+
+        \Auth::login($user);
+    }
+
 
     /**
-     * @Given category name :arg1 id :arg2 exists
+     * @Given the following :arg1 model exists:
      */
-    public function categoryNameIdExists($arg1, $arg2)
+    public function theFollowingModelExists($model, TableNode $table)
     {
-        factory(App\Category::class)->create([
-            'id' => $arg2,
-            'name' => $arg1,
-        ]);
+        $model = "App\\".ucfirst($model);
+        $rows = $table->getHash();
+
+        foreach($rows as $row) {
+            $instance = new $model($row);
+            $instance->save();
+        }
+    }
+
+    /**
+     * @When I delete a :arg1 model of id :arg2
+     */
+    public function iDeleteAModelOfId($model, $id)
+    {
+        route("admin.$model.destroy", ['id' => $id]);
     }
 
     /**
@@ -67,18 +90,5 @@ class AdminContext extends MinkContext implements Context, SnippetAcceptingConte
             throw new Exception("No html element found for the selector ('$selector')");
 
         $element->setValue($value);
-    }
-
-    /**
-     * @Given the following categories exist:
-     */
-    public function theFollowingCategoriesExist(TableNode $table)
-    {
-        $hash = $table->getHash();
-        foreach ($hash as $row) {
-            factory(App\Category::class)->create([
-                'name' => $row['name'],
-            ]);
-        }
     }
 }

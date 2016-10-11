@@ -3,33 +3,39 @@ Feature: Manage Category
 	As an admin
 	I need to be able to create, read, update, delete every category
 
-Scenario: Read a list of categories
+Background:
+    Given an admin has signed in
+
+Scenario: View a table of categories
     When I go to "/admin/category"
     Then I should see a "table" element
-    And I should see "Tên"
-    And I should see "Tác Vụ"
+    And I should see "Name"
+    And I should see "Actions"
 
-Scenario: Read a single category
-    Given category name "Indoor" id "1" exists
-    When I go to "/admin/category/1"
-    Then I should see "Indoor"
 
-Scenario: Create a root category
-    Given I am on "/admin/category/create"
-    When I fill in "name" with "Indoor"
-    And I press "Tạo"
-    Then I should be on "/admin/category/1"
-    And I should see "Indoor"
-
-@javascript
-Scenario: Create a child category
-    Given category name "Indoor" id "1" exists
+Scenario: Create a category
     When I go to "/admin/category/create"
-    Then I fill in "name" with "Bedroom"
-    And I click ".select2-selection__placeholder" element
-    And I type in ".select2-search__field" element with "Indoor"
-    And I press "Tạo"
-    And I should see "Bedroom"
+    And I fill in "name" with "Foo"
+    And I press "Create"
+    Then the "name" field should contain "Foo"
+
+Scenario: Update a category
+    Given the following "category" model exists:
+    | id | name  |
+    | 1  | Indoor|
+    When I go to "/admin/category/1/edit"
+    Then I fill in "name" with "Outdoor"
+    And I press "Edit"
+    Then I should be on "/admin/category/1/edit"
+    And the "name" field should contain "Outdoor"
+
+Scenario: Delete a category
+    Given the following "category" model exists:
+    | id | name  |
+    | 1  | Indoor|
+    And I am on "/admin/category"
+    When I delete a "category" model of id "1"
+    Then I should be on "/admin/category"
 
 
 

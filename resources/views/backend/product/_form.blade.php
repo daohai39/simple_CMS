@@ -1,3 +1,10 @@
+@push('head-scripts')
+<script>
+    var product = {!! $product !!};
+    console.log(product);
+</script>
+@endpush
+
 <div class="box-body">
     {{ csrf_field() }}
     <div class="form-group">
@@ -49,10 +56,11 @@
     </div>
 
     <div class="form-group">
-        <label for="images[]">Images</label>
+        <label for="images_id[]">Images</label>
         <dropzone
+            resource="product"
             @if(isset($product))
-            :images="images"
+                :item="{{ $product }}"
             @endif
         ></dropzone>
     </div>
@@ -67,15 +75,6 @@
         <textarea name="meta_description" class="form-control"> {!! $product->meta_description or old('meta_description')  !!} </textarea>
     </div>
 </div>
-
-@push('head-scripts')
-    <script>
-        var product;
-        @if(isset($product))
-        images = {!! $product->getMedia('gallery') !!}
-        @endif
-    </script>
-@endpush
 
 @push('pre-styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">

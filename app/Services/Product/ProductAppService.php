@@ -31,7 +31,7 @@ class ProductAppService implements ProductAppServiceInterface
         $product->category()->associate($category);
         $product->save();
         $product->tag($attributes['tags']);
-        $product->attachMedia($attributes['images_id'], 'gallery');
+        $product->syncMedia($attributes['images_id'], 'gallery');
 
         return $product;
 	}
@@ -45,6 +45,7 @@ class ProductAppService implements ProductAppServiceInterface
         $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
         $product->tag( $tags = empty($attributes['tags']) ? [] : $attributes['tags'] );
+        $product->syncMedia($attributes['images_id'], 'gallery');
 
         return $product->update($attributes);
     }

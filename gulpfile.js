@@ -11,6 +11,7 @@ elixir(function(mix) {
     mix.laroute()
        // Copy all bower plugins to public directory
        .bower(plugins.bower, directories.bower.src, directories.bower.output)
+       .copy('node_modules/alertifyjs/build', 'public/assets/vendor/alertify')
         // Compiling backend styles
         .styles([
           '../bower/AdminLTE/dist/css/AdminLTE.css',

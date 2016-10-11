@@ -3,9 +3,9 @@ default:
           - %paths.base%/tests/bootstrap/
     extensions:
         Laracasts\Behat:
-            # env_path: .env.behat
+            env_path: .env.behat
         Behat\MinkExtension:
-            base_url: http://decoks.dev
+            base_url: http://behat.decoks.dev
             default_session: laravel
             laravel: ~
             selenium2: ~

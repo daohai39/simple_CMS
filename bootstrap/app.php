@@ -52,4 +52,8 @@ $app->singleton(
 |
 */
 
+if (array_get($_SERVER, 'HTTP_HOST') == 'behat.decoks.dev') {
+    $app->loadEnvironmentFrom('.env.behat');
+}
+
 return $app;

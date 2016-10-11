@@ -17,16 +17,23 @@
         },
         computed: {
             dataset () {
-                if (this.single && !this.images[0]) {
+                if (this.single && !this.item.images[0]) {
                     return []
                 }
-                return this.images
+
+                var data = this.item.images;
+                if(this.item.thumbnail) {
+                    data.push(this.item.thumbnail);
+                }
+                return data;
             }
         },
         props: {
-            images: {
-                type: Array,
-                default: () => []
+            resource: {
+                type: String,
+            },
+            item: {
+                type: Object
             },
             url: {
                 type: String,
@@ -44,14 +51,15 @@
         methods: {
             initDz: function () {
                 var self = this
+
                 this.$set(
                     'dz',
                     new Dropzone("#dropzone", {
                         url: self.url,
-                        paramName: 'source',
+                        paramName: 'images',
                         acceptedFiles: 'image/*',
                         addRemoveLinks: true,
-                        dictRemoveFile: 'Xóa',
+                        dictRemoveFile: 'Delete',
                         init: function () {
                             this.on('sending', self.dzOnSending)
                             this.on('error', self.dzOnError)
@@ -87,9 +95,8 @@
             dzOnFileRemoved: function (file) {
                 if (file.data) {
                     this.$http({
-                        url: router.route('admin.media.destroy', {image: file.data.id}),
+                        url: router.route('admin.media.destroy', {id: file.data.id}),
                         method: 'DELETE',
-                        // data: {_method:'DELETE'}
                     }).then(function (response) {
                         console.log(response)
                     }, function (response) {
@@ -100,7 +107,7 @@
             dzOnSending: function(file, xhr, formData) {
                 var self = this
                 formData.append('_method', self.method)
-                formData.append('_token', window._token)
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'))
             },
             dzOnError: function(file, response, xhr) {
                 if (xhr && xhr.status == 422) {
@@ -120,10 +127,11 @@
             dzMockImages: function () {
                 var self = this
                 var promises = []
+
                 this.dataset.forEach(function(image) {
                     var promise = new Promise(function(resolve, reject) {
-                        var file = { name: image.title, size: image.size, src: image.public_path }
-                        file.data = image
+                        var file = { name: image.filename, size: image.size, src: image.url }
+                        file.data = image;
                         resolve(self.dzMockImage(file, image))
                     })
                     promises.push(promise)
@@ -134,14 +142,14 @@
             dzOnSuccess: function (file, data) {
                 var input = document.createElement('input')
                 input.setAttribute('type', 'hidden')
-                input.setAttribute('name', 'image_id[]')
+                input.setAttribute('name', 'images_id[]')
                 input.setAttribute('value', data.id)
                 file.data = data
                 file.previewElement.appendChild(input)
             },
-            featuredRendering: function (images) {
+            imagesRendering: function (images) {
                 var self = this
-                // this.images = images
+
                 images.forEach(function (image, index) {
                     Array.prototype.forEach.call( image.file.previewElement.querySelectorAll('[data-featured-btn]'), function( node ) {
                         node.parentNode.removeChild( node )
@@ -149,28 +157,37 @@
 
                     var e = document.createElement('a')
                     e.setAttribute('data-featured-btn', true)
-                    if (image.featured) {
-                        e.innerHTML = '<i class="fa fa-check-square"></i> Ảnh chính'
+
+                    if (image.isThumbnail) {
+                        e.innerHTML = '<i class="fa fa-check-square"></i> Thumbnail'
                         e.setAttribute('class', 'btn btn-xs btn-success btn-block')
                     } else {
-                        e.innerHTML = '<i class="fa fa-circle"></i> Đặt làm ảnh chính'
+                        e.innerHTML = '<i class="fa fa-circle"></i> Set thumbnail'
                         e.setAttribute('class', 'btn btn-xs btn-info btn-block')
                     }
                     e.addEventListener("click", function (e) {
                         e.preventDefault()
-                        self.$parent.setFeaturedImage(image.id).then(function (response) {
-                            image.featured = response.data.featured
-                            self.images.$set(index, image)
-                            self.featuredRendering(self.images)
+                        self.setThumbnailImage(image.id).then(function (response) {
+                            image.isThumbnail = response.data.isThumbnail
+                            self.dataset.$set(index, image)
+                            self.imagesRendering(self.dataset)
                         })
+                        location.reload();
                     })
                     image.file.previewElement.appendChild(e)
                 })
+            },
+            setThumbnailImage: function(image_id) {
+                var self = this;
+
+                return self.$parent.$http.post(
+                    router.route('admin.media.image.thumbnail', {resource: self.resource, item_id: self.item.id, image_id: image_id})
+                )
             }
         },
         ready: function () {
             this.initDz()
-            this.dzMockImages().then(!this.single ? this.featuredRendering : null)
+            this.dzMockImages().then(!this.single ? this.imagesRendering : null)
         }
     }
 </script>

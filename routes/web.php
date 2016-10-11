@@ -14,6 +14,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
     Route::resource('setting', 'SettingController', ['except' => ['show', 'create', 'store', 'destroy'] ]);
 
     Route::post('/media/image', ['as' => 'media.image.store', 'uses' => 'MediaController@storeImage']);
+    Route::post('/media/image/thumbnail', ['as' => 'media.image.thumbnail', 'uses' => 'MediaController@setThumbnail']);
     Route::delete('/media/{id}', ['as' => 'media.destroy', 'uses' => 'MediaController@destroy']);
 });
 

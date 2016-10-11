@@ -45,4 +45,10 @@ class MediaController extends BackendController
     {
         $this->appService->delete($id);
     }
+
+    public function setThumbnail(Request $request)
+    {
+        $media = $this->appService->setThumbnail($request->all());
+        return $media;
+    }
 }
