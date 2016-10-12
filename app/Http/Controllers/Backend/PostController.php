@@ -56,7 +56,7 @@ class PostController extends BackendController
     public function store(Request $request)
     {
         $post = $this->appService->create($request->all());
-        flash('Tạo bài viết thành công', 'success');
+        flash('Created Successfully', 'success');
         return redirect()->route('admin.post.edit', ['id' => $post->id]);
     }
 
@@ -95,7 +95,7 @@ class PostController extends BackendController
     public function update(Request $request, $id)
     {
         $this->appService->update($id, $request->all());
-        flash('Sửa bài viết thành công', 'success');
+        flash('Edited Successfully', 'success');
         return redirect()->route('admin.post.edit', ['id' => $id]);
     }
 
@@ -108,7 +108,7 @@ class PostController extends BackendController
     public function destroy($id)
     {
         $this->appService->delete($id);
-        flash('Xoá bài viết thành công', 'success');
+        flash('Deleted Successfully', 'success');
         return redirect()->route('admin.post.index');
     }
 }
