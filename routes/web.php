@@ -4,7 +4,7 @@ Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLogin
 Route::post('/login', ['as' => 'post.login', 'uses' => 'Auth\LoginController@login']);
 Route::post('/logout', ['as' => 'post.logout', 'uses' => 'Auth\LoginController@logout']);
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
     Route::get('/', ['as' => 'dashboard', 'uses' => 'BackendController@dashboard']);
 
     Route::resource('post', 'PostController', ['except' => ['show'] ]);

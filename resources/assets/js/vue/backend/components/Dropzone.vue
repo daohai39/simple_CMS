@@ -20,12 +20,7 @@
                 if (this.single && !this.item.images[0]) {
                     return []
                 }
-
-                var data = this.item.images;
-                if(this.item.thumbnail) {
-                    data.push(this.item.thumbnail);
-                }
-                return data;
+                return this.item.images;
             }
         },
         props: {
@@ -168,18 +163,21 @@
                     e.addEventListener("click", function (e) {
                         e.preventDefault()
                         self.setThumbnailImage(image.id).then(function (response) {
+                            self.dataset.forEach(function(image, index) {
+                                return image.isThumbnail = false;
+                            })
+
                             image.isThumbnail = response.data.isThumbnail
                             self.dataset.$set(index, image)
+
                             self.imagesRendering(self.dataset)
                         })
-                        location.reload();
                     })
                     image.file.previewElement.appendChild(e)
                 })
             },
             setThumbnailImage: function(image_id) {
                 var self = this;
-
                 return self.$parent.$http.post(
                     router.route('admin.media.image.thumbnail', {resource: self.resource, item_id: self.item.id, image_id: image_id})
                 )

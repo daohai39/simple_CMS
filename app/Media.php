@@ -5,6 +5,9 @@ use Plank\Mediable\Media as Mediable;
 
 class Media extends Mediable
 {
+    const IMAGE_DEFAULT = 'gallery';
+    const IMAGE_THUMBNAIL = 'thumbnail';
+
     protected $appends = ['url', 'isThumbnail'];
 
 
@@ -18,6 +21,6 @@ class Media extends Mediable
         return $this->join('mediables', 'media.id', '=', 'mediables.media_id')
                     ->where('media.id', '=', $this->id)
                     ->where('media.aggregate_type', '=', self::TYPE_IMAGE)
-                    ->where('mediables.tag', '=', 'thumbnail')->exists();
+                    ->where('mediables.tag', '=', self::IMAGE_THUMBNAIL)->exists();
     }
 }

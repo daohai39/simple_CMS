@@ -21,8 +21,6 @@ class Product extends Model implements TaggableInterface
         'featured' => false,
     ];
 
-    protected $appends = ['thumbnail'];
-
     public function sluggable()
     {
         return [
@@ -41,17 +39,9 @@ class Product extends Model implements TaggableInterface
     {
         return $this->morphToMany(Media::class, 'mediable')
             ->where('aggregate_type', Media::TYPE_IMAGE)
-            ->where('tag', '<>', 'thumbnail')
+            // ->where('tag', '<>', Media::IMAGE_THUMBNAIL)
             ->withPivot('tag', 'order')
             ->orderBy('order');
-    }
-
-    public function getThumbnailAttribute($value)
-    {
-        return $this->morphToMany(Media::class, 'mediable')
-            ->where('aggregate_type', Media::TYPE_IMAGE)
-            ->where('tag', '=', 'thumbnail')
-            ->first();
     }
 
     public function getMetaTitleAttribute($value)

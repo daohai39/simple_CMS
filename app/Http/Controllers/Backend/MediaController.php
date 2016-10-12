@@ -49,6 +49,6 @@ class MediaController extends BackendController
     public function setThumbnail(Request $request)
     {
         $media = $this->appService->setThumbnail($request->all());
-        return $media;
+        return $this->medias->find($media->id);
     }
 }

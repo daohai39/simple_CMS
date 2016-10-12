@@ -1,10 +1,3 @@
-@push('head-scripts')
-<script>
-    var product = {!! $product !!};
-    console.log(product);
-</script>
-@endpush
-
 <div class="box-body">
     {{ csrf_field() }}
     <div class="form-group">

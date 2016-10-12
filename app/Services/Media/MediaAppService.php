@@ -4,6 +4,7 @@ namespace App\Services\Media;
 use App\Contracts\Repositories\MediaRepositoryInterface;
 use App\Contracts\Services\MediaAppServiceInterface;
 use App\Contracts\Validators\MediaValidatorInterface;
+use App\Media;
 use Illuminate\Http\Request;
 use MediaUploader;
 
@@ -41,13 +42,21 @@ class MediaAppService implements MediaAppServiceInterface
         $item = $itemRepository->find($attributes['item_id']);
 
 
-        if( $oldThumbnail = $item->getMedia('thumbnail') ) {
-            $item->detachMedia($oldThumbnail, 'thumbnail');
-            $item->attachMedia($oldThumbnail, 'gallery');
-        }
+        if( $oldThumbnail = $item->firstMedia(Media::IMAGE_THUMBNAIL) ) {
+            if($oldThumbnail->id == $newThumbnail->id) {
+                $item->detachMedia($oldThumbnail, Media::IMAGE_THUMBNAIL);
+                $item->attachMedia($oldThumbnail, Media::IMAGE_DEFAULT);
+            } else {
+                $item->detachMedia($oldThumbnail, Media::IMAGE_THUMBNAIL);
+                $item->attachMedia($oldThumbnail, Media::IMAGE_DEFAULT);
 
-        $item->detachMedia($newThumbnail, 'gallery');
-        $item->attachMedia($newThumbnail, 'thumbnail');
+                $item->detachMedia($newThumbnail, Media::IMAGE_DEFAULT);
+                $item->attachMedia($newThumbnail, Media::IMAGE_THUMBNAIL);
+            }
+        } else {
+            $item->detachMedia($newThumbnail, Media::IMAGE_DEFAULT);
+            $item->attachMedia($newThumbnail, Media::IMAGE_THUMBNAIL);
+        }
 
         return $newThumbnail;
     }
