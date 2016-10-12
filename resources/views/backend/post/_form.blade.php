@@ -40,24 +40,70 @@
             <input type="checkbox" name="status" <?php if(isset($post) && $post->status == 'PUBLISH') echo "checked"?> data-toggle="toggle" data-off="Draft" data-on="Public" data-onstyle="success">
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="tags">Tags</label>
+        <select name="tags[]" multiple="multiple" class="form-control select2" id="select2-post-tags">
+                @if(isset($post))
+                    @foreach($post->tags as $tag)
+                        <option value="{{ $tag->name }}" selected="selected">{{ $tag->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+    </div>
+
+    <div class="form-group">
+        <label for="images_id[]">Images</label>
+        <dropzone
+            resource="post"
+            @if(isset($post))
+                :item="{{ $post }}"
+            @endif
+        ></dropzone>
+    </div>
 </div>
 
 @push('pre-styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/summernote/summernote.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap-toggle/css/bootstrap-toggle.min.css') }}">
 @endpush
 
 @push('pre-scripts')
+    <script src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
 @endpush
 
 @push('post-scripts')
+<script src="{{ asset('assets/js/backend/form.js') }}"></script>
 <script>
     $('#summernote').summernote({
         height: 300,                 // set editor height
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
+    });
+
+    new Select2("#select2-post-tags", {
+        placeholder: "#hashtag...",
+        tags: true,
+        ajax: {
+            url: laroute.route("admin.tag.create"),
+            processResults: function (response, params) {
+                params.page = params.page || 1;
+                return {
+                    results: $.map(response.data, function (item) {
+                        return {
+                            text: item['name'],
+                            id: item['name']
+                        }
+                    }),
+                    pagination: {
+                        more: response.to < response.total
+                    }
+                };
+            },
+        }
     });
 </script>
 @endpush

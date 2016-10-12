@@ -24,14 +24,17 @@ class ProductAppService implements ProductAppServiceInterface
 	public function create(array $attributes)
 	{
         $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+        $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
+        $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
+        $category = $this->categories->find($attributes['category_id']);
 
         $this->validator->validate('create', $attributes);
+
 		$product =  new Product($attributes);
-        $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
         $product->save();
-        $product->tag($attributes['tags']);
-        $product->syncMedia($attributes['images_id'], 'gallery');
+        $product->setTags($tags);
+        $product->syncMedia($images_id, 'gallery');
 
         return $product;
 	}
@@ -39,13 +42,16 @@ class ProductAppService implements ProductAppServiceInterface
     public function update($id, array $attributes)
     {
         $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+        $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
+        $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
+        $category = $this->categories->find($attributes['category_id']);
+
+        $this->validator->validate('update', $attributes, $id);
 
         $product = $this->products->find($id);
-        $this->validator->validate('update', $attributes, $id);
-        $category = $this->categories->find($attributes['category_id']);
         $product->category()->associate($category);
-        $product->tag( $tags = empty($attributes['tags']) ? [] : $attributes['tags'] );
-        $product->syncMedia($attributes['images_id'], 'gallery');
+        $product->setTags($tags);
+        $product->syncMedia($images_id, 'gallery');
 
         return $product->update($attributes);
     }

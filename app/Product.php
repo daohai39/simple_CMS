@@ -39,7 +39,6 @@ class Product extends Model implements TaggableInterface
     {
         return $this->morphToMany(Media::class, 'mediable')
             ->where('aggregate_type', Media::TYPE_IMAGE)
-            // ->where('tag', '<>', Media::IMAGE_THUMBNAIL)
             ->withPivot('tag', 'order')
             ->orderBy('order');
     }

@@ -19,20 +19,31 @@ class PostAppService implements PostAppServiceInterface
 
 	public function create(array $attributes)
 	{
-        $this->validator->validate('create', $attributes);
         $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
         $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
-		return Post::create($attributes);
+        $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
+        $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
+
+        $this->validator->validate('create', $attributes);
+
+		$post =  Post::create($attributes);
+        $post->setTags($tags);
+        $post->syncMedia($images_id, 'gallery');
 	}
 
     public function update($id, array $attributes)
     {
-        $post = $this->posts->find($id);
-        $this->validator->validate('update', $attributes, $id);
         $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
         $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
-        $post->update($attributes);
-        return $post;
+        $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
+        $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
+
+        $this->validator->validate('update', $attributes, $id);
+
+        $post = $this->posts->find($id);
+        $post->setTags($tags);
+        $post->syncMedia($images_id, 'gallery');
+        return $post->update($attributes);
     }
 
     public function delete($id)

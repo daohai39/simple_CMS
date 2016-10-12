@@ -64,7 +64,12 @@ return [
 
         'uploads-images' => [
             'driver' => 'local',
-            'root'   => public_path('uploads/images'),
+            'root'   => public_path('storage/uploads/images'),
+        ],
+
+        'uploads' => [
+            'driver' => 'local',
+            'root'   => public_path('storage/uploads'),
         ],
 
     ],

@@ -29,7 +29,7 @@
         <select name="tags[]" multiple="multiple" class="form-control select2" id="select2-product-tags">
                 @if(isset($product))
                     @foreach($product->tags as $tag)
-                        <option value="{{ $tag->id }}" selected="selected">{{ $tag->name }}</option>
+                         <option value="{{ $tag->name }}" selected="selected">{{ $tag->name }}</option>
                     @endforeach
                 @endif
             </select>

@@ -81,6 +81,7 @@ class PostController extends BackendController
     public function edit($id)
     {
         $post = $this->posts->find($id);
+        $post->load('images');
         return view('backend.post.edit', compact('post'));
     }
 

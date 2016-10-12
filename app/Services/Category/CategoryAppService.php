@@ -20,8 +20,8 @@ class CategoryAppService implements CategoryAppServiceInterface
 	public function create(array $attributes)
 	{
         $this->validator->validate('create', $attributes);
-        $category = Category::create($attributes);
 
+        $category = Category::create($attributes);
         if( ! empty($attributes['parent_id']) ) {
             $parent = $this->categories->find($attributes['parent_id']);
             $parent->appendNode($category);

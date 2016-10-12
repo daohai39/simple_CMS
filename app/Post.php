@@ -35,6 +35,14 @@ class Post extends Model implements TaggableInterface
         ];
     }
 
+    public function images()
+    {
+        return $this->morphToMany(Media::class, 'mediable')
+            ->where('aggregate_type', Media::TYPE_IMAGE)
+            ->withPivot('tag', 'order')
+            ->orderBy('order');
+    }
+
     public function getMetaTitleAttribute($value)
     {
         if(! $value) {
