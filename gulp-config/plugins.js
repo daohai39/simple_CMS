@@ -1,16 +1,16 @@
 const plugins = {
   bower: [
     {
+      src: 'summernote/dist',
+      output: 'summernote'
+    },
+    {
       src: 'bootstrap-toggle/js',
       output: 'bootstrap-toggle/js'
     },
     {
       src: 'bootstrap-toggle/css',
       output: 'bootstrap-toggle/css'
-    },
-    {
-      src: 'summernote/dist',
-      output: 'summernote'
     },
     {
       src: 'AdminLTE/plugins/iCheck',

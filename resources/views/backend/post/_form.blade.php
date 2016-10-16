@@ -5,9 +5,13 @@
         <input type="text" name="title" required="required" class="form-control" value="{{ isset($post) ? $post->title : old('title') }}">
     </div>
 
+
+
     <div class="form-group">
         <label for="content">Content *</label>
-        <textarea id="summernote" name="content" required="required" class="form-control">{{ isset($post) ? $post->content : old('content') }}</textarea>
+        <wysiwyg>
+            <textarea name="content" required="required" class="form-control" slot="textarea">{{ isset($post) ? $post->content : old('content') }}</textarea>
+        </wysiwyg>
     </div>
 
     <div class="form-group">
@@ -78,12 +82,6 @@
 @push('post-scripts')
 <script src="{{ asset('assets/js/backend/form.js') }}"></script>
 <script>
-    $('#summernote').summernote({
-        height: 300,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-    });
-
     new Select2("#select2-post-tags", {
         placeholder: "#hashtag...",
         tags: true,

@@ -11,7 +11,7 @@ use MediaUploader;
 
 class MediaAppService implements MediaAppServiceInterface
 {
-    const UPLOAD_IMAGES_DISK = 'uploads-images';
+    const UPLOAD_IMAGES_DISK = 'image';
     private $medias;
     private $validator;
 

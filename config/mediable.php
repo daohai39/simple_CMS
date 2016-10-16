@@ -6,12 +6,12 @@ return [
      *
      * Should extend `Plank\Mediable\Media`
      */
-    'model' => Plank\Mediable\Media::class,
+    'model' => App\Media::class,
 
     /*
      * Filesystem disk to use if none is specified
      */
-    'default_disk' => 'uploads',
+    'default_disk' => 'upload',
 
     /*
      * Filesystems that can be used for media storage
@@ -19,8 +19,8 @@ return [
      * Uploader will throw an exception if a disk not in this list is selected
      */
     'allowed_disks' => [
-        'uploads',
-        'uploads-images',
+        'upload',
+        'image',
     ],
 
     /*

@@ -4,10 +4,13 @@ require('../../bootstrap');
 let router = window.router || laroute || window.laroute
 
 
-import Dropzone from './components/Dropzone.vue'
+import UploadImage from './components/UploadImage.vue'
+import Wysiwyg from './components/Wysiwyg.vue'
+
 new Vue({
     el: 'body',
     components: {
-        'dropzone': Dropzone,
+        'upload-image': UploadImage,
+        'wysiwyg': Wysiwyg,
     }
 });

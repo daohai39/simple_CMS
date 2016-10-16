@@ -36,8 +36,10 @@
     </div>
 
     <div class="form-group">
-        <label for="content">Description</label>
-        <textarea id="summernote" name="description"> {!! isset($product) ? $product->description : '' !!} </textarea>
+        <label for="description">Description</label>
+        <wysiwyg>
+            <textarea class="form-control" name="description" slot="textarea">{!! isset($product) ? $product->description : old('description') !!}</textarea>
+        </wysiwyg>
     </div>
 
     <div class="form-group">
@@ -50,12 +52,12 @@
 
     <div class="form-group">
         <label for="images_id[]">Images</label>
-        <dropzone
+        <upload-image
             resource="product"
             @if(isset($product))
                 :item="{{ $product }}"
             @endif
-        ></dropzone>
+        ></upload-image>
     </div>
 
     <div class="form-group">
@@ -84,12 +86,6 @@
 @push('post-scripts')
 <script src="{{ asset('assets/js/backend/form.js') }}"></script>
 <script>
-    $('#summernote').summernote({
-        height: 300,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-    });
-
     new Select2("#select2-product-tags", {
         placeholder: "#hashtag...",
         tags: true,

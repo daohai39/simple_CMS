@@ -27,6 +27,38 @@ class AppServiceProvider extends ServiceProvider
         $this->bindAppServices();
         $this->bindDataTables();
         $this->bindValidators();
+
+        $this->app->bind('League\Glide\Server', function($app) {
+            return \League\Glide\ServerFactory::create([
+                'base_url' => 'img',
+                'source' => \Storage::disk('image')->getDriver(),
+                'cache' => \Storage::disk('image')->getDriver(),
+                'cache_path_prefix' => '.cache',
+                'response' => new \League\Glide\Responses\LaravelResponseFactory(),
+
+                'max_image_size' => 2000 * 2000,
+                'presets' => [
+                    'small' => [
+                        'w' => 200,
+                        'h' => 200,
+                        'fit' => 'crop',
+                    ],
+                    'medium' => [
+                        'w' => 600,
+                        'h' => 400,
+                        'fit' => 'crop',
+                    ],
+                ],
+
+                'defaults' => [
+                    'mark' => 'mark.png',
+                    'markw' => '100w',
+                    'markfit' => 'crop'
+                ],
+
+                'watermarks' => \Storage::disk('source')->getDriver(),
+            ]);
+        });
     }
 
 

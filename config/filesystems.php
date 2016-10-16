@@ -62,14 +62,21 @@ return [
             'bucket' => 'your-bucket',
         ],
 
-        'uploads-images' => [
+        'image' => [
             'driver' => 'local',
-            'root'   => public_path('storage/uploads/images'),
+            'root' => storage_path('app/public/images'),
+            'visibility' => 'public',
         ],
 
-        'uploads' => [
+        'upload' => [
             'driver' => 'local',
-            'root'   => public_path('storage/uploads'),
+            'root' => storage_path('app/uploads'),
+            'visibility' => 'public',
+        ],
+
+        'source' => [
+            'driver' => 'local',
+            'root' => storage_path('app/source'),
         ],
 
     ],

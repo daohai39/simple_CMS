@@ -5,6 +5,22 @@ const shell  = require('gulp-shell');
 
 const Task = Elixir.Task;
 
+
+Elixir.ready(function() {
+    Elixir.webpack.mergeConfig({
+        module: {
+            loaders: [
+                { test: /\.css$/, loader: "style-loader!css-loader" },
+                { test: /\.(eot|ttf|woff|png|jpg|gif|svg)$/, loader: "url-loader?limit=100000" },
+                { test: /\.(eot|ttf|woff|png|jpg|gif|svg)$/, loader: "file-loader" }
+            ]
+        }
+    });
+});
+
+
+
+
 Elixir.extend('bower', function(plugins, src, output) {
 	const self = this;
 	const tasks = plugins.map(function (plugin) {
