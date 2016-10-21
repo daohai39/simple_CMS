@@ -23,8 +23,7 @@ class MediaAppService implements MediaAppServiceInterface
 
 	public function uploadImage($image)
     {
-        $this->validator->validate('image', [ $image ]);
-        return MediaUploader::fromSource($image)->setAllowedAggregateTypes(['image'])->toDisk(self::UPLOAD_IMAGES_DISK)->upload();
+        return $this->uploadMedia(self::UPLOAD_IMAGES_DISK, $image);
     }
 
     public function delete($id)
@@ -59,5 +58,10 @@ class MediaAppService implements MediaAppServiceInterface
         }
 
         return $newThumbnail;
+    }
+
+    private function uploadMedia($disk = null, $media)
+    {
+        return MediaUploader::fromSource($media)->toDisk($disk)->upload();
     }
 }

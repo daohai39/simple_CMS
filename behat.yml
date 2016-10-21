@@ -10,8 +10,11 @@ default:
             laravel: ~
             selenium2: ~
             browser_name: chrome
+        Novaway\CommonContexts\Extension: ~
     suites:
       admin_features:
             paths:    [ %paths.base%/tests/features/web ]
             filters:  { role: admin }
-            contexts: [ AdminContext ]
+            contexts:
+                - AdminContext
+                - nwcontext:select2

@@ -7,8 +7,6 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Mink\Driver\Selenium2Driver;
-use Laracasts\Behat\Context\Migrator;
-use Laracasts\Behat\Context\DatabaseTransactions;
 use PHPUnit_Framework_Assert as PHPUnit;
 
 /**
@@ -16,17 +14,20 @@ use PHPUnit_Framework_Assert as PHPUnit;
  */
 class AdminContext extends MinkContext implements Context, SnippetAcceptingContext
 {
-    use Migrator, DatabaseTransactions;
+
+
     /**
-     * Initializes context.
+     * Migrate the database before each scenario and refresh
      *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
+     * @beforeScenario
      */
-    public function __construct()
+    public function migrateRefresh()
     {
+        Artisan::call('migrate:refresh');
     }
+
+
+
 
     /**
      * @Given an admin has signed in
@@ -39,22 +40,41 @@ class AdminContext extends MinkContext implements Context, SnippetAcceptingConte
         ]);
 
         \Auth::login($user);
-    }
 
+        if ($this->getSession()->getDriver() instanceof \Behat\Mink\Driver\Selenium2Driver) {
+
+            $this->visit(route('login'));
+            $this->fillField('email', 'admin@decoks.dev');
+            $this->fillField('password', 'admin@decoks.dev');
+            $this->pressButton('Sign In');
+        }
+    }
 
     /**
      * @Given the following :arg1 model exists:
      */
-    public function theFollowingModelExists($model, TableNode $table)
+    public function theFollowingProductExist($model = 'product', TableNode $table)
     {
         $model = "App\\".ucfirst($model);
         $rows = $table->getHash();
 
         foreach($rows as $row) {
             $instance = new $model($row);
+
+            $row = collect($row);
+
+
+            $relation = $row->filter(function($value, $key) use($instance) {
+                if(strpos($key, '_id') == true) {
+                    $relationName = explode('_', $key)[0];
+                    $instance->$relationName()->associate($value);
+                }
+            });
+
             $instance->save();
         }
     }
+
 
     /**
      * @When I delete a :arg1 model of id :arg2

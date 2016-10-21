@@ -27,8 +27,7 @@ class TagAppService implements TagAppServiceInterface
     {
         $tag = $this->tags->find($id);
         $this->validator->validate('update', $attributes, $id);
-        $tag->update($attributes);
-        return $tag;
+        return $tag->update($attributes);
     }
 
     public function delete($id)

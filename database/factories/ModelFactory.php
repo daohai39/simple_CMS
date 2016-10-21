@@ -38,10 +38,19 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Setting::class, function (Faker\Generator $faker) {
-    return 
+    return
     [
         'name' => $faker->name,
         'value' => $faker->words(5,true),
         'type' => $faker->randomElement($array = array ('text','textarea','number')),
+    ];
+});
+
+$factory->define(App\Designer::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->safeEmail,
+        'phone' => $faker->phoneNumber,
+        'description' => $faker->sentences(5, true),
     ];
 });

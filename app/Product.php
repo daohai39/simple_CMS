@@ -6,10 +6,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cartalyst\Tags\TaggableTrait;
 use Cartalyst\Tags\TaggableInterface;
 use Plank\Mediable\Mediable;
+use App\Traits\HasImages;
 
 class Product extends Model implements TaggableInterface
 {
-    use Sluggable, TaggableTrait, Mediable;
+    use Sluggable, TaggableTrait, Mediable, HasImages;
 
     protected $fillable = ['name', 'code', 'author', 'description', 'meta_title', 'meta_description', 'featured'];
 
@@ -30,18 +31,14 @@ class Product extends Model implements TaggableInterface
         ];
     }
 
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function images()
-    {
-        return $this->morphToMany(Media::class, 'mediable')
-            ->where('aggregate_type', Media::TYPE_IMAGE)
-            ->withPivot('tag', 'order')
-            ->orderBy('order');
-    }
+
+
 
     public function getMetaTitleAttribute($value)
     {

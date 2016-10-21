@@ -13,7 +13,10 @@ class Media extends Mediable
 
     public function getUrlAttribute($value)
     {
-        return route('image', ['path' => $this->getDiskPath()]);
+        if($this->aggregate_type == self::TYPE_IMAGE)
+            return route('image', ['path' => $this->getDiskPath()]);
+
+        return $this->getUrl();
     }
 
     public function getIsThumbnailAttribute($value)

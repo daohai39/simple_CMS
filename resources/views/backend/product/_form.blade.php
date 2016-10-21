@@ -109,7 +109,7 @@
     });
 
     new Select2("#select2-product-category", {
-        placeholder: "Chọn danh mục",
+        placeholder: "Choose Category",
         ajax: {
             url: laroute.route("admin.category.create"),
             data: function (params) {

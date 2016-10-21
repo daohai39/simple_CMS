@@ -14,6 +14,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
     Route::get('/', ['as' => 'dashboard', 'uses' => 'BackendController@dashboard']);
 
     Route::resource('post', 'PostController', ['except' => ['show'] ]);
+    Route::resource('designer', 'DesignerController', ['except' => ['show'] ]);
     Route::resource('category', 'CategoryController', ['except' => ['show'] ]);
     Route::resource('tag','TagController', ['except' => ['show'] ]);
     Route::resource('product', 'ProductController', ['except' => ['show'] ]);

@@ -1,3 +1,4 @@
+@manage-category
 Feature: Manage Category
 	In order to manage all categories
 	As an admin

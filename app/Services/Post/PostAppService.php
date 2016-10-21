@@ -29,6 +29,7 @@ class PostAppService implements PostAppServiceInterface
 		$post =  Post::create($attributes);
         $post->setTags($tags);
         $post->syncMedia($images_id, 'gallery');
+        return $post;
 	}
 
     public function update($id, array $attributes)

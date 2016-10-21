@@ -48,12 +48,11 @@ class AppServiceProvider extends ServiceProvider
                         'h' => 400,
                         'fit' => 'crop',
                     ],
-                ],
-
-                'defaults' => [
-                    'mark' => 'mark.png',
-                    'markw' => '100w',
-                    'markfit' => 'crop'
+                    'marked' => [
+                        'mark' => 'mark.png',
+                        'markw' => '100w',
+                        'markfit' => 'crop'
+                    ]
                 ],
 
                 'watermarks' => \Storage::disk('source')->getDriver(),
@@ -74,7 +73,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\TagRepositoryInterface' => 'App\Repositories\Eloquent\TagRepository',
             'App\Contracts\Repositories\PostRepositoryInterface' => 'App\Repositories\Eloquent\PostRepository',
             'App\Contracts\Repositories\MediaRepositoryInterface' => 'App\Repositories\Eloquent\MediaRepository',
-            'App\Contracts\Repositories\SettingRepositoryInterface' => 'App\Repositories\Eloquent\SettingRepository'
+            'App\Contracts\Repositories\SettingRepositoryInterface' => 'App\Repositories\Eloquent\SettingRepository',
+            'App\Contracts\Repositories\DesignerRepositoryInterface' => 'App\Repositories\Eloquent\DesignerRepository',
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -91,6 +91,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Services\PostAppServiceInterface' => 'App\Services\Post\PostAppService',
             'App\Contracts\Services\MediaAppServiceInterface' => 'App\Services\Media\MediaAppService',
             'App\Contracts\Services\SettingAppServiceInterface' => 'App\Services\Setting\SettingAppService',
+            'App\Contracts\Services\DesignerAppServiceInterface' => 'App\Services\Designer\DesignerAppService',
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -105,7 +106,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\DataTables\ProductDataTableInterface' => 'App\DataTables\ProductDataTable',
             'App\Contracts\DataTables\TagDataTableInterface' => 'App\DataTables\TagDataTable',
             'App\Contracts\DataTables\PostDataTableInterface' => 'App\DataTables\PostDataTable',
-            'App\Contracts\DataTables\SettingDataTableInterface' => 'App\DataTables\SettingDataTable'
+            'App\Contracts\DataTables\SettingDataTableInterface' => 'App\DataTables\SettingDataTable',
+            'App\Contracts\DataTables\DesignerDataTableInterface' => 'App\DataTables\DesignerDataTable',
         ];
 
         foreach($services as $abstract => $concrete) {
@@ -121,7 +123,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
             'App\Contracts\Validators\PostValidatorInterface' => 'App\Validators\PostValidator',
             'App\Contracts\Validators\MediaValidatorInterface' => 'App\Validators\MediaValidator',
-            'App\Contracts\Validators\SettingValidatorInterface' => 'App\Validators\SettingValidator'
+            'App\Contracts\Validators\SettingValidatorInterface' => 'App\Validators\SettingValidator',
+            'App\Contracts\Validators\DesignerValidatorInterface' => 'App\Validators\DesignerValidator',
         ];
 
         foreach($services as $abstract => $concrete) {

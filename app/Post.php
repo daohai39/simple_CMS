@@ -6,10 +6,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cartalyst\Tags\TaggableTrait;
 use Cartalyst\Tags\TaggableInterface;
 use Plank\Mediable\Mediable;
+use App\Traits\HasImages;
 
 class Post extends Model implements TaggableInterface
 {
-    use Sluggable, TaggableTrait, Mediable;
+    use Sluggable, TaggableTrait, Mediable, HasImages;
 
     const STATUS_DRAFT = 'DRAFT';
     const STATUS_PUBLISH = 'PUBLISH';
@@ -35,13 +36,8 @@ class Post extends Model implements TaggableInterface
         ];
     }
 
-    public function images()
-    {
-        return $this->morphToMany(Media::class, 'mediable')
-            ->where('aggregate_type', Media::TYPE_IMAGE)
-            ->withPivot('tag', 'order')
-            ->orderBy('order');
-    }
+
+
 
     public function getMetaTitleAttribute($value)
     {

@@ -1,24 +1,26 @@
 <?php
+
 namespace App\Http\Controllers\Backend;
 
-use App\Contracts\DataTables\CategoryDataTableInterface;
-use App\Contracts\Repositories\CategoryRepositoryInterface;
-use App\Contracts\Services\CategoryAppServiceInterface;
+use App\Contracts\DataTables\DesignerDataTableInterface;
+use App\Contracts\Repositories\DesignerRepositoryInterface;
+use App\Contracts\Services\DesignerAppServiceInterface;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-class CategoryController extends BackendController
+class DesignerController extends BackendController
 {
-    private $categories;
+    private $designers;
     private $appService;
     private $dataTable;
 
-    public function __construct(CategoryRepositoryInterface $categories, CategoryAppServiceInterface $appService, CategoryDataTableInterface $dataTable)
+    public function __construct(DesignerRepositoryInterface $designers, DesignerAppServiceInterface $appService, DesignerDataTableInterface $dataTable)
     {
-        $this->categories = $categories;
+        $this->designers = $designers;
         $this->appService = $appService;
         $this->dataTable = $dataTable;
     }
+
 
     /**
      * Display a listing of the resource.
@@ -28,9 +30,9 @@ class CategoryController extends BackendController
     public function index(Request $request)
     {
         if($request->ajax()) {
-            return $this->dataTable->getRootData();
+            return $this->dataTable->getData();
         }
-        return view('backend.category.index');
+        return view('backend.designer.index');
     }
 
     /**
@@ -38,18 +40,9 @@ class CategoryController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        if($request->ajax()) {
-            if($input = $request->input('q'))
-                return $this->categories->paginateNameLike($input);
-            else if($request->input('type') == 'root')
-                return $this->categories->paginateRoots();
-            else if($request->input('type') == 'children')
-                return $this->categories->paginateChildren();
-        }
-
-        return view('backend.category.create');
+        return view('backend.designer.create');
     }
 
     /**
@@ -60,9 +53,9 @@ class CategoryController extends BackendController
      */
     public function store(Request $request)
     {
-        $category = $this->appService->create($request->all());
+        $designer = $this->appService->create($request->all());
         flash('Created Successfully', 'success');
-        return redirect()->route('admin.category.edit', ['id' => $category->id]);
+        return redirect()->route('admin.designer.edit', ['id' => $designer->id]);
     }
 
     /**
@@ -71,10 +64,9 @@ class CategoryController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $category = $this->categories->find($id);
-        return view('backend.category.show', compact('category'));
+        //
     }
 
     /**
@@ -85,8 +77,9 @@ class CategoryController extends BackendController
      */
     public function edit($id)
     {
-        $category = $this->categories->find($id);
-        return view('backend.category.edit', compact('category'));
+        $designer = $this->designers->find($id);
+        $designer->load('images');
+        return view('backend.designer.edit', compact('designer'));
     }
 
     /**
@@ -100,7 +93,7 @@ class CategoryController extends BackendController
     {
         $this->appService->update($id, $request->all());
         flash('Edited Successfully', 'success');
-        return redirect()->route('admin.category.edit', ['id' => $id]);
+        return redirect()->route('admin.designer.edit', ['id' => $id]);
     }
 
     /**
@@ -113,6 +106,6 @@ class CategoryController extends BackendController
     {
         $this->appService->delete($id);
         flash('Deleted Successfully', 'success');
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.designer.index');
     }
 }

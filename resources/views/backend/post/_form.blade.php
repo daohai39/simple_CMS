@@ -58,12 +58,12 @@
 
     <div class="form-group">
         <label for="images_id[]">Images</label>
-        <dropzone
-            resource="post"
+        <upload-image
+            resource = "post"
             @if(isset($post))
-                :item="{{ $post }}"
+                :item = "{{ $post }}"
             @endif
-        ></dropzone>
+        ></upload-image>
     </div>
 </div>
 
