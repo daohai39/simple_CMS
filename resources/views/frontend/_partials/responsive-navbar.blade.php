@@ -1,0 +1,42 @@
+<nav class="sidebar-menu slide-from-left">
+	<div class="nano">
+		<div class="content">
+			<nav class="responsive-menu">
+				<ul>
+					<li><a href="single-project.html">Tin Tức</a></li>
+					<li><a href="work-3columns.html">Sản Phẩm Thông Minh</a></li>
+					<li class="menu-item-has-children"><a href="#">Phòng Xông Hơi</a>
+						<ul class="sub-menu">
+							<li><a href="phong-xong-kho.html">Phòng Xông Hơi Khô</a></li>
+							<li><a href="phong-xong-uot.html">Phòng Xông Hơi Ướt</a></li>
+						</ul>
+					</li>
+					<li class="menu-item-has-children"><a href="#">Nội Thất</a>
+						<ul class="sub-menu">
+							<li><a href="phong-khach.html">Phòng Khách</a></li>
+							<li><a href="phong-bep.html">Phòng Bếp</a></li>
+							<li><a href="phong-ngu.html">Phòng Ngủ</a></li>
+							<li><a href="phong-ve-sinh.html">Phòng Vệ Sinh</a></li>
+						</ul>
+					</li>
+					<li><a href="cong-trinh.html">Công Trình Hoàn Thiện</a></li>
+					<li class="menu-item-has-children"><a href="#">Ngoại Thất</a>
+						<ul class="sub-menu">
+							<li><a href="nha-lo.html">Nhà Lô</a></li>
+							<li><a href="biet-thu.html">Biệt Thự</a></li>
+							<li><a href="tieu-canh.html">Tiểu Cảnh</a></li>
+						</ul>
+					</li>
+					<li><a href="cau-thang.html">Cầu Thang</a></li>
+					<li><a href="dich-vu.html">Dịch Vụ Sửa Nhà</a></li>
+					<li class="menu-item-has-children"><a href="#">Hàng Rào Cổng Sắt</a>
+						<ul class="sub-menu">
+							<li><a href="hang-rao.html">Hàng Rào</a></li>
+							<li><a href="cong-sat.html">Cổng Sắt</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</nav>

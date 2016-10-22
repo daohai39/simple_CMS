@@ -18,5 +18,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], 
     Route::delete('/media/{id}', ['as' => 'media.destroy', 'uses' => 'MediaController@destroy']);
 });
 
-
+Route::get('/', function(){
+	return view('frontend.index');
+});
 
