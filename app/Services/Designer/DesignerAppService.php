@@ -19,9 +19,9 @@ class DesignerAppService implements DesignerAppServiceInterface
 
 	public function create(array $attributes)
 	{
-        $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
-
         $this->validator->validate('create', $attributes);
+
+        $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
 
         $designer = Designer::create($attributes);
         $designer->syncMedia($images_id, 'gallery');
@@ -31,10 +31,10 @@ class DesignerAppService implements DesignerAppServiceInterface
 
     public function update($id, $attributes)
     {
+        $this->validator->validate('update', $attributes, $id);
+
         $designer = $this->designers->find($id);
         $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
-
-        $this->validator->validate('update', $attributes, $id);
 
         $designer->syncMedia($images_id, 'gallery');
         return $designer->update($attributes);

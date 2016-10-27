@@ -77,7 +77,14 @@ return [
 
         'source' => [
             'driver' => 'local',
-            'root' => storage_path('app/source'),
+            'root' => storage_path('app/sources'),
+        ],
+
+        'test' => [
+            'driver' => 'local',
+            'root' => storage_path('app/tests'),
+            'prefix' => 'tests',
+            'visibility' => 'public',
         ],
 
     ],

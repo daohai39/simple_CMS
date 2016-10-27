@@ -9,7 +9,7 @@ class MediaValidator extends AbstractValidator implements MediaValidatorInterfac
     {
       	return [
             'image' => [
-            	'image' => 'image'
+            	'image' => 'image | max: 5000'
             ],
         ];
     }

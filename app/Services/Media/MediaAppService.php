@@ -12,6 +12,7 @@ use MediaUploader;
 class MediaAppService implements MediaAppServiceInterface
 {
     const UPLOAD_IMAGES_DISK = 'image';
+
     private $medias;
     private $validator;
 
@@ -21,9 +22,12 @@ class MediaAppService implements MediaAppServiceInterface
         $this->validator = $validator;
     }
 
-	public function uploadImage($image)
+	public function uploadImage($media)
     {
-        return $this->uploadMedia(self::UPLOAD_IMAGES_DISK, $image);
+        $this->validator->validate('image', array('image' => $media));
+        return MediaUploader::fromSource($media)->toDisk(self::UPLOAD_IMAGES_DISK)
+                                                ->setAllowedAggregateTypes(['image'])
+                                                ->upload();
     }
 
     public function delete($id)
@@ -58,10 +62,5 @@ class MediaAppService implements MediaAppServiceInterface
         }
 
         return $newThumbnail;
-    }
-
-    private function uploadMedia($disk = null, $media)
-    {
-        return MediaUploader::fromSource($media)->toDisk($disk)->upload();
     }
 }

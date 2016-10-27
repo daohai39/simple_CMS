@@ -13,12 +13,12 @@ abstract class AbstractValidator
     }
 
 
-    public function validate(String $action, array $data, $id = null)
+    public function validate($action, array $data, $id = null)
     {
         $validation = $this->validator->make($data, $this->getRules($action, $id))->validate();
     }
 
-    private function getRules(String $action, $id = null)
+    private function getRules($action, $id = null)
     {
         $id = ($id == null) ? '' : $id;
         if( !array_key_exists($action, $this->rules($id)) ) {

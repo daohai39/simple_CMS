@@ -23,7 +23,7 @@
 @endpush
 
 @push('post-scripts')
-  <script>
+  <!-- <script>
     new FormValidation().validate('form');
-  </script>
+  </script> -->
 @endpush

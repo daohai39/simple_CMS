@@ -5,20 +5,17 @@
 <link rel="stylesheet" type="text/css" href='{{ asset("assets/vendor/datatables-responsive-bs/css/responsive.bootstrap.min.css") }}'>
 @endpush
 
-@section('title', 'Thẻ')
-@section('content-header', 'Thẻ')
+@section('title', 'Tag')
+@section('content-header', 'Tag')
 
 @section('content')
     <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Danh sách thẻ</h3>
-        </div>
         <div class="box-body">
             <table id="categories-table" class="table dt-responsive nowrap" cellspacing="0"  width="100%">
                 <thead>
                     <tr>
-                        <th>Tên</th>
-                        <th>Tác Vụ</th>
+                        <th>Name</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
             </table>

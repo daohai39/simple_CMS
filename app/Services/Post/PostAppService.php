@@ -19,12 +19,12 @@ class PostAppService implements PostAppServiceInterface
 
 	public function create(array $attributes)
 	{
-        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
-        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
+        $this->validator->validate('create', $attributes);
+
+        $attributes['featured'] = isset($attributes['featured']) ? ( ($attributes['featured'] == 'on') ? true : false) : false;
+        $attributes['status'] = isset($attributes['status']) ? (($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT) : Post::STATUS_DRAFT;
         $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
         $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
-
-        $this->validator->validate('create', $attributes);
 
 		$post =  Post::create($attributes);
         $post->setTags($tags);
@@ -34,12 +34,12 @@ class PostAppService implements PostAppServiceInterface
 
     public function update($id, array $attributes)
     {
-        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
-        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
+        $this->validator->validate('update', $attributes, $id);
+
+        $attributes['featured'] = isset($attributes['featured']) ? ( ($attributes['featured'] == 'on') ? true : false) : false;
+        $attributes['status'] = isset($attributes['status']) ? (($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT) : Post::STATUS_DRAFT;
         $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
         $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
-
-        $this->validator->validate('update', $attributes, $id);
 
         $post = $this->posts->find($id);
         $post->setTags($tags);

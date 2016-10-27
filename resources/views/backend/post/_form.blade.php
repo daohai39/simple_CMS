@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <label for="meta_title">Meta_title</label>
-        <input type="text" name="meta_title" required="required" class="form-control" value="{{ isset($post) ? $post->meta_title : old('meta_title') }}">
+        <input type="text" name="meta_title" class="form-control" value="{{ isset($post) ? $post->meta_title : old('meta_title') }}">
     </div>
 
     <div class="form-group">

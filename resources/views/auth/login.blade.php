@@ -33,18 +33,18 @@
                 <form action="{{ url('/login') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group has-feedback">
-                        <input name="email" type="email" class="form-control" placeholder="Email">
+                        <input name="email" type="email" class="form-control" value="{{ old('email') }}" placeholder="Email">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                        @if ($errors->has('email'))
+                        @if (! empty($errors) && $errors->has('email'))
                             <span>
                                 <strong style="color: #dd4b39">{{ $errors->first('email') }}</strong>
                             </span>
                         @endif
                     </div>
                     <div class="form-group has-feedback">
-                        <input name="password" type="password" class="form-control" placeholder="Password">
+                        <input name="password" type="password" class="form-control" value="{{ old('password') }}" placeholder="Password">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if ($errors->has('password'))
+                        @if (! empty($errors) && $errors->has('password'))
                             <span>
                                 <strong style="color: #dd4b39">{{ $errors->first('password') }}</strong>
                             </span>

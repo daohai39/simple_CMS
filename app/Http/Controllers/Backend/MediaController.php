@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class MediaController extends BackendController
 {
+
 	private $medias;
     private $appService;
 
@@ -28,11 +29,7 @@ class MediaController extends BackendController
      */
     public function storeImage(Request $request)
     {
-        $media = $this->appService->uploadImage($request->file('images'));
-
-        if($request->ajax()) {
-            return $media;
-        }
+        return $this->appService->uploadImage($request->file('image'));
     }
 
     /**

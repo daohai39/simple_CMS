@@ -5,8 +5,8 @@
 <link rel="stylesheet" type="text/css" href='{{ asset("assets/vendor/datatables-responsive-bs/css/responsive.bootstrap.min.css") }}'>
 @endpush
 
-@section('title', 'Posts')
-@section('content-header', 'Posts')
+@section('title', 'Post')
+@section('content-header', 'Post')
 
 @section('content')
     <div class="box">

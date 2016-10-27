@@ -14,6 +14,6 @@ class TagDataTable extends AbstractDataTable implements TagDataTableInterface
     public function getData($columns = ['*'])
     {
         $tags = Tag::select($columns);
-        return self::of($tags)->hasActions(['update', 'delete'])->make();
+        return self::of($tags)->hasActions(['delete'])->make();
     }
 }

@@ -23,12 +23,12 @@ class ProductAppService implements ProductAppServiceInterface
 
 	public function create(array $attributes)
 	{
-        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+        $this->validator->validate('create', $attributes);
+
+        $attributes['featured'] = isset($attributes['featured']) ? ( ($attributes['featured'] == 'on') ? true : false) : false;
         $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
         $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
         $category = $this->categories->find($attributes['category_id']);
-
-        $this->validator->validate('create', $attributes);
 
 		$product =  new Product($attributes);
         $product->category()->associate($category);
@@ -41,12 +41,12 @@ class ProductAppService implements ProductAppServiceInterface
 
     public function update($id, array $attributes)
     {
-        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+        $this->validator->validate('update', $attributes, $id);
+
+        $attributes['featured'] = isset($attributes['featured']) ? ( ($attributes['featured'] == 'on') ? true : false) : false;
         $images_id = empty($attributes['images_id']) ? [] : $attributes['images_id'];
         $tags = empty($attributes['tags']) ? [] : $attributes['tags'];
         $category = $this->categories->find($attributes['category_id']);
-
-        $this->validator->validate('update', $attributes, $id);
 
         $product = $this->products->find($id);
         $product->category()->associate($category);

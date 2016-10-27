@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('meta_title')->nullable()->default(null);
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('meta_description')->nullable()->default(null);
             $table->longText('content');
             $table->boolean('featured')->default(false);

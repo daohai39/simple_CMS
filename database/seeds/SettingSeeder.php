@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 class SettingSeeder extends Seeder
-{    
+{
     /**
      * Run the database seeds.
      *
@@ -12,57 +12,59 @@ class SettingSeeder extends Seeder
     {
         //
         factory(App\Setting::class)->make()->fill([
-            'name' => 'about-meta-description',
+            'name' => 'Contact',
+            'key' => 'contact',
             'value' => 'Thong tin lien he',
             'type' => 'text',
+            'default' => true,
+        ])->save();
+
+        factory(App\Setting::class)->make()->fill([
+            'name' => 'Facebook',
+            'key' => 'facebook',
+            'value' => 'http://facebook.com',
+            'type' => 'text',
+            'default' => true,
         ])->save();
 
         factory(App\Setting::class)->make()->fill([
             'name' => 'Logo',
+            'key' => 'logo',
             'value' => 'link/to/logo',
             'type' => 'text',
+            'default' => true,
         ])->save();
-        
+
         factory(App\Setting::class)->make()->fill([
             'name' => 'Phone',
+            'key' => 'phone',
             'value' => '0123456789',
             'type' => 'text',
-        ])->save();
-
-        factory(App\Setting::class)->make()->fill([
-            'name' => 'Hotline',
-            'value' => '0123456789',
-            'type' => 'text',
-        ])->save();
-
-        factory(App\Setting::class)->make()->fill([
-            'name' => 'product-meta-description',
-            'value' => 'Danh muc san pham',
-            'type' => 'text',
+            'default' => true,
         ])->save();
 
         factory(App\Setting::class)->make()->fill([
             'name' => 'meta-title',
+            'key' => 'meta-title',
             'value' => 'Decoks',
             'type' => 'text',
+            'default' => true,
         ])->save();
 
         factory(App\Setting::class)->make()->fill([
             'name' => 'meta-description',
+            'key' => 'meta-description',
             'value' => 'Thiet ke noi ngoai that',
             'type' => 'text',
-        ])->save();
-
-        factory(App\Setting::class)->make()->fill([
-            'name' => 'About',
-            'value' => 'About here',
-            'type' => 'textarea',
+            'default' => true,
         ])->save();
 
         factory(App\Setting::class)->make()->fill([
             'name' => 'Footer',
+            'key' => 'footer',
             'value' => 'Footer here',
             'type' => 'textarea',
+            'default' => true,
         ])->save();
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
-@section('title', 'Tạo thẻ')
-@section('content-header', 'Tạo thẻ')
+@section('title', 'Create Tag')
+@section('content-header', 'Create Tag')
 
 
 @section('content')
@@ -10,8 +10,8 @@
             <form action="{{ route('admin.tag.store') }}" method="POST" class="form-horizontal">
                 @include('backend.tag._form')
                 <div class="box-footer">
-                    <a href="javascript:window.history.back()" class="btn btn-default">Hủy</a>
-                    <button type="submit" class="btn btn-primary pull-right">Tạo</button>
+                    <a href="javascript:window.history.back()" class="btn btn-default">Cancel</a>
+                    <button type="submit" class="btn btn-primary pull-right">Create</button>
                 </div>
             </form>
         </div>

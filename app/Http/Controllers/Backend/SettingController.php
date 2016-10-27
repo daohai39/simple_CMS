@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Contracts\Repositories\SettingRepositoryInterface;
 use App\Contracts\Services\SettingAppServiceInterface;
 use App\Contracts\DataTables\SettingDataTableInterface;
-class SettingController extends Controller
+class SettingController extends BackendController
 {
     private $setting;
     private $appService;

@@ -17,7 +17,7 @@
         },
         computed: {
             dataset () {
-                if (this.single && !this.item.images[0]) {
+                if (!this.item) {
                     return []
                 }
                 return this.item.images;
@@ -51,7 +51,7 @@
                     'dz',
                     new Dropzone("#dropzone", {
                         url: self.url,
-                        paramName: 'images',
+                        paramName: 'image',
                         acceptedFiles: 'image/*',
                         addRemoveLinks: true,
                         dictRemoveFile: 'Delete',
@@ -106,7 +106,7 @@
             },
             dzOnError: function(file, response, xhr) {
                 if (xhr && xhr.status == 422) {
-                    // Validation
+                    console.log(response);
                 }
                 file.previewElement.classList.add("dz-error")
                 var _ref = file.previewElement.querySelector("[data-dz-errormessage]")

@@ -14,16 +14,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
     Route::get('/', ['as' => 'dashboard', 'uses' => 'BackendController@dashboard']);
 
     Route::resource('post', 'PostController', ['except' => ['show'] ]);
+    Route::resource('product', 'ProductController', ['except' => ['show'] ]);
     Route::resource('designer', 'DesignerController', ['except' => ['show'] ]);
     Route::resource('category', 'CategoryController', ['except' => ['show'] ]);
-    Route::resource('tag','TagController', ['except' => ['show'] ]);
-    Route::resource('product', 'ProductController', ['except' => ['show'] ]);
+    Route::resource('tag','TagController', ['except' => ['show', 'create', 'store', 'edit', 'update'] ]);
     Route::resource('setting', 'SettingController', ['except' => ['show', 'create', 'store', 'destroy'] ]);
 
+    Route::delete('/media/{id}', ['as' => 'media.destroy', 'uses' => 'MediaController@destroy']);
     Route::post('/media/image', ['as' => 'media.image.store', 'uses' => 'MediaController@storeImage']);
     Route::post('/media/image/thumbnail', ['as' => 'media.image.thumbnail', 'uses' => 'MediaController@setThumbnail']);
-    Route::delete('/media/{id}', ['as' => 'media.destroy', 'uses' => 'MediaController@destroy']);
 });
 
-
+Route::get('/', function(){
+	return view('frontend.index');
+});
 
