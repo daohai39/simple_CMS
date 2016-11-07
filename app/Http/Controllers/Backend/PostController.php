@@ -3,24 +3,27 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests;
-use App\Contracts\Repositories\PostRepositoryInterface;
-use App\Contracts\DataTables\PostDataTableInterface;
-use App\Contracts\Services\PostAppServiceInterface;
-use App\Validators\ValidationExceptions;
-
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+use App\Post;
+use Ramsey\Uuid\Uuid;
+use App\Jobs\Post\CreatePost;
+use App\Jobs\Post\DeletePost;
+use App\Jobs\Post\UpdatePost;
+use App\Traits\ExecuteCommandTrait;
+use App\Contracts\DataTables\PostDataTableInterface;
+use App\Contracts\Repositories\PostRepositoryInterface;
 
 class PostController extends BackendController
 {
+    use ExecuteCommandTrait;
+
     private $posts;
-    private $appService;
     private $dataTable;
 
-    public function __construct(PostRepositoryInterface $posts, PostAppServiceInterface $appService, PostDataTableInterface $dataTable)
+    public function __construct(PostRepositoryInterface $posts, PostDataTableInterface $dataTable)
     {
         $this->posts = $posts;
-        $this->appService = $appService;
         $this->dataTable = $dataTable;
     }
 
@@ -55,9 +58,15 @@ class PostController extends BackendController
      */
     public function store(Request $request)
     {
-        $post = $this->appService->create($request->all());
+        $id = (string) Uuid::uuid4();
+
+        $attributes = array_merge(['id' => $id], $request->all());
+        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
+
+        $this->executeCommand(new CreatePost($attributes));
         flash('Created Successfully', 'success');
-        return redirect()->route('admin.post.edit', ['id' => $post->id]);
+        return redirect()->route('admin.post.edit', ['id' => $id]);
     }
 
     /**
@@ -94,7 +103,11 @@ class PostController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $this->appService->update($id, $request->all());
+        $attributes = $request->all();
+        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+        $attributes['status'] = ($attributes['status'] == 'on') ? Post::STATUS_PUBLISH : Post::STATUS_DRAFT;
+
+        $this->executeCommand(new UpdatePost($id, $attributes));
         flash('Edited Successfully', 'success');
         return redirect()->route('admin.post.edit', ['id' => $id]);
     }
@@ -107,7 +120,7 @@ class PostController extends BackendController
      */
     public function destroy($id)
     {
-        $this->appService->delete($id);
+        $this->executeCommand(new DeletePost($id));
         flash('Deleted Successfully', 'success');
         return redirect()->route('admin.post.index');
     }

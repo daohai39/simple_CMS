@@ -1,23 +1,27 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
+
+use Ramsey\Uuid\Uuid;
+use App\Traits\ExecuteCommandTrait;
+use App\Jobs\Designer\CreateDesigner;
+use App\Jobs\Designer\DeleteDesigner;
+use App\Jobs\Designer\UpdateDesigner;
 
 use App\Contracts\DataTables\DesignerDataTableInterface;
 use App\Contracts\Repositories\DesignerRepositoryInterface;
-use App\Contracts\Services\DesignerAppServiceInterface;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class DesignerController extends BackendController
 {
+    use ExecuteCommandTrait;
+
     private $designers;
-    private $appService;
     private $dataTable;
 
-    public function __construct(DesignerRepositoryInterface $designers, DesignerAppServiceInterface $appService, DesignerDataTableInterface $dataTable)
+    public function __construct(DesignerRepositoryInterface $designers, DesignerDataTableInterface $dataTable)
     {
         $this->designers = $designers;
-        $this->appService = $appService;
         $this->dataTable = $dataTable;
     }
 
@@ -53,20 +57,12 @@ class DesignerController extends BackendController
      */
     public function store(Request $request)
     {
-        $designer = $this->appService->create($request->all());
-        flash('Created Successfully', 'success');
-        return redirect()->route('admin.designer.edit', ['id' => $designer->id]);
-    }
+        $id = Uuid::uuid4()->toString();
+        $attributes = array_merge(['id' => $id], $request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $this->executeCommand(new CreateDesigner($attributes));
+        flash('Created Successfully', 'success');
+        return redirect()->route('admin.designer.edit', ['id' => $id]);
     }
 
     /**
@@ -91,7 +87,7 @@ class DesignerController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $this->appService->update($id, $request->all());
+        $this->executeCommand(new UpdateDesigner($id, $request->all()));
         flash('Edited Successfully', 'success');
         return redirect()->route('admin.designer.edit', ['id' => $id]);
     }
@@ -104,7 +100,7 @@ class DesignerController extends BackendController
      */
     public function destroy($id)
     {
-        $this->appService->delete($id);
+        $this->executeCommand(new DeleteDesigner($id));
         flash('Deleted Successfully', 'success');
         return redirect()->route('admin.designer.index');
     }

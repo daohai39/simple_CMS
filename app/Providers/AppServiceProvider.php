@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 
     /**
@@ -24,11 +27,23 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->bindRepositories();
-        $this->bindAppServices();
         $this->bindDataTables();
-        $this->bindValidators();
 
-        $this->app->bind('League\Glide\Server', function($app) {
+        $this->registerGlide();
+
+        $this->app->singleton('CommandBus', function() {
+            return app(Dispatcher::class)->pipeThrough([
+                \App\Jobs\Middlewares\ValidatingMiddleware::class,
+                \App\Jobs\Middlewares\DatabaseTransactionsMiddleware::class,
+                \App\Jobs\Middlewares\LoggingMiddleware::class,
+            ]);
+        });
+    }
+
+
+    protected function registerGlide()
+    {
+        return $this->app->bind('League\Glide\Server', function($app) {
             return \League\Glide\ServerFactory::create([
                 'base_url' => 'img',
                 'source' => \Storage::disk('image')->getDriver(),
@@ -60,7 +75,6 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-
     /**
      * Method use to bind repositories to IoC
      * @return void
@@ -82,23 +96,6 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    protected function bindAppServices()
-    {
-        $services = [
-            'App\Contracts\Services\CategoryAppServiceInterface' => 'App\Services\Category\CategoryAppService',
-            'App\Contracts\Services\ProductAppServiceInterface' => 'App\Services\Product\ProductAppService',
-            'App\Contracts\Services\TagAppServiceInterface' => 'App\Services\Tag\TagAppService',
-            'App\Contracts\Services\PostAppServiceInterface' => 'App\Services\Post\PostAppService',
-            'App\Contracts\Services\MediaAppServiceInterface' => 'App\Services\Media\MediaAppService',
-            'App\Contracts\Services\SettingAppServiceInterface' => 'App\Services\Setting\SettingAppService',
-            'App\Contracts\Services\DesignerAppServiceInterface' => 'App\Services\Designer\DesignerAppService',
-        ];
-
-        foreach($services as $abstract => $concrete) {
-            $this->app->bind($abstract, $concrete);
-        }
-    }
-
     protected function bindDataTables()
     {
         $services = [
@@ -108,23 +105,6 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\DataTables\PostDataTableInterface' => 'App\DataTables\PostDataTable',
             'App\Contracts\DataTables\SettingDataTableInterface' => 'App\DataTables\SettingDataTable',
             'App\Contracts\DataTables\DesignerDataTableInterface' => 'App\DataTables\DesignerDataTable',
-        ];
-
-        foreach($services as $abstract => $concrete) {
-            $this->app->bind($abstract, $concrete);
-        }
-    }
-
-    protected function bindValidators()
-    {
-        $services = [
-            'App\Contracts\Validators\CategoryValidatorInterface' => 'App\Validators\CategoryValidator',
-            'App\Contracts\Validators\TagValidatorInterface' => 'App\Validators\TagValidator',
-            'App\Contracts\Validators\ProductValidatorInterface' => 'App\Validators\ProductValidator',
-            'App\Contracts\Validators\PostValidatorInterface' => 'App\Validators\PostValidator',
-            'App\Contracts\Validators\MediaValidatorInterface' => 'App\Validators\MediaValidator',
-            'App\Contracts\Validators\SettingValidatorInterface' => 'App\Validators\SettingValidator',
-            'App\Contracts\Validators\DesignerValidatorInterface' => 'App\Validators\DesignerValidator',
         ];
 
         foreach($services as $abstract => $concrete) {

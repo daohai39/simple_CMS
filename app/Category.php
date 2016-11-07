@@ -1,15 +1,18 @@
 <?php
 namespace App;
 
-use Kalnoy\Nestedset\NodeTrait;
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NodeTrait;
+use Ramsey\Uuid\Uuid;
 
 class Category extends Model
 {
     use NodeTrait, Sluggable;
 
-    protected $fillable = ['name'];
+    public $incrementing = false;
+    protected $fillable = ['id', 'name'];
+
 
     public function sluggable()
     {

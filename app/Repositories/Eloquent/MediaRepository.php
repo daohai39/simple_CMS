@@ -3,6 +3,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Contracts\Repositories\MediaRepositoryInterface;
 use App\Media;
+use App\Image;
 
 class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
 {
@@ -11,4 +12,8 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
 		parent::__construct($media);
 	}
 
+    public function image()
+    {
+        return new self(new Image);
+    }
 }

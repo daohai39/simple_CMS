@@ -52,6 +52,20 @@ return [
             'prefix' => '',
         ],
 
+        'eventstore' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_2', 'localhost'),
+            'port' => env('DB_PORT_2', '3306'),
+            'database' => env('DB_DATABASE_2', 'forge'),
+            'username' => env('DB_USERNAME_2', 'forge'),
+            'password' => env('DB_PASSWORD_2', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),

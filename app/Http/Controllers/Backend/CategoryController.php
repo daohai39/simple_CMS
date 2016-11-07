@@ -1,22 +1,27 @@
 <?php
 namespace App\Http\Controllers\Backend;
 
+use Ramsey\Uuid\Uuid;
+use App\Traits\ExecuteCommandTrait;
+use App\Jobs\Category\CreateCategory;
+use App\Jobs\Category\DeleteCategory;
+use App\Jobs\Category\UpdateCategory;
 use App\Contracts\DataTables\CategoryDataTableInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
-use App\Contracts\Services\CategoryAppServiceInterface;
+
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class CategoryController extends BackendController
 {
+    use ExecuteCommandTrait;
+
     private $categories;
-    private $appService;
     private $dataTable;
 
-    public function __construct(CategoryRepositoryInterface $categories, CategoryAppServiceInterface $appService, CategoryDataTableInterface $dataTable)
+    public function __construct(CategoryRepositoryInterface $categories, CategoryDataTableInterface $dataTable)
     {
         $this->categories = $categories;
-        $this->appService = $appService;
         $this->dataTable = $dataTable;
     }
 
@@ -28,7 +33,7 @@ class CategoryController extends BackendController
     public function index(Request $request)
     {
         if($request->ajax()) {
-            return $this->dataTable->getRootData();
+            return $this->dataTable->getData();
         }
         return view('backend.category.index');
     }
@@ -60,9 +65,12 @@ class CategoryController extends BackendController
      */
     public function store(Request $request)
     {
-        $category = $this->appService->create($request->all());
+        $id = (string) Uuid::uuid4();
+        $attributes = array_merge(['id' => $id], $request->all());
+
+        $this->executeCommand(new CreateCategory($attributes));
         flash('Created Successfully', 'success');
-        return redirect()->route('admin.category.edit', ['id' => $category->id]);
+        return redirect()->route('admin.category.edit', ['id' => $id]);
     }
 
     /**
@@ -98,7 +106,7 @@ class CategoryController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $this->appService->update($id, $request->all());
+        $this->executeCommand(new UpdateCategory($id, $request->all()));
         flash('Edited Successfully', 'success');
         return redirect()->route('admin.category.edit', ['id' => $id]);
     }
@@ -111,7 +119,7 @@ class CategoryController extends BackendController
      */
     public function destroy($id)
     {
-        $this->appService->delete($id);
+        $this->executeCommand(new DeleteCategory($id));
         flash('Deleted Successfully', 'success');
         return redirect()->route('admin.category.index');
     }

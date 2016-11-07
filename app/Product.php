@@ -12,14 +12,14 @@ class Product extends Model implements TaggableInterface
 {
     use Sluggable, TaggableTrait, Mediable, HasImages;
 
-    protected $fillable = ['name', 'code', 'author', 'description', 'meta_title', 'meta_description', 'featured'];
+    public $incrementing = false;
 
+    protected $fillable = ['id', 'name', 'code', 'author', 'description', 'meta_title', 'meta_description', 'featured'];
     protected $casts = [
         'featured' => 'boolean',
     ];
-
     protected $attributes = [
-        'featured' => false,
+        'featured'          => false,
     ];
 
     public function sluggable()
@@ -36,9 +36,6 @@ class Product extends Model implements TaggableInterface
     {
         return $this->belongsTo(Category::class);
     }
-
-
-
 
     public function getMetaTitleAttribute($value)
     {

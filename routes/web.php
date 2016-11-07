@@ -17,12 +17,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
     Route::resource('product', 'ProductController', ['except' => ['show'] ]);
     Route::resource('designer', 'DesignerController', ['except' => ['show'] ]);
     Route::resource('category', 'CategoryController', ['except' => ['show'] ]);
-    Route::resource('tag','TagController', ['except' => ['show', 'create', 'store', 'edit', 'update'] ]);
+    Route::resource('tag','TagController', ['except' => ['show', 'store', 'edit', 'update'] ]);
     Route::resource('setting', 'SettingController', ['except' => ['show', 'create', 'store', 'destroy'] ]);
 
     Route::delete('/media/{id}', ['as' => 'media.destroy', 'uses' => 'MediaController@destroy']);
     Route::post('/media/image', ['as' => 'media.image.store', 'uses' => 'MediaController@storeImage']);
-    Route::post('/media/image/thumbnail', ['as' => 'media.image.thumbnail', 'uses' => 'MediaController@setThumbnail']);
+    Route::post('/media/image/thumbnail', ['as' => 'media.image.thumbnail', 'uses' => 'MediaController@changeThumbnail']);
 });
 
 Route::get('/', function(){

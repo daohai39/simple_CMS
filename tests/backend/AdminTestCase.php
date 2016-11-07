@@ -40,6 +40,7 @@ abstract class AdminTestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
         \Artisan::call('migrate:refresh');
+        $this->be($this->mockAdmin());
     }
 
     public function tearDown()

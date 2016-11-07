@@ -1,26 +1,28 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\DataTables\ProductDataTableInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;
-use App\Contracts\Services\ProductAppServiceInterface;
 use App\Http\Requests;
-use App\Validators\ValidationException;
+use App\Jobs\Product\CreateProduct;
+use App\Jobs\Product\DeleteProduct;
+use App\Jobs\Product\UpdateProduct;
+use App\Jobs\Tag\AttachTags;
+use App\Traits\ExecuteCommandTrait;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 
 class ProductController extends BackendController
 {
+    use ExecuteCommandTrait;
 
     private $products;
-    private $appService;
     private $dataTable;
 
-    public function __construct(ProductRepositoryInterface $products, ProductAppServiceInterface $appService, ProductDataTableInterface $dataTable)
+    public function __construct(ProductRepositoryInterface $products, ProductDataTableInterface $dataTable)
     {
         $this->products = $products;
-        $this->appService = $appService;
         $this->dataTable = $dataTable;
     }
 
@@ -57,9 +59,15 @@ class ProductController extends BackendController
      */
     public function store(Request $request)
     {
-        $product = $this->appService->create($request->all());
+        $id = (string) Uuid::uuid4();
+
+        $attributes = array_merge(['id' => $id], $request->all());
+        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+
+        $this->executeCommand(new CreateProduct($attributes));
+
         flash('Created Successfully', 'success');
-        return redirect()->route('admin.product.edit', ['id' => $product->id]);
+        return redirect()->route('admin.product.edit', ['id' => $id]);
     }
 
     /**
@@ -96,7 +104,11 @@ class ProductController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $product = $this->appService->update($id, $request->all());
+        $attributes = $request->all();
+        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
+
+        $this->executeCommand(new UpdateProduct($id, $attributes));
+
         flash('Edited Successfully', 'success');
         return redirect()->route('admin.product.edit', ['id' => $id]);
     }
@@ -109,7 +121,7 @@ class ProductController extends BackendController
      */
     public function destroy($id)
     {
-        $this->appService->delete($id);
+        $this->executeCommand(new DeleteProduct($id));
         flash('Deleted Successfully', 'success');
         return redirect()->route('admin.product.index');
     }

@@ -9,13 +9,13 @@ class Designer extends Model
 {
     use Mediable, HasImages;
 
-    protected $fillable = ['name', 'facebook', 'email', 'phone', 'description'];
+    public $incrementing = false;
+    protected $fillable = ['id', 'name', 'facebook', 'email', 'phone', 'description'];
 
     protected $attributes = [
         'facebook' => 'https://www.facebook.com/',
         'email' => '',
         'phone' => '',
+        'description' => '',
     ];
-
-    protected $appends = ['thumbnail'];
 }

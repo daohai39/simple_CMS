@@ -15,7 +15,8 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('title');
             $table->string('meta_title')->nullable()->default(null);
             $table->string('slug')->unique();

@@ -13,6 +13,11 @@ abstract class AbstractRepository implements AbstractRepositoryInterface
 		$this->model = $model;
 	}
 
+    public function getFillable()
+    {
+        return $this->model()->getFillable();
+    }
+
 	public function find($id, $columns = ['*'])
 	{
 		return $this->model()->findOrFail($id, $columns);

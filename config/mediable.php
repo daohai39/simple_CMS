@@ -82,6 +82,7 @@ return [
                 'jpeg',
                 'png',
                 'gif',
+                'JPG',
             ]
         ],
         Plank\Mediable\Media::TYPE_IMAGE_VECTOR => [

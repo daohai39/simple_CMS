@@ -14,7 +14,8 @@ class CreateMediableTables extends Migration
     public function up()
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('disk', 32);
             $table->string('directory');
             $table->string('filename');
@@ -23,19 +24,16 @@ class CreateMediableTables extends Migration
             $table->string('aggregate_type', 32);
             $table->integer('size')->unsigned();
             $table->timestamps();
-
             $table->index(['disk', 'directory']);
             $table->unique(['disk', 'directory', 'filename', 'extension']);
             $table->index('aggregate_type');
         });
-
         Schema::create('mediables', function (Blueprint $table) {
-            $table->integer('media_id')->unsigned();
+            $table->uuid('media_id');
             $table->string('mediable_type');
-            $table->integer('mediable_id')->unsigned();
+            $table->uuid('mediable_id');
             $table->string('tag');
             $table->integer('order')->unsigned();
-
             $table->primary(['media_id', 'mediable_type', 'mediable_id', 'tag']);
             $table->index(['mediable_id', 'mediable_type']);
             $table->index('tag');
@@ -44,7 +42,6 @@ class CreateMediableTables extends Migration
                 ->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      *

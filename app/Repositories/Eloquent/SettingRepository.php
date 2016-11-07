@@ -10,9 +10,4 @@ class SettingRepository extends AbstractRepository implements SettingRepositoryI
 	{
 		parent::__construct($setting);
 	}
-
-	public function paginateNameLike($name, $perpage = null, $columns = ['*'])
-	{
-		return $this->paginateWhere(['name', 'like', "%{$name}%"], $perpage, $columns);
-	}
 }

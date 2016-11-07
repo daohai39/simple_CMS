@@ -1,11 +1,19 @@
 @extends('layouts.backend')
 
+@push('pre-styles')
+@endpush
 
 @section('title', 'Dashboard')
 @section('content-header', 'Dashboard')
 
 @section('content')
     <div class="box">
-        <h1>Dashboard</h1>
+
     </div>
 @endsection
+
+@push('pre-scripts')
+@endpush
+
+@push('post-scripts')
+@endpush

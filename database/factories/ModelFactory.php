@@ -19,7 +19,7 @@ $factory->define(App\Category::class, function(Faker\Generator $faker) {
 
 $factory->define(App\Product::class, function(Faker\Generator $faker) {
     return [
-    'name' => $faker->words(3, true),
+        'name' => $faker->words(3, true),
         'code' => $faker->postcode,
         'author' => $faker->name,
         'description' => $faker->paragraphs(3, true)

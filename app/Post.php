@@ -16,14 +16,15 @@ class Post extends Model implements TaggableInterface
     const STATUS_PUBLISH = 'PUBLISH';
     const STATUSES = [ self::STATUS_DRAFT, self::STATUS_PUBLISH ];
 
-    protected $fillable = ['title', 'meta_title', 'description', 'meta_description', 'featured', 'status', 'content'];
+    public $incrementing = false;
 
+    protected $fillable = ['id', 'title', 'content', 'featured', 'status', 'description', 'meta_title', 'meta_description'];
     protected $casts = [
         'featured' => 'boolean',
     ];
-
     protected $attributes = [
         'featured' => false,
+        'status' => self::STATUS_DRAFT,
     ];
 
 
@@ -35,9 +36,6 @@ class Post extends Model implements TaggableInterface
             ]
         ];
     }
-
-
-
 
     public function getMetaTitleAttribute($value)
     {

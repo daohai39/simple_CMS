@@ -15,11 +15,16 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->unique();
+            $table->primary('id');
+
             $table->string('name');
             $table->string('slug')->unique();
 
-            NestedSet::columns($table);
+            $table->uuid('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedInteger('_lft');
+            $table->unsignedInteger('_rgt');
             $table->timestamps();
         });
     }

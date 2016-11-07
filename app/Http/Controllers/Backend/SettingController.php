@@ -1,24 +1,24 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
+use App\Jobs\Setting\UpdateSetting;
+use App\Traits\ExecuteCommandTrait;
+use App\Contracts\DataTables\SettingDataTableInterface;
+use App\Contracts\Repositories\SettingRepositoryInterface;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Contracts\Repositories\SettingRepositoryInterface;
-use App\Contracts\Services\SettingAppServiceInterface;
-use App\Contracts\DataTables\SettingDataTableInterface;
+use Illuminate\Http\Request;
+
 class SettingController extends BackendController
 {
+    use ExecuteCommandTrait;
+
     private $setting;
-    private $appService;
     private $dataTable;
 
-    public function __construct(SettingRepositoryInterface $setting, SettingAppServiceInterface $appService, SettingDataTableInterface $dataTable)
+    public function __construct(SettingRepositoryInterface $setting, SettingDataTableInterface $dataTable)
     {
         $this->setting = $setting;
-        $this->appService = $appService;
         $this->dataTable = $dataTable;
     }
 
@@ -29,7 +29,7 @@ class SettingController extends BackendController
      */
     public function index(Request $request)
     {
-          if($request->ajax()) {
+        if($request->ajax()) {
             return $this->dataTable->getData();
         }
         return view('backend.setting.index');
@@ -44,7 +44,7 @@ class SettingController extends BackendController
     public function edit($id)
     {
         $setting = $this->setting->find($id);
-        return view('backend.setting.edit',compact('setting'));
+        return view('backend.setting.edit', compact('setting'));
     }
 
     /**
@@ -56,9 +56,9 @@ class SettingController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $setting = $this->appService->update($id, $request->all());
+        $this->executeCommand(new UpdateSetting($id, $request->all()));
         flash('Edited Successfully', 'success');
-        return redirect()->route('admin.setting.edit', ['id' => $setting->id]);
+        return redirect()->route('admin.setting.edit', ['id' => $id]);
     }
 
 

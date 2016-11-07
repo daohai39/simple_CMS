@@ -1,29 +1,21 @@
 <?php
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Plank\Mediable\Media as Mediable;
+use Ramsey\Uuid\Uuid;
 
 class Media extends Mediable
 {
-    const IMAGE_DEFAULT = 'gallery';
-    const IMAGE_THUMBNAIL = 'thumbnail';
+    public $incrementing = false;
+    protected $table = 'media';
 
-    protected $appends = ['url', 'isThumbnail'];
-
-
-    public function getUrlAttribute($value)
-    {
-        if($this->aggregate_type == self::TYPE_IMAGE)
-            return route('image', ['path' => $this->getDiskPath()]);
-
-        return $this->getUrl();
-    }
-
-    public function getIsThumbnailAttribute($value)
-    {
-        return $this->join('mediables', 'media.id', '=', 'mediables.media_id')
-                    ->where('media.id', '=', $this->id)
-                    ->where('media.aggregate_type', '=', self::TYPE_IMAGE)
-                    ->where('mediables.tag', '=', self::IMAGE_THUMBNAIL)->exists();
+    public static function boot() {
+        // extends boot method from Model
+        // avoid file deletion when delete model
+        Model::boot();
+        static::creating(function ($media) {
+            $media->id = Uuid::uuid4()->toString();
+        });
     }
 }

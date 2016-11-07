@@ -8,11 +8,11 @@
     <div class="form-group" id="setting-value">
         <label for="value">Description</label>
         @if ($setting->type == 'textarea')
-            <textarea id="summernote" name="value">{{ isset($setting) ? $setting->value : '' }}</textarea>
-        @elseif ($setting->type == 'text')
-            <input type="text" name="value" id="text" class="form-control"  value="{{ isset($setting) ? $setting->value : old('value') }}">
+            <wysiwyg>
+                <textarea name="value" class="form-control" slot="textarea">{{ isset($setting) ? $setting->value : old('value') }}</textarea>
+            </wysiwyg>
         @else
-            <input type="number" name="value" id="number" class="form-control"  value="{{ isset($setting) ? $setting->value : old('value') }}">
+            <input type="text" name="value" id="text" class="form-control"  value="{{ isset($setting) ? $setting->value : old('value') }}">
         @endif
     </div>
 </div>
@@ -28,12 +28,5 @@
 @endpush
 
 @push('post-scripts')
-<script>
-    $('#summernote').summernote({
-        height: 300,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-    });
-
-</script>
+<script src="{{ asset('assets/js/backend/form.js') }}"></script>
 @endpush

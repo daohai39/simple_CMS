@@ -22,4 +22,10 @@ class CategoryDataTable extends AbstractDataTable implements CategoryDataTableIn
         $children = Category::findOrFail($id)->children();
         return self::of($children)->hasActions(['update', 'delete'])->make();
     }
+
+    public function getData($columns = ['*'])
+    {
+        $roots = Category::select($columns);
+        return self::of($roots)->hasActions(['update', 'delete'])->make();
+    }
 }

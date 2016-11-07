@@ -25,4 +25,9 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
     {
         return $this->paginateWhere(['parent_id', '<>', null], $perpage, $columns);
     }
+
+    public function findBySlug($slug)
+    {
+        return $this->model()->where('slug', $slug)->first();
+    }
 }

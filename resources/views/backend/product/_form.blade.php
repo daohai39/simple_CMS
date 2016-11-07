@@ -87,7 +87,7 @@
 <script src="{{ asset('assets/js/backend/form.js') }}"></script>
 <script>
     new Select2("#select2-product-tags", {
-        placeholder: "#hashtag...",
+        placeholder: "#tag...",
         tags: true,
         ajax: {
             url: laroute.route("admin.tag.create"),
@@ -104,7 +104,7 @@
                         more: response.to < response.total
                     }
                 };
-            },
+            }
         }
     });
 

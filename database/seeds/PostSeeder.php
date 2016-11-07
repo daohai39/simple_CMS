@@ -1,9 +1,22 @@
 <?php
 
+use App\Traits\ExecuteCommandTrait;
+use App\Jobs\Post\CreatePost;
+use App\Post;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
 
 class PostSeeder extends Seeder
 {
+    use ExecuteCommandTrait;
+
+    private $faker;
+
+    public function __construct(Faker\Generator $faker)
+    {
+        $this->faker = $faker;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -11,6 +24,21 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Post::class, 30)->create();
+        $this->makePosts();
+    }
+
+    private function makePosts($total = 30)
+    {
+        for($i = 0; $i < $total; $i++) {
+            $this->executeCommand(new CreatePost([
+                'id'               => (string) Uuid::uuid4(),
+                'title'            => $this->faker->sentence,
+                'content'          => $this->faker->paragraph,
+                'featured'         => $this->faker->randomElement([true, false]),
+                'status'           => $this->faker->randomElement(Post::STATUSES),
+                'description'      => $this->faker->paragraph,
+                'tags'             => $this->faker->words(rand(0, 10)),
+            ]));
+        }
     }
 }

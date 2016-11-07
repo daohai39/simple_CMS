@@ -1,22 +1,31 @@
 <?php
 namespace App\Traits;
 
-use App\Media;
+use App\Image;
 
 trait HasImages
 {
     public function images()
     {
-        return $this->morphToMany(Media::class, 'mediable')
-            ->where('aggregate_type', Media::TYPE_IMAGE)
+        return $this->morphToMany(Image::class, 'mediable', 'mediables', 'mediable_id', 'media_id')
+            ->where('aggregate_type', Image::TYPE_IMAGE)
             ->withPivot('tag', 'order')
             ->orderBy('order');
     }
 
+    public function attachImages($images_id)
+    {
+        if($thumbnail = $this->thumbnail) {
+            $images_id = array_filter($images_id, function($id) use ($thumbnail) {
+                return $id !== $thumbnail->id;
+            });
+        }
+
+        return $this->syncMedia($images_id, Image::IMAGE_DEFAULT);
+    }
+
     public function getThumbnailAttribute($value)
     {
-        $thumbnail = $this->images()->where('tag', '=', Media::IMAGE_THUMBNAIL)->first();
-        if($thumbnail)
-            return $thumbnail->url;
+        return $this->firstMedia(Image::IMAGE_THUMBNAIL);
     }
 }

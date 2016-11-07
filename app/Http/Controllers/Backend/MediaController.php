@@ -2,22 +2,24 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\Repositories\MediaRepositoryInterface;
-use App\Contracts\Services\MediaAppServiceInterface;
 use App\Http\Requests;
-use App\Validators\ValidationException;
+use App\Jobs\Media\ChangeThumbnail;
+use App\Jobs\Media\DeleteMedia;
+use App\Jobs\Media\UploadImage;
+use App\Traits\ExecuteCommandTrait;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 
 class MediaController extends BackendController
 {
+    use ExecuteCommandTrait;
 
 	private $medias;
-    private $appService;
 
-    public function __construct(MediaRepositoryInterface $medias, MediaAppServiceInterface $appService)
+    public function __construct(MediaRepositoryInterface $medias)
     {
         $this->medias = $medias;
-        $this->appService = $appService;
     }
 
 
@@ -29,7 +31,10 @@ class MediaController extends BackendController
      */
     public function storeImage(Request $request)
     {
-        return $this->appService->uploadImage($request->file('image'));
+        return $this->executeCommand(new UploadImage([
+            'id' => Uuid::uuid4()->toString(),
+            'image' => $request->image
+        ]));
     }
 
     /**
@@ -40,12 +45,12 @@ class MediaController extends BackendController
      */
     public function destroy($id)
     {
-        $this->appService->delete($id);
+        $this->executeCommand(new DeleteMedia($id));
     }
 
-    public function setThumbnail(Request $request)
+    public function changeThumbnail(Request $request)
     {
-        $media = $this->appService->setThumbnail($request->all());
-        return $this->medias->find($media->id);
+        $this->executeCommand(new ChangeThumbnail($request->all()));
+        return $this->medias->image()->find($request->image_id);
     }
 }

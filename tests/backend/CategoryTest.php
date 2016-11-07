@@ -1,19 +1,39 @@
 <?php
 
-use App\Validators\CategoryValidator;
+use App\Jobs\Category\CreateCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Contracts\Bus\Dispatcher;
 
 class CategoryTest extends AdminTestCase
 {
     use WithoutMiddleware;
 
+    protected $dispatcher;
+    protected $mockCategoryId;
+    protected $categories;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->dispatcher = $this->app->make(Dispatcher::class);
+        $this->mockCategoryId = $this->mockCategory();
+        $this->categories = app('App\Contracts\Repositories\CategoryRepositoryInterface');
+    }
+
+    private function mockCategory()
+    {
+        $id = (string) Uuid::uuid4();
+        $this->dispatcher->dispatch(new CreateCategory([ 'id' => $id, 'name' => 'Test Category']));
+        return $id;
+    }
+
     /** @test */
     public function it_can_show_list()
     {
-        $category = factory(App\Category::class)->create();
-
         $this->visitRoute('admin.category.index')
             ->see('Category')
             ->get(route('admin.category.index'), ['HTTP_X-Requested-With' => 'XMLHttpRequest'])
@@ -25,30 +45,23 @@ class CategoryTest extends AdminTestCase
     /** @test */
     public function it_can_create()
     {
-        $parent = factory(App\Category::class)->create();
-
-        $this->post(route('admin.category.store'), [ 'name' => 'Foooo', 'parent_id' => $parent->id ])
-            ->assertRedirectedTo( route('admin.category.edit', ['id' => 2]) )
+        $this->post(route('admin.category.store'), [ 'name' => 'Test Category 2', 'parent_id' => $this->mockCategoryId ])
             ->assertSessionHas('flash_notification.message', 'Created Successfully');
     }
 
     /** @test */
     public function it_can_update()
     {
-        $update = factory(App\Category::class)->create();
-
-        $this->put(route('admin.category.update', ['id' => $update->id]), [ 'name' => 'Foo updated'])
-            ->assertRedirectedTo( route('admin.category.edit', ['id' => $update->id]) )
+        $this->put(route('admin.category.update', ['id' => $this->mockCategoryId]), [ 'name' => 'Test Category updated'])
+            ->assertRedirectedToRoute('admin.category.edit', ['id' => $this->mockCategoryId] )
             ->assertSessionHas('flash_notification.message', 'Edited Successfully');
     }
 
     /** @test */
     public function it_can_delete()
     {
-        $category = factory(App\Category::class)->create();
-
-        $this->delete(route('admin.category.destroy', ['id' => $category->id]))
-            ->assertRedirectedTo( route('admin.category.index'))
+        $this->delete(route('admin.category.destroy', ['id' => $this->mockCategoryId]))
+            ->assertRedirectedToRoute('admin.category.index')
             ->assertSessionHas('flash_notification.message', 'Deleted Successfully');
     }
 
@@ -57,7 +70,6 @@ class CategoryTest extends AdminTestCase
     {
         // Enable middleware for using session
         $this->enableMiddleware();
-        $this->be($this->mockAdmin());
 
         $this->visitRoute('admin.category.create')
             ->press('Create')
@@ -69,7 +81,6 @@ class CategoryTest extends AdminTestCase
     {
         // Enable middleware for using session
         $this->enableMiddleware();
-        $this->be($this->mockAdmin());
 
         $this->visitRoute('admin.category.create')
             ->type('C', 'name')
