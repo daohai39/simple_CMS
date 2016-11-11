@@ -2,7 +2,6 @@
     <div id="dropzone" class="dropzone"></div>
 </template>
 
-<<<<<<< HEAD
 
 
 <script>
@@ -15,10 +14,6 @@
         'wrapAround': true,
     })
 
-=======
-<script>
-    var Dropzone = require("dropzone")
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
     Dropzone.autoDiscover = false
     var router = window.router || laroute || window.laroute
     export default {
@@ -53,7 +48,6 @@
                 type: String,
                 default: () => 'POST'
             },
-<<<<<<< HEAD
             thumbnailable: {
                 type: Boolean,
                 default: () => true,
@@ -61,20 +55,12 @@
             previewable: {
                 type: Boolean,
                 default: () => true,
-=======
-            single: {
-                type: Boolean,
-                default: () => false
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
             }
         },
         methods: {
             initDz: function () {
                 var self = this
-<<<<<<< HEAD
-=======
 
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 this.$set(
                     'dz',
                     new Dropzone("#dropzone", {
@@ -93,21 +79,9 @@
                                 this.removeAllFiles();
                                 this.addFile(file);
                             });
-<<<<<<< HEAD
                         }
                     })
                 )
-=======
-                            if (self.single) {
-                                this.element.className += " single";
-                            }
-                        }
-                    })
-                )
-                if (self.single) {
-                    this.dz.options.maxFiles = 1;
-                }
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
             },
             dzOnComplete: function(file) {
                 if (file._removeLink) {
@@ -178,16 +152,12 @@
             },
             imagesRendering: function (images) {
                 var self = this
-<<<<<<< HEAD
-=======
 
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 images.forEach(function (image, index) {
                     Array.prototype.forEach.call( image.file.previewElement.querySelectorAll('[data-featured-btn]'), function( node ) {
                         node.parentNode.removeChild( node )
                     })
 
-<<<<<<< HEAD
                     if(self.thumbnailable) {
                         self.imageThumbnailable(image, index);
                     }
@@ -239,48 +209,11 @@
                 e.setAttribute('data-title', image.filename);
 
                 image.file.previewElement.appendChild(e)
-=======
-                    var e = document.createElement('a')
-                    e.setAttribute('data-featured-btn', true)
-
-                    if (image.isThumbnail) {
-                        e.innerHTML = '<i class="fa fa-check-square"></i> Thumbnail'
-                        e.setAttribute('class', 'btn btn-xs btn-success btn-block')
-                    } else {
-                        e.innerHTML = '<i class="fa fa-circle"></i> Set thumbnail'
-                        e.setAttribute('class', 'btn btn-xs btn-info btn-block')
-                    }
-                    e.addEventListener("click", function (e) {
-                        e.preventDefault()
-                        self.setThumbnailImage(image.id).then(function (response) {
-                            self.dataset.forEach(function(image, index) {
-                                return image.isThumbnail = false;
-                            })
-
-                            image.isThumbnail = response.data.isThumbnail
-                            self.dataset.$set(index, image)
-
-                            self.imagesRendering(self.dataset)
-                        })
-                    })
-                    image.file.previewElement.appendChild(e)
-                })
-            },
-            setThumbnailImage: function(image_id) {
-                var self = this;
-                return self.$parent.$http.post(
-                    router.route('admin.media.image.thumbnail', {resource: self.resource, item_id: self.item.id, image_id: image_id})
-                )
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
             }
         },
         ready: function () {
             this.initDz()
-<<<<<<< HEAD
             this.dzMockImages().then(this.imagesRendering)
-=======
-            this.dzMockImages().then(!this.single ? this.imagesRendering : null)
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         }
     }
 </script>

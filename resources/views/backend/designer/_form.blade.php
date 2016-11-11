@@ -1,9 +1,3 @@
-@push('head-scripts')
-<script>
-var single = true;
-</script>
-@endpush
-
 <div class="box-body">
     {{ csrf_field() }}
     <div class="form-group">

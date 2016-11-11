@@ -23,7 +23,6 @@ elixir(function(mix) {
           'backend/*.js',
           '../bower/AdminLTE/dist/js/app.js',
         ], 'public/assets/js/backend/app.js')
-<<<<<<< HEAD
 
         // Compiling frontend styles
         .styles([
@@ -59,36 +58,11 @@ elixir(function(mix) {
           'frontend/files/rs-plugin/js/jquery.themepunch.revolution.min.js',
         ], 'public/assets/js/frontend/jquery.themepunch.revolution.min.js')
 
-
-
         .version([
             'assets/js/backend/app.js',
             'assets/css/backend/app.css',
         ])
         .webpack('vue/backend/form.js', 'public/assets/js/backend/form.js')
-        // Versioning backend & frontend styles and scripts
-
-=======
-        // Compiling frontend styles
-        .styles([
-          'frontend/files/css/*.css',
-          'frontend/files/rs-plugin/css/*.css',
-        ],'public/assets/css/frontend/app.css')
-        // Compiling frontend scripts
-        .scripts([
-          'frontend/files/js/*.js',
-          'frontend/files/rs-plugin/js/*.js',
-        ], 'public/assets/js/frontend/app.js')
-        .version([
-            'assets/js/backend/app.js',
-            'assets/css/backend/app.css',
-            'assets/js/frontend/app.js',
-            'assets/css/frontend/app.css',
-        ])
-        .webpack('vue/backend/form.js', 'public/assets/js/backend/form.js')
-        // Versioning backend & frontend styles and scripts
-        
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         .browserSync({
             proxy: 'http://decoks.dev'
         })

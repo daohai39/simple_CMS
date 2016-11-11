@@ -1,10 +1,4 @@
 {
   "assets/css/backend/app.css": "assets/css/backend/app-439f698f11.css",
-<<<<<<< HEAD
   "assets/js/backend/app.js": "assets/js/backend/app-2d2ad1063c.js"
-=======
-  "assets/css/frontend/app.css": "assets/css/frontend/app-2c232bab52.css",
-  "assets/js/backend/app.js": "assets/js/backend/app-2059b3957f.js",
-  "assets/js/frontend/app.js": "assets/js/frontend/app-e6470b5de6.js"
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
 }

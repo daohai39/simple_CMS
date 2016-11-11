@@ -13,7 +13,6 @@ const plugins = {
       output: 'bootstrap-toggle/css'
     },
     {
-<<<<<<< HEAD
       src: 'AdminLTE/plugins/datepicker',
       output: 'datepicker'
     },
@@ -22,8 +21,6 @@ const plugins = {
       output: 'daterangepicker'
     },
     {
-=======
->>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
       src: 'AdminLTE/plugins/iCheck',
       output: 'icheck'
     },
