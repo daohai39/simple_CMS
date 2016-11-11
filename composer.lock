@@ -179,6 +179,7 @@
         },
         {
             "name": "cviebrock/eloquent-sluggable",
+<<<<<<< HEAD
             "version": "4.1.2",
             "source": {
                 "type": "git",
@@ -193,6 +194,22 @@
             },
             "require": {
                 "cocur/slugify": "^2.3",
+=======
+            "version": "4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cviebrock/eloquent-sluggable.git",
+                "reference": "1832f0427f1aaf1c83a0d39df3da2b5602a3096f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/1832f0427f1aaf1c83a0d39df3da2b5602a3096f",
+                "reference": "1832f0427f1aaf1c83a0d39df3da2b5602a3096f",
+                "shasum": ""
+            },
+            "require": {
+                "cocur/slugify": "^2.1",
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 "illuminate/config": "5.1.* || 5.2.* || 5.3.*",
                 "illuminate/database": "5.1.* || 5.2.* || 5.3.*",
                 "illuminate/support": "5.1.* || 5.2.* || 5.3.*",
@@ -226,7 +243,11 @@
                 "laravel",
                 "slug"
             ],
+<<<<<<< HEAD
             "time": "2016-11-09 15:42:49"
+=======
+            "time": "2016-10-12 04:26:51"
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -753,6 +774,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v5.3.22",
             "source": {
                 "type": "git",
@@ -763,6 +785,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/715328dd4fb1a7bcf3cb41b3472f9e3499d068fc",
                 "reference": "715328dd4fb1a7bcf3cb41b3472f9e3499d068fc",
+=======
+            "version": "v5.3.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "140ad823863d5cc6f4580f1cdf9b18b9a6a457f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/140ad823863d5cc6f4580f1cdf9b18b9a6a457f4",
+                "reference": "140ad823863d5cc6f4580f1cdf9b18b9a6a457f4",
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 "shasum": ""
             },
             "require": {
@@ -877,7 +911,11 @@
                 "framework",
                 "laravel"
             ],
+<<<<<<< HEAD
             "time": "2016-11-01 18:52:00"
+=======
+            "time": "2016-10-26 13:27:05"
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         },
         {
             "name": "laravelcollective/html",
@@ -1565,6 +1603,7 @@
         },
         {
             "name": "paragonie/random_compat",
+<<<<<<< HEAD
             "version": "v2.0.4",
             "source": {
                 "type": "git",
@@ -1575,6 +1614,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
                 "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
+=======
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c0125896dbb151380ab47e96c621741e79623beb",
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb",
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 "shasum": ""
             },
             "require": {
@@ -1609,7 +1660,11 @@
                 "pseudorandom",
                 "random"
             ],
+<<<<<<< HEAD
             "time": "2016-11-07 23:38:38"
+=======
+            "time": "2016-10-17 15:23:22"
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         },
         {
             "name": "phenx/php-font-lib",
@@ -3297,6 +3352,7 @@
         },
         {
             "name": "myclabs/deep-copy",
+<<<<<<< HEAD
             "version": "1.5.5",
             "source": {
                 "type": "git",
@@ -3307,6 +3363,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/399c1f9781e222f6eb6cc238796f5200d1b7f108",
                 "reference": "399c1f9781e222f6eb6cc238796f5200d1b7f108",
+=======
+            "version": "1.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 "shasum": ""
             },
             "require": {
@@ -3335,7 +3403,11 @@
                 "object",
                 "object graph"
             ],
+<<<<<<< HEAD
             "time": "2016-10-31 17:19:45"
+=======
+            "time": "2016-09-16 13:37:59"
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3547,6 +3619,7 @@
         },
         {
             "name": "phpunit/php-code-coverage",
+<<<<<<< HEAD
             "version": "4.0.2",
             "source": {
                 "type": "git",
@@ -3557,6 +3630,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6cba06ff75a1a63a71033e1a01b89056f3af1e8d",
                 "reference": "6cba06ff75a1a63a71033e1a01b89056f3af1e8d",
+=======
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5f3f7e736d6319d5f1fc402aff8b026da26709a3",
+                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3",
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 "shasum": ""
             },
             "require": {
@@ -3606,7 +3691,11 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
             "time": "2016-11-01 05:06:24"
+=======
+            "time": "2016-07-26 14:39:29"
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         },
         {
             "name": "phpunit/php-file-iterator",

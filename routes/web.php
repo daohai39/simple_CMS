@@ -32,8 +32,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
 
 
 
-
-
 Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function(){
     Route::get('/', ['as' => 'index', function() {
         return view('frontend.home');
@@ -44,5 +42,4 @@ Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function(){
     Route::get('post/{post_slug}',['as'=>'post.show','uses'=>'PostController@show']);
     Route::get('{slug}',['as'=>'slug.show','uses'=>'SlugController@index']);
 });
-
 

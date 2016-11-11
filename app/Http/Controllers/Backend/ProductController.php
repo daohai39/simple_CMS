@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Contracts\DataTables\ProductDataTableInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;
+
 use App\Jobs\Product\CreateProduct;
 use App\Jobs\Product\DeleteProduct;
 use App\Jobs\Product\UpdateProduct;

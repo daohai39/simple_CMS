@@ -31,6 +31,12 @@ class MediaController extends BackendController
         ]));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function storeImage(Request $request)
     {
         return $this->executeCommand(new UploadImage([

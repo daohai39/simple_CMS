@@ -13,7 +13,7 @@
 		            <li>Phone Number : 04-6259-7009</li>
 		            <li>Email : noithatks07@gmail.com</li>
 		            <li>
-		            	Like and share us on 
+		            	Like and share us on
 			            <a href="http://facebook.com">
 			            	<i class="fa fa-facebook fa-2x"></i>acebook
 			            </a>

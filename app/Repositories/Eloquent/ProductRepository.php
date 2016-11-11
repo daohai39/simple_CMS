@@ -23,5 +23,4 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
             $query->where('slug', '=',$category_slug);
         })->paginate($perpage);
     }
-
 }

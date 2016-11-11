@@ -34,6 +34,7 @@
             </li>
 
             <li class="treeview">
+<<<<<<< HEAD
                 <a href="{{ route('admin.designer.index') }}">
                     <i class="fa fa-user"></i>
                     <span>Designer</span>
@@ -55,12 +56,23 @@
             </li>
 
             <li class="treeview">
+=======
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
                 <a href="{{ route('admin.setting.index') }}">
                     <i class="fa fa-cog"></i>
                     <span>Setting</span>
                 </a>
             </li>
 
+<<<<<<< HEAD
+=======
+            <li class="treeview">
+                <a href="{{ route('admin.designer.index') }}">
+                    <i class="fa fa-user"></i>
+                    <span>Designer</span>
+                </a>
+            </li>
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
         </ul>
     </section>
     <!-- /.sidebar -->

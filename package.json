@@ -19,7 +19,11 @@
     "vue-resource": "^0.9.3"
   },
   "dependencies": {
+<<<<<<< HEAD
     "dropzone": "^4.3.0",
     "lightbox2": "^2.9.0"
+=======
+    "dropzone": "^4.3.0"
+>>>>>>> 56590c9d242e300e030ae5c1d881e335f37724a3
   }
 }
