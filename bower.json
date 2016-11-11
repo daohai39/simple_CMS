@@ -1,0 +1,30 @@
+{
+  "name": "decoks",
+  "description": "",
+  "main": "",
+  "authors": [
+    "PhuongVV <phuongvietvu0306@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#~2.3.6",
+    "components-font-awesome": "~4.6.3",
+    "datatables.net": "~1.10.12",
+    "datatables.net-bs": "~1.10.12",
+    "datatables.net-responsive": "~2.1.0",
+    "datatables.net-responsive-bs": "~2.1.0",
+    "Ionicons": "ionicons#~2.0.1",
+    "parsleyjs": "^2.4.4",
+    "bootstrap-toggle": "^2.2.2",
+    "summernote": "^0.8.2"
+  }
+}
