@@ -2,6 +2,12 @@
 <input type="hidden" name="project_id" value="{{ isset($stage) ? $stage->project->id : $project_id }}">
 <div class="col-md-6">
     <div class="box-body">
+        @if(isset($stage))
+        <div class="form-group">
+            <label for="project">Project </label>
+            <h4 style="display: inline-block;"><a href="{{ route('admin.project.edit', ['id' => $stage->project->id]) }}">{{ $stage->project->name }}</a></h4>
+        </div>
+        @endif
         <div class="form-group">
             <label for="name">Name<span required="required">*</span></label>
             <input type="text" name="name" required="required" class="form-control" placeholder="" value="{{ isset($stage) ? $stage->name : old('name') }}">
@@ -10,28 +16,6 @@
         <div class="form-group">
             <label for="description">Description</label>
             <textarea rows="10" name="description" required="required" class="form-control">{{ isset($stage) ? $stage->description : old('description') }}</textarea>
-        </div>
-
-        <!-- <div class="form-group">
-            <label for="images_id[]">Images</label>
-            <upload-image
-                resource = "stage"
-                :thumbnailable = "false"
-                @if(isset($stage))
-                    :item = "{{ $stage }}"
-                @endif
-            ></upload-image>
-        </div> -->
-
-        <div class="form-group">
-            <label for="documents_id[]">Documents</label>
-            <upload-document
-                resource = "stage"
-                :thumbnailable = "false"
-                @if(isset($stage))
-                    :item = "{{ $stage }}"
-                @endif
-            ></upload-document>
         </div>
     </div>
 </div>
@@ -80,6 +64,30 @@
                 <input type="checkbox" name="paid" class="minimal" <?php echo (isset($stage) && $stage->paid == true) ? 'checked' : ( (old('paid') == 'on') ? 'checked' : '') ?>>
             </label>
         </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="images_id[]">Images</label>
+        <upload-image
+            resource = "stage"
+            :thumbnailable = "false"
+            @if(isset($stage))
+                :item = "{{ $stage }}"
+            @endif
+        ></upload-image>
+    </div>
+
+    <div class="form-group">
+        <label for="documents_id[]">Documents</label>
+        <upload-document
+            resource = "stage"
+            :thumbnailable = "false"
+            @if(isset($stage))
+                :item = "{{ $stage }}"
+            @endif
+        ></upload-document>
     </div>
 </div>
 

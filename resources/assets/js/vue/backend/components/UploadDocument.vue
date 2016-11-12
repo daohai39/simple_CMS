@@ -1,5 +1,5 @@
 <template>
-    <div id="dropzone" class="dropzone"></div>
+    <div id="dropzone-document" class="dropzone"></div>
 </template>
 
 <script>
@@ -20,7 +20,6 @@
                 if (!this.item) {
                     return []
                 }
-                console.log(this.item);
                 return this.item.documents;
             }
         },
@@ -53,7 +52,7 @@
                 var self = this
                 this.$set(
                     'dz',
-                    new Dropzone("#dropzone", {
+                    new Dropzone("#dropzone-document", {
                         url: self.url,
                         paramName: 'document',
                         acceptedMimeTypes: '.xls,.xlsx,.doc,.docx,.txt,.text,.pdf',

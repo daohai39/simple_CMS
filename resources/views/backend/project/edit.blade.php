@@ -22,6 +22,31 @@
             </form>
         </div>
 
+        @if($project->isCompleted)
+            <div class="col-md-7">
+                <div class="box">
+                    <div class="box-body">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Date Started</th>
+                                    <th>Date Finished</th>
+                                    <th>Total Expected Cost</th>
+                                    <th>Total Actual Cost</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ $project->started_at }}</td>
+                                    <td>{{ $project->finished_at }}</td>
+                                    <td>{{ $project->total_expected_cost }}</td>
+                                    <td>{{ $project->total_actual_cost }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="col-md-7">
             <div class="box">
                 <div class="box-header with-border">
@@ -34,6 +59,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Date Started</th>
+                                <th>Date Finished</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -41,6 +67,7 @@
                             <tr>
                                 <td>{{ $stage->name }}</td>
                                 <td>{{ $stage->started_at or '' }}</td>
+                                <td>{{ $stage->finished_at or '' }}</td>
                                 <td>
                                     @if($stage->isCompleted)
                                     <span class="label label-success">Completed</span>
@@ -60,6 +87,8 @@
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @push('pre-scripts')

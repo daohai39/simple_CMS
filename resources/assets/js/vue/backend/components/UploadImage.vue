@@ -1,5 +1,5 @@
 <template>
-    <div id="dropzone" class="dropzone"></div>
+    <div id="dropzone-image" class="dropzone"></div>
 </template>
 
 
@@ -63,7 +63,7 @@
 
                 this.$set(
                     'dz',
-                    new Dropzone("#dropzone", {
+                    new Dropzone("#dropzone-image", {
                         url: self.url,
                         paramName: 'image',
                         acceptedFiles: 'image/*',
