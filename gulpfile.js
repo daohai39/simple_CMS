@@ -57,7 +57,6 @@ elixir(function(mix) {
         .scripts([
           'frontend/files/rs-plugin/js/jquery.themepunch.revolution.min.js',
         ], 'public/assets/js/frontend/jquery.themepunch.revolution.min.js')
-
         .version([
             'assets/js/backend/app.js',
             'assets/css/backend/app.css',
