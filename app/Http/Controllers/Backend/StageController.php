@@ -45,7 +45,7 @@ class StageController extends Controller
         $attributes['paid'] = ($request->has('paid') && $request->paid =='on') ? true : false;
 
         $this->executeCommand(new CreateStage($attributes));
-        return redirect()->route('admin.project.edit', ['id' => $request->project_id]);
+        return redirect()->route('admin.stage.edit', ['id' => $id]);
     }
 
     /**
@@ -75,7 +75,7 @@ class StageController extends Controller
         $attributes['paid'] = ($request->has('paid') && $request->paid =='on') ? true : false;
 
         $this->executeCommand(new UpdateStage($id, $attributes));
-        return redirect()->route('admin.project.edit', ['id' => $request->project_id]);
+        return redirect()->route('admin.stage.edit', ['id' => $id]);
     }
 
     /**

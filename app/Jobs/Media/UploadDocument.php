@@ -14,7 +14,7 @@ class UploadDocument
     public $attributes;
     public $rules = [
         'id' => 'required',
-        'file' => 'required'
+        'file' => 'required',
     ];
 
     /**
@@ -41,7 +41,7 @@ class UploadDocument
 
     protected function upload()
     {
-        // $this->validateUpload();
+        $this->validateUpload();
 
         if($this->attributes['file'] instanceof UploadedFile) {
             return $this->uploadFromSource();
@@ -70,6 +70,7 @@ class UploadDocument
                     ->upload();
 
         $document->id = $this->attributes['id'];
+        $document->mime_type = $this->attributes['file']->getMimeType();
         $document->save();
 
         return $document;
@@ -81,7 +82,7 @@ class UploadDocument
 
         if($this->attributes['file'] instanceof UploadedFile) {
             $rules = array_merge($rules, [
-                'file' => 'required'
+                'file' => 'required|mimes:pdf,docx,doc,xls,xlsx,txt,text'
             ]);
         }
 

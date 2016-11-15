@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   z-index: 9999;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 10px 0;
+  padding: 10px 0 0 0;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;
   -o-transition: all 400ms;
@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .site-header .inner-header {
-  padding: 0 70px;
+
 }
 @media (max-width: 991px) {
   .site-header .inner-header {
@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .site-header .main-header .logo {
   float: left;
-  margin: 15px 0;
+  margin: 0 10px;
 }
 .site-header .main-header .logo a {
   color: #fff;
@@ -122,8 +122,8 @@ h1, h2, h3, h4, h5, h6 {
   background: rgb(255, 255, 255);
 }
 
-.site-header .main-header .search .inner-addon { 
-    position: relative; 
+.site-header .main-header .search .inner-addon {
+    position: relative;
     left: 25%;
 }
 
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #272727;
 }
 .header-right-toggle {
-  padding: 15px 0 15px 30px;
+  padding-top: 15px;
 }
 .header-right-toggle a {
   color: #272727;
@@ -188,7 +188,6 @@ nav.main-navigation ul {
 nav.main-navigation ul li {
   position: relative;
   display: inline-block;
-  padding: 5px;
 }
 nav.main-navigation ul li ul.sub-menu {
   position: absolute;
@@ -417,7 +416,7 @@ font-size:20px;
 }
 .links {
     margin-bottom: 40px;
-	
+
 }
 .links h4,.footer h4
 {
@@ -667,9 +666,11 @@ color:#333;
   color: #000;
 }
 .blog-single-item img {
-  max-width: 100%;
+  width: 100%;
   background-size: cover;
   overflow: hidden!important;
+  display: block;
+  margin: 0 auto;
 }
 .blog-single-item span {
   font-size: 13px;
@@ -1410,7 +1411,7 @@ h6 {
 font-size:35px;
  text-align:center;
  color:#fff;
- 
+
 }
 .service-item h3 {
   font-size: 16px;
@@ -1518,7 +1519,7 @@ color:#fff;
 }
 section.services{
   width: 100%;
-  margin: 0; 
+  margin: 0;
   padding: 0;
   position: relative;
 }
@@ -1752,7 +1753,7 @@ section.services{
 .section-heading .section-dec {
   width: 80px;
   height: 1px;
-  background-color: #dddddd;
+  background-color: #000;
   margin: 15px auto 60px auto;
 }
 .section-heading-white h2 {
@@ -1769,7 +1770,7 @@ section.services{
   background-color: #dddddd;
   margin: 15px 0 60px 0;
 }
-/* 
+/*
  * 	Core Owl Carousel CSS File
  *	v1.3.3
  */
@@ -1984,7 +1985,7 @@ section.services{
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Contributing author: Tyler Smith (@mbmufffin)
- * 
+ *
  */
 /* ====================================================================================================================
  * FONT-FACE

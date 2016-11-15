@@ -65,6 +65,7 @@ class MediaController extends BackendController
     public function preview($id)
     {
         $media = $this->medias->find($id);
-        return redirect($media->getUrl());
+        $file = \Storage::disk($media->disk)->get("{$media->filename}.{$media->extension}");
+        return response()->make($file, 200, ['Content-Type' => $media->mime_type]);
     }
 }

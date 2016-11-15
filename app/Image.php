@@ -11,7 +11,7 @@ class Image extends Media
 
     public function getUrlAttribute($value)
     {
-        if($this->aggregate_type == self::TYPE_IMAGE)
+        if($this->aggregate_type == self::TYPE_IMAGE && $this->disk == 'image')
             return route('image', ['path' => $this->getDiskPath()]);
 
         return $this->getUrl();

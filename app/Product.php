@@ -31,6 +31,11 @@ class Product extends Model implements TaggableInterface
         ];
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->whereFeatured(true);
+    }
+
 
     public function category()
     {

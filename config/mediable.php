@@ -22,6 +22,7 @@ return [
         'upload',
         'image',
         'document',
+        'source',
     ],
 
     /*

@@ -47,10 +47,24 @@
                 </a>
             </li>
 
-             <li class="treeview">
+            <li class="treeview">
                 <a href="{{ route('admin.project.index') }}">
                     <i class="fa fa-files-o"></i>
                     <span>Project</span>
+                </a>
+            </li>
+
+            <li class="treeview">
+                <a href="{{ route('admin.slider.index') }}">
+                    <i class="fa fa-photo"></i>
+                    <span>Slider</span>
+                </a>
+            </li>
+
+            <li class="treeview">
+                <a href="{{ route('admin.cover-page.index') }}">
+                    <i class="fa fa-book"></i>
+                    <span>Homepage Cover</span>
                 </a>
             </li>
 

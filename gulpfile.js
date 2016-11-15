@@ -57,6 +57,13 @@ elixir(function(mix) {
         .scripts([
           'frontend/files/rs-plugin/js/jquery.themepunch.revolution.min.js',
         ], 'public/assets/js/frontend/jquery.themepunch.revolution.min.js')
+
+        .copy('resources/assets/css/frontend/assets', 'public/assets/css/assets')
+        .copy('resources/assets/css/frontend/font', 'public/assets/css/font')
+        .copy('resources/assets/css/frontend/images', 'public/assets/css/images')
+
+        .copy('resources/assets/images', 'public/assets/images')
+
         .version([
             'assets/js/backend/app.js',
             'assets/css/backend/app.css',

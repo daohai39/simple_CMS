@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('title','index')
 
 @section('content')
@@ -7,24 +6,17 @@
 	<div class="fullwidthbanner-container">
 		<div class="fullwidthbanner">
 			<ul>
+                @foreach($sliders as $slider)
 				<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
-					<img src="files/images/01-slide.jpg" data-fullwidthcentering="on" alt="slide">
-					<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Khai Pham Architecture</div>
-					<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">With Khai Pham you can create anything for free</div>
-					<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class="btn btn-slider">Discover More</a></div>
+					<img src="{{ $slider->images->first()->url or '' }}" data-fullwidthcentering="on" alt="slide">
+					<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">{{ $slider->heading or '' }}</div>
+					<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">{{ $slider->description or '' }}</div>
+
+                    @if($slider->url)
+					<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="{{ $slider->url }}" class="btn btn-slider">Discover More</a></div>
+                    @endif
 				</li>
-				<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
-					<img src="files/images/02-slide.jpg" data-fullwidthcentering="on" alt="slide">
-					<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Create a Multi Styles</div>
-					<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">With Khai Pham you can create multi housing platform</div>
-					<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class=" second-btn btn btn-slider">Discover More</a></div>
-				</li>
-				<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
-					<img src="files/images/03-slide.jpg" data-fullwidthcentering="on" alt="slide">
-					<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Bring Beauty To Your Home</div>
-					<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Create many beatiful styles for your construcion</div>
-					<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class="btn btn-slider">Discover More</a></div>
-				</li>
+                @endforeach
 			</ul>
 		</div>
 	</div>
@@ -32,146 +24,66 @@
 
 <div class="clearfix"></div>
 
-<section class="services gray container-fluid">
-	<div>
-		<div class="left-image"></div>
-	</div>
-	<div class="container">
-		<div class="right-text col-sm-12">
-			<h4>Về công ty chúng tôi</h4>
-			<p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ut explicabo magni sapiente.</em><br><br>Inventore at quia, vel in repellendus, cumque dolorem autem ad quidem mollitia porro blanditiis atque rerum debitis eveniet nostrum aliquam. Sint aperiam expedita sapiente amet officia quis perspiciatis adipisci, iure dolorem esse exercitationem!</p>
-			<br>
-			<a href="about.blade.php">READ MORE...</a>
-		</div>
-	</div>
-</section>
+@foreach($covers as $cover)
+    @if($loop->index % 2 == 0)
+    <section class="services gray container-fluid">
+        <div>
+            <div class="left-image"></div>
+        </div>
+        <div class="container">
+            <div class="right-text col-sm-12">
+                <h4>{{ $cover->heading or '' }}</h4>
+                <p><em>{{ $cover->content or '' }}</p>
+                <br>
+                @if($cover->url)
+                <a href="{{ $cover->url }}">READ MORE...</a>
+                @endif
+            </div>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    @else
+    <section class="call-to-action-2 container-fluid">
+        <div class="container">
+        <div class="left-text push-sm-right col-sm-12">
+            <h4>{{ $cover->heading or '' }}</h4>
+            <p><em>{{ $cover->content or '' }}</p>
+            <br>
+            @if($cover->url)
+                <a href="{{ $cover->url }}">READ MORE...</a>
+            @endif
+        </div>
+            <div class="right-image pull-sm-left col-sm-12"></div>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    @endif
+@endforeach
 
-<div class="clearfix"></div>
 
-<section class="call-to-action-2 container-fluid">
-	<div class="container">
-	<div class="left-text push-sm-right col-sm-12">
-		<h4>Thiết kế thi công nội thất</h4>
-		<p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ut explicabo magni sapiente.</em><br><br>Inventore at quia, vel in repellendus, cumque dolorem autem ad quidem mollitia porro blanditiis atque rerum debitis eveniet nostrum aliquam. Sint aperiam expedita sapiente amet officia quis perspiciatis adipisci, iure dolorem esse exercitationem!</p>
-		<br>
-		<a href="blog-single.blade.php">READ MORE...</a>
-	</div>
-		<div class="right-image pull-sm-left col-sm-12"></div>
-	</div>
-</section>
-
-<div class="clearfix"></div>
-
-<section class="services gray container-fluid">
-	<div>
-		<div class="left-image"></div>
-	</div>
-	<div class="container">
-		<div class="right-text">
-			<h4>Phòng xông hơi</h4>
-			<p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ut explicabo magni sapiente.</em><br><br>Inventore at quia, vel in repellendus, cumque dolorem autem ad quidem mollitia porro blanditiis atque rerum debitis eveniet nostrum aliquam. Sint aperiam expedita sapiente amet officia quis perspiciatis adipisci, iure dolorem esse exercitationem!</p>
-			<br>
-			<a href="blog-single.blade.php">READ MORE...</a>
-		</div>
-
-	</div>					
-</section>
-
-<div class="clearfix"></div>
-
-<section class="call-to-action-2 container-fluid">
-	<div class="container">
-	<div class="left-text">
-		<h4>Ngoại thất</h4>
-		<p><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi ut explicabo magni sapiente.</em><br><br>Inventore at quia, vel in repellendus, cumque dolorem autem ad quidem mollitia porro blanditiis atque rerum debitis eveniet nostrum aliquam. Sint aperiam expedita sapiente amet officia quis perspiciatis adipisci, iure dolorem esse exercitationem!</p>
-		<br>
-		<a href="blog-single.blade.php">READ MORE...</a>
-	</div>
-		<div class="right-image"></div>
-	</div>
-</section>
 
 <section class="portfolio">
 	<div class="container">
 		<div class="section-heading-white">
-			<h2>Recent Photos</h2>
+			<h2>Popular Products</h2>
 			<div class="section-dec"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div id="owl-portfolio" class="owl-carousel owl-theme">
+                    @foreach($featuredProducts as $product)
 					<div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/01-portfolio.jpg">
-        					<figcaption>
-            					<h3>Phòng Xông Hơi</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
+				  		<a href="{{ route('frontend.slug.show', ['slug' => $product->slug]) }}">
+                            <figure>
+                                <img alt="portfolio" src="files/images/01-portfolio.jpg">
+                                <figcaption>
+                                    <h3>{{ $product->name }}</h3>
+                                    <p>{{ $product->description }}</p>
+                                </figcaption>
+                            </figure>
+                        </a>
     				</div>
-				    <div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/02-portfolio.jpg">
-        					<figcaption>
-            					<h3>Nội Thất</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
-				    <div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/03-portfolio.jpg">
-        					<figcaption>
-            					<h3>Ngoại Thất</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
-				    <div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/04-portfolio.jpg">
-        					<figcaption>
-            					<h3>Sản Phẩm Thông Minh</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
-    				<div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/05-portfolio.jpg">
-        					<figcaption>
-            					<h3>Công Trình Hoàn Thiện</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
-				    <div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/06-portfolio.jpg">
-        					<figcaption>
-            					<h3>Cầu Thang</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
-    				<div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/07-portfolio.jpg">
-        					<figcaption>
-            					<h3>Hàng Rào</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
-				    <div class="item">
-				  		<figure>
-        					<img alt="portfolio" src="files/images/08-portfolio.jpg">
-        					<figcaption>
-            					<h3>Cổng Sắt</h3>
-            					<p>Lorem ipsum dolor sit amet consectetur.</p>
-        					</figcaption>
-    					</figure>								    
-    				</div>
+                    @endforeach
 				</div>
 			</div>
 		</div>
@@ -185,72 +97,24 @@
 <section class="testimonials">
 	<div class="container">
 		<div class="section-heading">
-			<h2>What Others saying</h2>
+			<h2>Recent Posts</h2>
 			<div class="section-dec"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div id="owl-demo" class="owl-carousel owl-theme">
-					<div class="item">
+                    @foreach($featuredPosts as $post)
+					<div class="item" style="height: 200px; width: 350px">
 				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Ramshad Imeri - <em>India,Malappura</em></h6>
+                            <a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}"><h6>{{ $post->title }}</h6></a>
+				  			<p>{{ $post->description }}</p>
 				  		</div>
 				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Akhil Luis - <em>India, Calicut</em></h6>
-				  		</div>
-				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Ramkumar - <em>Munnar, Kerala</em></h6>
-				  		</div>
-				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Sajit OB - <em>Berlin, Germany</em></h6>
-				  		</div>
-				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Anithamol Benny - <em>Thodupuzha, Kottayam</em></h6>
-				  		</div>
-				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Sreejith Rajan - <em>India, Alappuzha</em></h6>
-				  		</div>
-				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Aneeshkumar - <em>Kakkanad ,Cochin</em></h6>
-				  		</div>
-				    </div>
-				    <div class="item">
-				  		<div class="testimonials-post">
-				  			<span class="fa fa-quote-left"></span>
-				  			<p>“ At vero eos et accusamus et iusto odio dignissimos ducimus qui molestias excepturi blanditis ”</p>
-				  			<h6>Rohit Sarma - <em>Gurgaon, India</em></h6>
-				  		</div>
-				    </div>
+                    @endforeach
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 @endsection
-	
+

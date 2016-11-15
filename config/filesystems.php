@@ -64,14 +64,14 @@ return [
 
         'source' => [
             'driver' => 'local',
-            'root' => storage_path('app/sources'),
+            'root' => storage_path('app/public/sources'),
+            'prefix' => 'storage/sources',
+            'visibility' => 'public',
         ],
 
         'test' => [
             'driver' => 'local',
             'root' => storage_path('app/tests'),
-            'prefix' => 'tests',
-            'visibility' => 'public',
         ],
 
 

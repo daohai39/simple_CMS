@@ -25,7 +25,6 @@ class UploadImage
     public function __construct(array $attributes)
     {
         $this->attributes = $attributes;
-
         $this->attributes['file'] = $this->upload();
     }
 
@@ -41,7 +40,7 @@ class UploadImage
 
     protected function upload()
     {
-        $this->validateUpload();
+        // $this->validateUpload();
 
         if($this->attributes['file'] instanceof UploadedFile) {
             return $this->uploadFromSource();
@@ -53,7 +52,7 @@ class UploadImage
     protected function importFromFile()
     {
         $file = "{$this->attributes['file']['filename']}.{$this->attributes['file']['extension']}";
-        $image = MediaUploader::importPath('image', $file);
+        $image = MediaUploader::importPath($this->attributes['file']['disk'], $file);
         $image->id = $this->attributes['id'];
         $image->save();
 
@@ -80,7 +79,7 @@ class UploadImage
 
         if($this->attributes['file'] instanceof UploadedFile) {
             $rules = array_merge($rules, [
-                'file' => 'required | image | max:5000'
+                'file' => 'required|image|max:5000'
             ]);
         }
 

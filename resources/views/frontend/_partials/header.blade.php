@@ -1,21 +1,21 @@
 <header class="site-header">
 	<div id="main-header" class="main-header header-sticky">
-		<div class="inner-header clearfix">
+		<div class="inner-header clearfix container" ">
 			<div class="logo col-md-8 col-xs-10">
 				<a href="{{ route('frontend.index') }}"><img src="{{ asset('files/images/logo.png') }}" width="8%" alt="Logo"></a>
 				<span class="header">
 					Ks interior design
 				</span>
 			</div>
-			<div class="search col-md-4 visible-lg">
+			<!-- <div class="search col-md-4 visible-lg">
 				<input type="text" name="search" placeholder="Tim kiem">
-			</div>
+			</div> -->
 			<div class="header-right-toggle pull-right hidden-md hidden-lg">
 				<a href="javascript:void(0)" class="side-menu-button"><i class="fa fa-bars"></i></a>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid">
+	<div class="container">
 		<nav class="nav navbar-inverse navbar-fixed-top main-navigation hidden-xs hidden-sm" id="myH2">
 			<ul>
 				<li><a href="{{ route('frontend.post.index') }}">Tin Tức</a></li>

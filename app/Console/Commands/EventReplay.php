@@ -11,7 +11,7 @@ class EventReplay extends Command
 {
     private $dispatcher;
 
-    private $tables = ['categories', 'designers', 'media', 'mediables', 'posts', 'products', 'tags', 'tagged', 'customers', 'projects', 'stages'];
+    private $tables = ['categories', 'cover_pages', 'customers', 'designers', 'media', 'mediables', 'posts', 'products', 'projects', 'sliders', 'stages', 'tagged', 'tags'];
 
     /**
      * The name and signature of the console command.
@@ -45,7 +45,7 @@ class EventReplay extends Command
      */
     public function handle()
     {
-        $this->clearRecords();
+            $this->clearRecords();
 
         if($this->option('time') == 'now')
             return $this->replayToTime(date('Y-m-d H:i:s'));

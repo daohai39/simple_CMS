@@ -16,7 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**
@@ -31,12 +30,20 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerGlide();
 
+        // Register custom command bus & pipe through
         $this->app->singleton('CommandBus', function() {
             return app(Dispatcher::class)->pipeThrough([
                 \App\Jobs\Middlewares\ValidatingMiddleware::class,
                 \App\Jobs\Middlewares\DatabaseTransactionsMiddleware::class,
                 \App\Jobs\Middlewares\LoggingMiddleware::class,
             ]);
+        });
+
+        // Register view composer for frontend
+        view()->composer('frontend.*', function ($view) {
+            $view->with('settings', app('App\Contracts\Repositories\SettingRepositoryInterface')->all()->mapWithKeys(function ($setting) {
+                return [$setting['key'] => $setting['value']];
+            }));
         });
     }
 
@@ -92,6 +99,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\ProjectRepositoryInterface' => 'App\Repositories\Eloquent\ProjectRepository',
             'App\Contracts\Repositories\StageRepositoryInterface' => 'App\Repositories\Eloquent\StageRepository',
             'App\Contracts\Repositories\CustomerRepositoryInterface' => 'App\Repositories\Eloquent\CustomerRepository',
+            'App\Contracts\Repositories\SliderRepositoryInterface' => 'App\Repositories\Eloquent\SliderRepository',
+            'App\Contracts\Repositories\CoverPageRepositoryInterface' => 'App\Repositories\Eloquent\CoverPageRepository',
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -110,6 +119,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\DataTables\DesignerDataTableInterface' => 'App\DataTables\DesignerDataTable',
             'App\Contracts\DataTables\ProjectDataTableInterface' => 'App\DataTables\ProjectDataTable',
             'App\Contracts\DataTables\CustomerDataTableInterface' => 'App\DataTables\CustomerDataTable',
+            'App\Contracts\DataTables\SliderDataTableInterface' => 'App\DataTables\SliderDataTable',
+            'App\Contracts\DataTables\CoverPageDataTableInterface' => 'App\DataTables\CoverPageDataTable',
         ];
 
         foreach($services as $abstract => $concrete) {

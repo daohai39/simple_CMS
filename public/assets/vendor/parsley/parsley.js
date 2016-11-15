@@ -1,6 +1,6 @@
 /*!
 * Parsley.js
-* Version 2.6.0 - built Wed, Nov 2nd 2016, 10:27 am
+* Version 2.5.0 - built Wed, Oct 5th 2016, 1:34 pm
 * http://parsleyjs.org
 * Guillaume Potier - <guillaume@wisembly.com>
 * Marc-Andre Lafortune - <petroselinum@marc-andre.ca>
@@ -701,7 +701,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
           var _ref$step = _ref.step;
-          var step = _ref$step === undefined ? 'any' : _ref$step;
+          var step = _ref$step === undefined ? '1' : _ref$step;
           var _ref$base = _ref.base;
           var base = _ref$base === undefined ? 0 : _ref$base;
 
@@ -1680,7 +1680,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     // Bind specific HTML5 constraints to be HTML5 compliant
     _bindHtml5Constraints: function _bindHtml5Constraints() {
       // html5 required
-      if (this.$element.attr('required')) this.addConstraint('required', true, undefined, true);
+      if (this.$element.hasClass('required') || this.$element.attr('required')) this.addConstraint('required', true, undefined, true);
 
       // html5 pattern
       if ('string' === typeof this.$element.attr('pattern')) this.addConstraint('pattern', this.$element.attr('pattern'), undefined, true);
@@ -1711,7 +1711,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       // Small special case here for HTML5 number: integer validator if step attribute is undefined or an integer value, number otherwise
       if ('number' === type) {
         return this.addConstraint('type', ['number', {
-          step: this.$element.attr('step') || '1',
+          step: this.$element.attr('step'),
           base: this.$element.attr('min') || this.$element.attr('value')
         }], undefined, true);
         // Regular other HTML5 supported types
@@ -1883,7 +1883,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   ParsleyFactory.prototype = {
     init: function init(options) {
       this.__class__ = 'Parsley';
-      this.__version__ = '2.6.0';
+      this.__version__ = '2.5.0';
       this.__id__ = ParsleyUtils__default.generateID();
 
       // Pre-compute options
@@ -2005,7 +2005,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     actualizeOptions: null,
     _resetOptions: null,
     Factory: ParsleyFactory,
-    version: '2.6.0'
+    version: '2.5.0'
   });
 
   // Supplement ParsleyField and Form with ParsleyAbstract

@@ -110,7 +110,14 @@
             },
             dzMockDocument: function (mockFile, data) {
                 this.dz.emit("addedfile", mockFile)
-                this.dz.createThumbnailFromUrl(mockFile, mockFile.src)
+
+                if(data.mime_type == 'application/pdf')
+                    this.dz.createThumbnailFromUrl(mockFile, "/assets/images/pdf.png");
+                else if(data.mime_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || data.mime_type == 'application/msword')
+                    this.dz.createThumbnailFromUrl(mockFile, "/assets/images/msword.png");
+                else if(data.mime_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || data.mime_type == 'application/vnd.ms-excel')
+                    this.dz.createThumbnailFromUrl(mockFile, "/assets/images/msxls.png");
+
                 this.dz.emit("complete", mockFile)
                 this.dz.emit("success", mockFile, data)
                 data.file = mockFile

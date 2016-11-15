@@ -14,6 +14,13 @@ class ProductDataTable extends AbstractDataTable implements ProductDataTableInte
     public function getData($columns = ['*'])
     {
         $products = Product::select($columns);
-        return self::of($products)->hasActions(['update', 'delete'])->make();
+        return self::of($products)
+        ->addColumn('featured', function($product) {
+            if($product->featured)
+                return '<span class="label label-success">Featured</span>';
+            else
+                return '<span class="label label-default">Non-featured</span>';
+        })
+        ->hasActions(['update', 'delete'])->make();
     }
 }

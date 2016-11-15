@@ -17,7 +17,9 @@
             <table id="posts-table" class="table dt-responsive nowrap" cellspacing="0"  width="100%">
                 <thead>
                     <tr>
-                        <th>Title</th>
+                        <th width="50%">Title</th>
+                        <th>Featured</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -39,6 +41,8 @@
         ajax: laroute.route('admin.post.index'),
         columns: [
             { data: 'title', name: 'title' },
+            { data: 'featured', name: 'featured' },
+            { data: 'status', name: 'status' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false}
         ],
         order: [[1, 'asc']]

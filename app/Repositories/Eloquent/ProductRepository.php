@@ -11,6 +11,11 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
         parent::__construct($product);
     }
 
+    public function featured()
+    {
+        return $this->model()->featured();
+    }
+
     public function findBySlug($product_slug)
     {
         return $this->model()->where('slug',$product_slug)->first();

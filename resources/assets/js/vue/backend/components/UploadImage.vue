@@ -2,8 +2,6 @@
     <div id="dropzone-image" class="dropzone"></div>
 </template>
 
-
-
 <script>
     var Dropzone = require("dropzone")
     var lightbox = require('lightbox2')
@@ -55,6 +53,10 @@
             previewable: {
                 type: Boolean,
                 default: () => true,
+            },
+            single: {
+                type: Boolean,
+                default: () => false,
             }
         },
         methods: {
@@ -79,9 +81,15 @@
                                 this.removeAllFiles();
                                 this.addFile(file);
                             });
+                            if (self.single) {
+                                this.element.className += " single";
+                            }
                         }
                     })
                 )
+                if (self.single) {
+                    this.dz.options.maxFiles = 1;
+                }
             },
             dzOnComplete: function(file) {
                 if (file._removeLink) {
@@ -213,7 +221,7 @@
         },
         ready: function () {
             this.initDz()
-            this.dzMockImages().then(this.imagesRendering)
+            this.dzMockImages().then(!this.single ? this.imagesRendering : null)
         }
     }
 </script>

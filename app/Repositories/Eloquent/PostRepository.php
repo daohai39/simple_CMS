@@ -11,6 +11,11 @@ class PostRepository extends AbstractRepository implements PostRepositoryInterfa
         parent::__construct($post);
     }
 
+    public function featured()
+    {
+        return $this->model()->featured();
+    }
+
     public function findBySlug($post_slug)
     {
         return $this->model()->where('slug',$post_slug)->first();

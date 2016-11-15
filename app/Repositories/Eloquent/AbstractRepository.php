@@ -13,6 +13,11 @@ abstract class AbstractRepository implements AbstractRepositoryInterface
 		$this->model = $model;
 	}
 
+    public function all()
+    {
+        return $this->model()->all();
+    }
+
     public function getFillable()
     {
         return $this->model()->getFillable();

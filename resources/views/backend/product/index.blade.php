@@ -17,8 +17,9 @@
             <table id="products-table" class="table dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th width="40%">Name</th>
                         <th>Code</th>
+                        <th>Featured</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -41,6 +42,7 @@
         columns: [
             { data: 'name', name: 'name' },
             {data: 'code', name: 'code'},
+            {data: 'featured', name: 'featured'},
             { data: 'actions', name: 'actions', orderable: false, searchable: false}
         ],
         order: [[1, 'asc']]
