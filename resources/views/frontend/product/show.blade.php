@@ -3,7 +3,7 @@
 @section('title', $product->name)
 
 @section('content')
-<section class="page-heading wow fadeIn" data-wow-duration="1.5s">
+<!-- <section class="page-heading wow fadeIn" data-wow-duration="1.5s">
 	<div class="container">
 		<ol class="breadcrumb">
 			<li>
@@ -12,11 +12,19 @@
 			<li class="active">{{ $product->name }}</li>
 		</ol>
 	</div>
-</section>
+</section> -->
 
 <section class="single-project">
 	<div class="container">
 		<div class="row">
+			<div class="page-heading wow fadeIn" data-wow-duration="1.5s">
+				<ol class="breadcrumb">
+					<li>
+						<a href="#">Trang chủ</a>
+					</li>
+					<li class="active">{{ $product->name }}</li>
+				</ol>
+			</div>
 			<div class="col-md-8">
 				<div class="single-project-item">
 					<div class="slider">

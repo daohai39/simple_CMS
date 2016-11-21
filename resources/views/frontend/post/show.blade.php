@@ -3,7 +3,7 @@
 @section('title', $post->title)
 
 @section('content')
-<section class="page-heading wow fadeIn" data-wow-duration="1.5s">
+<!-- <section class="page-heading wow fadeIn" data-wow-duration="1.5s">
 	<div class="container">
 		<ol class="breadcrumb">
 			<li>
@@ -12,11 +12,19 @@
 			<li class="active">{{ $post->title }}</li>
 		</ol>
 	</div>
-</section>
+</section> -->
 
 <section class="blog-single">
 	<div class="container">
 		<div class="row">
+			<div class="page-heading wow fadeIn" data-wow-duration="1.5s">
+				<ol class="breadcrumb">
+					<li>
+						<a href="#">Trang chủ</a>
+					</li>
+					<li class="active">{{ $post->title }}</li>
+				</ol>
+			</div>
 			<div class="col-md-12">
 				<div class="blog-single-item">
 					<img src="../files/images/01-big-blog.jpg" alt="">
