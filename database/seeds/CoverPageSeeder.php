@@ -21,42 +21,43 @@ class CoverPageSeeder extends Seeder
         $this->makeCover(
             'Công ty chúng tôi',
             'Với đội ngũ thiết kế và kiến trúc sư lành nghề ,chúng tôi cung cấp cho khách hàng dịch vụ tốt nhất.',
-            'van-phong.jpg',
+            null,
             null
         );
 
         $this->makeCover(
             'Thiết kế nội thât',
             'Công ty chuyên thiết kế và thi công nội thất hiện đại, chuyên nghiệp...',
-            'phong-bep.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'noi-that'])
         );
 
         $this->makeCover(
             'Ngoại thất',
             'Thiết kế hiện đại theo phong cách Châu Âu',
-            'ngoai-that.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'ngoai-that'])
         );
 
         $this->makeCover(
             'Phòng xông hơi',
             'Chuyên thiết kế, thi công, lắp đặt phòng xông hơi chất lượng cao',
-            'phong-xong-hoi.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'phong-xong-hoi'])
         );
     }
 
     public function makeCover($heading, $content, $imageName, $url = null)
     {
-        $image = $this->uploadImage('source', $imageName);
+        if($imageName)
+            $image = $this->uploadImage('source', $imageName);
 
         $this->executeCommand(new CreateCoverPage([
             'id' => Uuid::uuid4()->toString(),
             'heading' => $heading,
             'content' => $content,
             'url' => $url,
-            'image_id' => $image->id,
+            'image_id' => isset($image) ? $image->id : [],
         ]));
     }
 

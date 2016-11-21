@@ -22,48 +22,49 @@ class SliderSeeder extends Seeder
         $this->makeSlider(
             'Khai Pham Architecture',
             'Công ty chuyên thiết kế và thi công nội thất hiện đại, chuyên nghiệp...',
-            'noi-that-phong-khach.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'phong-khach'])
         );
 
         $this->makeSlider(
             null,
             'Nội thất phòng khách',
-            'noi-that-phong-khach-2.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'phong-khach'])
         );
 
         $this->makeSlider(
             null,
             'Phòng bé gái',
-            'phong-be-gai.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'phong-ngu'])
         );
 
         $this->makeSlider(
             null,
             'Phòng ngủ',
-            'phong-ngu.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'phong-ngu'])
         );
 
         $this->makeSlider(
             null,
             'Phòng ngủ sang trọng',
-            'phong-ngu-2.jpg',
+            null,
             route('frontend.slug.show', ['slug' => 'phong-ngu'])
         );
     }
 
     public function makeSlider($heading, $description, $imageName, $url)
     {
-        $image = $this->uploadImage('source', $imageName);
+        if($imageName)
+            $image = $this->uploadImage('source', $imageName);
 
         $this->executeCommand(new CreateSlider([
             'id' => Uuid::uuid4()->toString(),
             'heading' => $heading,
             'description' => $description,
-            'image_id' => $image->id,
+            'image_id' => isset($image) ? $image->id : [],
             'url' => $url,
         ]));
     }

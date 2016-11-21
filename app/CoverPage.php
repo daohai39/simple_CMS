@@ -24,12 +24,15 @@ class CoverPage extends Model
 
     public function attachImage($images_id)
     {
+        $tag = "cover_{$this->id}";
         $current = $this->firstMedia('cover');
-        if($current) {
+
+        if($current && count($images_id) == 1 && $images_id[0] == $current->id) {
+            return;
+        } else if(count($images_id) > 1){
             $images_id = array_filter($images_id, function($id) use ($current) {
                 return $id !== $current->id;
             });
-
             $this->detachMediaTags('cover');
         }
 

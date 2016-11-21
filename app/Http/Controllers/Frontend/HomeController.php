@@ -31,7 +31,8 @@ class HomeController extends Controller
         $covers = $this->covers->all();
         $featuredProducts = $this->products->featured()->limit(9)->get();
         $featuredPosts = $this->posts->featured()->limit(9)->get();
-        // dd($covers);
+
+        // dd(compact('sliders'));
         return view('frontend.home', compact('sliders', 'featuredProducts', 'featuredPosts', 'covers'));
     }
 }

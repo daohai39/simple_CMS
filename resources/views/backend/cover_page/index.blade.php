@@ -17,7 +17,7 @@
             <table id="cover-pages-table" class="table dt-responsive nowrap" cellspacing="0"  width="100%">
                 <thead>
                     <tr>
-                        <th>Description</th>
+                        <th>Heading</th>
                         <th>Url</th>
                         <th>Actions</th>
                     </tr>
@@ -39,7 +39,7 @@
     var table = new DataTables("#cover-pages-table", {
         ajax: laroute.route('admin.cover-page.index'),
         columns: [
-            { data: 'description', name: 'description' },
+            { data: 'heading', name: 'heading' },
             { data: 'url', name: 'url' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false}
         ],

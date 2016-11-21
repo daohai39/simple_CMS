@@ -25,11 +25,18 @@ class Slider extends Model
 
     public function attachImage($images_id)
     {
-        $current = $this->firstMedia('slider');
-        if($current) {
-            $this->detachMediaTags('slider');
+        $tag = "slider_{$this->id}";
+        $current = $this->firstMedia('cover');
+
+        if($current && count($images_id) == 1 && $images_id[0] == $current->id) {
+            return;
+        } else if(count($images_id) > 1){
+            $images_id = array_filter($images_id, function($id) use ($current) {
+                return $id !== $current->id;
+            });
+            $this->detachMediaTags('cover');
         }
 
-        $this->attachMedia($images_id, 'slider');
+        $this->attachMedia($images_id, 'cover');
     }
 }
