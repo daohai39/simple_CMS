@@ -5,8 +5,9 @@ html {
   -moz-osx-font-smoothing: grayscale;
   font-size: 93.75%;
 }
-
-
+a:hover{
+  text-decoration: none;
+}
 html ::selection {
   color: #ffffff;
   background: #272727;
@@ -16,13 +17,12 @@ body
  font-family: 'Open Sans', sans-serif;
  }
 section {
-  padding: 15px 0;
+  padding: 100px 0;
 }
 p {
   font-size: 13px;
   line-height: 24px;
   color: #757575;
-  text-align: justify;
 }
 
 ul, ol, dl {
@@ -32,9 +32,9 @@ ul, ol, dl {
     list-style-position: outside;
     font-family: inherit;
 }
-.gray
+.green
 {
-background:#E6E4EF;
+background:#49b203;
 }
 
 .spacing.three {
@@ -60,12 +60,13 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .site-header {
+  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 9999;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 10px 0 0 0;
+  padding: 10px 0;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;
   -o-transition: all 400ms;
@@ -81,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .site-header .inner-header {
-
+  padding: 0 20px;
 }
 @media (max-width: 991px) {
   .site-header .inner-header {
@@ -90,58 +91,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .site-header .main-header .logo {
   float: left;
-  margin: 0 10px;
+  margin: 15px 0;
 }
 .site-header .main-header .logo a {
   color: #fff;
   font-family: 'Audiowide', sans-serif;
+  font-size: 24px;
   text-transform: uppercase;
 }
-.site-header .main-header .search .enjoy-css {
-  width: 250px;
-  height: 45px;
-  cursor: pointer;
-  margin: 0 auto;
-  border: .5px solid rgb(232, 238, 241);
-  border-radius: 28px;
-  font: normal 14px/28px "Advent Pro", Helvetica, sans-serif;
-  color: rgb(119, 126, 128);
-  text-align: center;
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  letter-spacing: 1px;
-  background: rgba(0,0,0,0);
-}
-
-/* enable absolute positioning */
-.site-header .main-header .search .enjoy-cssx {
-  width: 250px;
-  height: 45px;
-  border-radius: 28px;
-  font: normal 14px/28px "Advent Pro", Helvetica, sans-serif;
-  background: rgb(255, 255, 255);
-}
-
-.site-header .main-header .search .inner-addon {
-    position: relative;
-    left: 25%;
-}
-
-/* style icon */
-.site-header .main-header .search .inner-addon .fa {
-  position: absolute;
-  padding: 13px;
-  pointer-events: none;
-}
-
-/* align icon */
-.site-header .main-header .search .left-addon .fa  { left:  0px;}
-.site-header .main-header .search .right-addon .fa { right: 0px;}
-
-/* add padding  */
-.site-header .main-header .search .left-addon input  { padding-left:  30px; }
-.site-header .main-header .search .right-addon input { padding-right: 30px; }
-
 .scrolled-header {
   background: #fff;
   padding: 0;
@@ -154,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #272727;
 }
 .header-right-toggle {
-  padding-top: 15px;
+  padding: 15px 0 15px 30px;
 }
 .header-right-toggle a {
   color: #272727;
@@ -166,28 +123,21 @@ a.side-menu-button {
 }
 a.side-menu-button i {
   margin-right: 6px;
-  color: #fff;
-  position: relative;
-  top: -15px;
-
-}
-nav.navbar-inverse{
-  background: none;
-  text-align: center;
 }
 nav.main-navigation {
   position: relative;
-  z-index: 9999;
+  z-index: 20;
 }
 nav.main-navigation ul {
   margin: 0;
   padding: 0;
-  z-index: 9999;
   list-style: none;
+  z-index: 9999;
 }
 nav.main-navigation ul li {
   position: relative;
   display: inline-block;
+  padding: 0px;
 }
 nav.main-navigation ul li ul.sub-menu {
   position: absolute;
@@ -223,9 +173,8 @@ nav.main-navigation ul li ul.sub-menu li a {
   padding: 5px 30px;
 }
 nav.main-navigation ul li:hover ul.sub-menu {
-  visibility: visible;
+  visibility: visible; 
   opacity: 1;
-  z-index: 9999;
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -233,19 +182,19 @@ nav.main-navigation ul li:hover ul.sub-menu {
   transform: translate3d(0, 0, 0);
 }
 nav.main-navigation ul a {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #fff;
   display: block;
-  padding: 15px 10px;
+  padding: 20px 10px;
 }
 nav.main-navigation ul a i {
   margin-left: 7px;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
   nav.main-navigation ul a {
-    padding: 0px 0;
+    padding: 10px 0;
   }
 }
 nav.responsive-menu ul {
@@ -404,11 +353,15 @@ padding:0
 {
 color:#757575;;
 }
-.footer a:hover
+/*.footer a:hover
 {
 color:#78cb01;
-}
+}*/
 
+.socials li
+{
+float:left;
+}
 .socials li a
 {
 padding-right:20px;
@@ -416,7 +369,7 @@ font-size:20px;
 }
 .links {
     margin-bottom: 40px;
-
+  
 }
 .links h4,.footer h4
 {
@@ -452,7 +405,7 @@ color:#333;
     padding: 5px 15px;
     height: 2.3rem;
     background: #eee;
-	border:none;
+  border:none;
 }
 
 
@@ -666,11 +619,9 @@ color:#333;
   color: #000;
 }
 .blog-single-item img {
-  width: 100%;
+  max-width: 100%;
   background-size: cover;
   overflow: hidden!important;
-  display: block;
-  margin: 0 auto;
 }
 .blog-single-item span {
   font-size: 13px;
@@ -943,12 +894,9 @@ figure:hover p {
   -ms-transition: all 1.0s;
   transition: all 1.0s;
 }
-figcaption a {
-  padding-left: 20px;
-
-}
 figcaption a:hover {
-  color: #000;
+  color: #ffffff;
+  background: #fff;
 }
 .portfolio-page-nav {
   margin-top: 30px;
@@ -1387,7 +1335,6 @@ h6 {
 .slider ul {
   margin: 0;
   padding: 0;
-  z-index: -9999;
   list-style: none;
 }
 .slider .tp-caption {
@@ -1411,7 +1358,7 @@ h6 {
 font-size:35px;
  text-align:center;
  color:#fff;
-
+ 
 }
 .service-item h3 {
   font-size: 16px;
@@ -1517,44 +1464,6 @@ color:#fff;
   padding: 60px;
   border-bottom: 1px solid #dddddd;
 }
-section.services{
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-}
-.services .left-image{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background-size: cover;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  background-image: url(../images/01-big-portfolio.jpg);
-}
-.services .right-text{
-  float: right;
-  padding: 70px 0;
-  width: 50%;
-  padding-left: 80px;
-}
-.services .right-text h4 {
-  text-transform: uppercase;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.services .right-text p {
-  padding-top: 20px;
-}
-.services .right-text em {
-  font-size: 16px;
-  color: #aaa;
-  font-weight: 300;
-  font-style: normal;
-}
 @media (max-width: 991px) {
   .call-to-action-3 {
     padding: 30px 0px;
@@ -1579,8 +1488,7 @@ section.services{
   }
 }
 .testimonials {
-  background:#E6E4EF;
-
+  background:#ffffff;
 }
 #owl-demo .item {
   padding: 30px 0px;
@@ -1588,8 +1496,9 @@ section.services{
 }
 .testimonials-post {
   text-align: center;
-  background: #ffffff;
+  background: #EBEBEB;
   padding: 30px;
+  height: 300px;
 }
 .testimonials-post span {
   font-size: 18px;
@@ -1749,6 +1658,7 @@ section.services{
   font-weight: 300;
   margin: 0px;
   letter-spacing: 2px;
+  color:#000;
 }
 .section-heading .section-dec {
   width: 80px;
@@ -1770,9 +1680,9 @@ section.services{
   background-color: #dddddd;
   margin: 15px 0 60px 0;
 }
-/*
- * 	Core Owl Carousel CSS File
- *	v1.3.3
+/* 
+ *  Core Owl Carousel CSS File
+ *  v1.3.3
  */
 /* clearfix */
 .owl-carousel .owl-wrapper:after {
@@ -1985,7 +1895,7 @@ section.services{
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Contributing author: Tyler Smith (@mbmufffin)
- *
+ * 
  */
 /* ====================================================================================================================
  * FONT-FACE

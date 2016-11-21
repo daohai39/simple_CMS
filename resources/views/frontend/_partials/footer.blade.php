@@ -20,7 +20,7 @@
 		            @if(isset($settings['phone']))
                     <li><span class="footer-header">Phone: </span>{{ $settings['phone'] }}</li>
                     @endif
-
+                    
                     @if(isset($settings['email']))
                     <li><span class="footer-header">Email: </span>{{ $settings['email'] }}</li>
                     @endif
