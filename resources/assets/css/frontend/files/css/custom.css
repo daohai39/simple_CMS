@@ -18,7 +18,7 @@ input[type=text]:focus {
     width: 100%;
 }
 
-section.page-heading .container ol.breadcrumb{
+.page-heading ol.breadcrumb{
   background-color: #fff;
 }
 
