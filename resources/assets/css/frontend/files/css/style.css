@@ -601,7 +601,7 @@ color:#333;
   }
 }
 .blog-single img {
-  max-width: 100%;
+  width: 100%;
   background-size: cover;
   overflow: hidden!important;
 }
