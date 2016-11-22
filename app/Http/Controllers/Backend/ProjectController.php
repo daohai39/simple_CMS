@@ -59,6 +59,7 @@ class ProjectController extends BackendController
         $id = Uuid::uuid4()->toString();
         $attributes = array_merge(['id' => $id], $request->all());
         $this->executeCommand(new CreateProject($attributes));
+        flash('Create Successfully', 'success');
         return redirect()->route('admin.project.edit', ['id' => $id]);
     }
 
@@ -84,6 +85,7 @@ class ProjectController extends BackendController
     public function update(Request $request, $id)
     {
         $this->executeCommand(new UpdateProject($id, $request->all()));
+        flash('Edited Successfully', 'success');
         return redirect()->route('admin.project.edit', ['id' => $id]);
     }
 
@@ -96,6 +98,7 @@ class ProjectController extends BackendController
     public function destroy($id)
     {
         $this->executeCommand(new DeleteProject($id));
+        flash('Delete Successfully', 'success');
         return redirect()->route('admin.project.index');
     }
 }

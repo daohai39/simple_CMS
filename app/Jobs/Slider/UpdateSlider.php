@@ -14,7 +14,9 @@ class UpdateSlider
 
     public $id;
     public $attributes;
-    public $rules;
+    public $rules = [
+        'image_id' => 'required'
+    ];
 
     public function __construct($id, array $attributes)
     {

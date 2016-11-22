@@ -13,7 +13,9 @@ class CreateSlider
     use InteractsWithQueue, Queueable, SerializesModels;
 
     public $attributes;
-    public $rules = [];
+    public $rules = [
+        'image_id' => 'required'
+    ];
 
     public function __construct(array $attributes)
     {

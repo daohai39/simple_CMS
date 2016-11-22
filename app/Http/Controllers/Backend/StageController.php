@@ -45,6 +45,7 @@ class StageController extends Controller
         $attributes['paid'] = ($request->has('paid') && $request->paid =='on') ? true : false;
 
         $this->executeCommand(new CreateStage($attributes));
+        flash('Created Successfully', 'success');
         return redirect()->route('admin.stage.edit', ['id' => $id]);
     }
 
@@ -75,6 +76,7 @@ class StageController extends Controller
         $attributes['paid'] = ($request->has('paid') && $request->paid =='on') ? true : false;
 
         $this->executeCommand(new UpdateStage($id, $attributes));
+        flash('Edited Successfully', 'success');
         return redirect()->route('admin.stage.edit', ['id' => $id]);
     }
 
@@ -88,6 +90,7 @@ class StageController extends Controller
     {
         $project = $this->stages->find($id)->project;
         $this->executeCommand(new DeleteStage($id));
+        flash('Deleted Successfully', 'success');
         return redirect()->route('admin.project.edit', ['id' => $project->id]);
     }
 }

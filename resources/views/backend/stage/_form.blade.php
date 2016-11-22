@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-            <label for="description">Description</label>
+            <label for="description">Description<span required="required">*</span></label>
             <textarea rows="10" name="description" required="required" class="form-control">{{ isset($stage) ? $stage->description : old('description') }}</textarea>
         </div>
 
@@ -23,7 +23,6 @@
             <upload-image
                 resource = "stage"
                 :thumbnailable = "false"
-                :single = "true"
                 @if(isset($stage))
                     :item = "{{ $stage }}"
                 @endif
