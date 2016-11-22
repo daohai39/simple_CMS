@@ -14,8 +14,6 @@ Khai Pham Arc Website
 `php artisan migrate:refresh --seed`
 ### Assets Compiling
 `gulp`
-### Tests
-`vendor/bin/behat&&vendor/bin/phpunit`
 ### Development
 `gulp watch`
 
