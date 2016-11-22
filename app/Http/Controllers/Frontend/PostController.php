@@ -15,24 +15,25 @@ class PostController extends Controller
     protected $posts;
 
     public function __construct(PostRepositoryInterface $posts)
-    {	
+    {
     	$this->posts = $posts;
     }
 
 	public function index()
 	{
-		$post = $this->posts->paginate();
-		return view('frontend.post.index',['post' => $post]);
+		$posts = $this->posts->paginate();
+		return view('frontend.post.index',['posts' => $posts]);
 	}
 
 	public function show($post_slug)
 	{
 		$post = $this->posts->findBySlug($post_slug);
-		if($post)
-		{
-			return view('frontend.post.show',['post' => $post]);
+		if($post) {
+            $featuredPosts = $this->posts->featured()->limit(3)->get();
+
+			return view('frontend.post.show', compact('post', 'featuredPosts'));
 		}
 		return abort(404);
-	}		
+	}
 
 }

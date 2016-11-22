@@ -28,10 +28,10 @@ class SlugController extends Controller
             return view('frontend.product.show', ['product' => $product]);
         } else if($category = $this->categories->findBySlug($slug)) {
             if(! $category->isCategorizable) {
-                return view('frontend.product.index', ['category' => $category, 'products' => $category->childrenProducts()->paginate(9)]);
+                return view('frontend.product.index', ['category' => $category, 'products' => $category->childrenProducts()->paginate(16)]);
             }
 
-            $products = $this->products->paginateByCategorySlug($slug, 9);
+            $products = $this->products->paginateByCategorySlug($slug, 16);
             return view('frontend.product.index', ['category' => $category, 'products' => $products]);
         }
         return abort(404);

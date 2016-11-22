@@ -15,6 +15,7 @@ class CreatePost
     ];
 
     public $rules = [
+        'author' => 'required | min:3',
         'title' => 'required | min:3 | unique:posts,title',
         'content' => 'required | min:3',
         'featured' => 'required | boolean',

@@ -1,5 +1,11 @@
 <div class="box-body">
     {{ csrf_field() }}
+
+    <div class="form-group">
+        <label for="author">Author *</label>
+        <input type="text" name="author" required="required" class="form-control" value="{{ isset($post) ? $post->author : old('author') }}">
+    </div>
+
     <div class="form-group">
         <label for="title">Title *</label>
         <input type="text" name="title" required="required" class="form-control" value="{{ isset($post) ? $post->title : old('title') }}">
@@ -48,12 +54,16 @@
     <div class="form-group">
         <label for="tags">Tags</label>
         <select name="tags[]" multiple="multiple" class="form-control select2" id="select2-post-tags">
-                @if(isset($post))
-                    @foreach($post->tags as $tag)
-                        <option value="{{ $tag->name }}" selected="selected">{{ $tag->name }}</option>
-                    @endforeach
-                @endif
-            </select>
+            @if(isset($post))
+                @foreach($post->tags as $tag)
+                    <option value="{{ $tag->name }}" selected="selected">{{ $tag->name }}</option>
+                @endforeach
+            @elseif(old('tags') && is_array(old('tags')))
+                @foreach(old('tags') as $tag)
+                    <option value="{{ $tag }}" selected="selected">{{ $tag }}</option>
+                @endforeach
+            @endif
+        </select>
     </div>
 
     <div class="form-group">

@@ -62,13 +62,6 @@
             </li>
 
             <li class="treeview">
-                <a href="{{ route('admin.cover-page.index') }}">
-                    <i class="fa fa-book"></i>
-                    <span>Homepage Cover</span>
-                </a>
-            </li>
-
-            <li class="treeview">
                 <a href="{{ route('admin.setting.index') }}">
                     <i class="fa fa-cog"></i>
                     <span>Setting</span>

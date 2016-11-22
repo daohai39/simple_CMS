@@ -100,7 +100,6 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\Repositories\StageRepositoryInterface' => 'App\Repositories\Eloquent\StageRepository',
             'App\Contracts\Repositories\CustomerRepositoryInterface' => 'App\Repositories\Eloquent\CustomerRepository',
             'App\Contracts\Repositories\SliderRepositoryInterface' => 'App\Repositories\Eloquent\SliderRepository',
-            'App\Contracts\Repositories\CoverPageRepositoryInterface' => 'App\Repositories\Eloquent\CoverPageRepository',
         ];
 
         foreach($repositories as $abstract => $concrete) {
@@ -120,7 +119,6 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\DataTables\ProjectDataTableInterface' => 'App\DataTables\ProjectDataTable',
             'App\Contracts\DataTables\CustomerDataTableInterface' => 'App\DataTables\CustomerDataTable',
             'App\Contracts\DataTables\SliderDataTableInterface' => 'App\DataTables\SliderDataTable',
-            'App\Contracts\DataTables\CoverPageDataTableInterface' => 'App\DataTables\CoverPageDataTable',
         ];
 
         foreach($services as $abstract => $concrete) {

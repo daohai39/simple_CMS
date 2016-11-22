@@ -2,8 +2,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\DataTables\ProductDataTableInterface;
+use App\Contracts\Repositories\CategoryRepositoryInterface;
+use App\Contracts\Repositories\DesignerRepositoryInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;
-
 use App\Jobs\Product\CreateProduct;
 use App\Jobs\Product\DeleteProduct;
 use App\Jobs\Product\UpdateProduct;
@@ -17,11 +18,16 @@ class ProductController extends BackendController
     use ExecuteCommandTrait;
 
     private $products;
+    private $categories;
+    private $designers;
     private $dataTable;
 
-    public function __construct(ProductRepositoryInterface $products, ProductDataTableInterface $dataTable)
+    public function __construct(ProductRepositoryInterface $products, ProductDataTableInterface $dataTable,
+                                CategoryRepositoryInterface $categories, DesignerRepositoryInterface $designers)
     {
         $this->products = $products;
+        $this->categories = $categories;
+        $this->designers = $designers;
         $this->dataTable = $dataTable;
     }
 
@@ -59,10 +65,12 @@ class ProductController extends BackendController
     public function store(Request $request)
     {
         $id = (string) Uuid::uuid4();
-
-        $attributes = array_merge(['id' => $id], $request->all());
-        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
-
+        $attributes = array_merge($request->all(), [
+            'id' => $id,
+            'category_id' => $this->categories->findBy('name', $request->category)->id,
+            'designer_id' => $this->designers->firstOrcreate(['name' => $request->designer])->id,
+            'featured' => $request->featured == 'on' ? true : false,
+        ]);
         $this->executeCommand(new CreateProduct($attributes));
 
         flash('Created Successfully', 'success');
@@ -103,9 +111,11 @@ class ProductController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $attributes = $request->all();
-        $attributes['featured'] = ($attributes['featured'] == 'on') ? true : false;
-
+        $attributes = array_merge($request->all(), [
+            'category_id' => $this->categories->findBy('name', $request->category)->id,
+            'designer_id' => $this->designers->firstOrcreate(['name' => $request->designer])->id,
+            'featured' => $request->featured == 'on' ? true : false,
+        ]);
         $this->executeCommand(new UpdateProduct($id, $attributes));
 
         flash('Edited Successfully', 'success');

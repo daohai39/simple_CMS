@@ -44,8 +44,14 @@ class DesignerController extends BackendController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if($request->ajax()) {
+            if($input = $request->input('q')) {
+                return $this->designers->paginateNameLike($input);
+            }
+            return $this->designers->paginate();
+        }
         return view('backend.designer.create');
     }
 

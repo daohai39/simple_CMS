@@ -15,14 +15,17 @@
 	        	<ul class="socials">
                     @if(isset($settings['address']))
                     <li><span class="footer-header">Address: </span>{{ $settings['address'] }}</li>
+                    <div class="clearfix"></div>
                     @endif
 
 		            @if(isset($settings['phone']))
                     <li><span class="footer-header">Phone: </span>{{ $settings['phone'] }}</li>
+                    <div class="clearfix"></div>
                     @endif
-                    
+
                     @if(isset($settings['email']))
                     <li><span class="footer-header">Email: </span>{{ $settings['email'] }}</li>
+                    <div class="clearfix"></div>
                     @endif
 
                     @if(isset($settings['facebook']))

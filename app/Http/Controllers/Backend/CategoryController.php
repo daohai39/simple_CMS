@@ -48,10 +48,7 @@ class CategoryController extends BackendController
         if($request->ajax()) {
             if($input = $request->input('q'))
                 return $this->categories->paginateNameLike($input);
-            else if($request->input('type') == 'root')
-                return $this->categories->paginateRoots();
-            else if($request->input('type') == 'children')
-                return $this->categories->paginateChildren();
+            return $this->categories->paginate();
         }
 
         return view('backend.category.create');
@@ -66,7 +63,10 @@ class CategoryController extends BackendController
     public function store(Request $request)
     {
         $id = (string) Uuid::uuid4();
-        $attributes = array_merge(['id' => $id], $request->all());
+        $attributes = array_merge($request->all(), [
+            'id' => $id,
+            'parent_id' => $this->categories->findBy('name', $request->parent)->id,
+        ]);
 
         $this->executeCommand(new CreateCategory($attributes));
         flash('Created Successfully', 'success');
@@ -106,6 +106,10 @@ class CategoryController extends BackendController
      */
     public function update(Request $request, $id)
     {
+        $attributes = array_merge($request->all(), [
+            'parent_id' => $this->categories->findBy('name', $request->parent)->id,
+        ]);
+
         $this->executeCommand(new UpdateCategory($id, $request->all()));
         flash('Edited Successfully', 'success');
         return redirect()->route('admin.category.edit', ['id' => $id]);

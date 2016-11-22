@@ -32,6 +32,7 @@ class PostSeeder extends Seeder
         for($i = 0; $i < $total; $i++) {
             $this->executeCommand(new CreatePost([
                 'id'               => (string) Uuid::uuid4(),
+                'author'           => $this->faker->name,
                 'title'            => $this->faker->sentence,
                 'content'          => $this->faker->paragraph,
                 'featured'         => $this->faker->randomElement([true, false]),

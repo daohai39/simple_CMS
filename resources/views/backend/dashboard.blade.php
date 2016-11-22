@@ -7,9 +7,7 @@
 @section('content-header', 'Dashboard')
 
 @section('content')
-    <div class="box">
-
-    </div>
+    <h4>Welcome to Khai Pham Decoks Admin Page</h4>
 @endsection
 
 @push('pre-scripts')

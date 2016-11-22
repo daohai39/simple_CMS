@@ -14,11 +14,17 @@
     </div>
 
     <div class="form-group">
-        <label for="parent_id">Parent</label>
-        <select name="parent_id" class="form-control select2">
-            <option selected="selected" value="{{ isset($category->parent) ? $category->parent->id : old('parent_id') }}">
-                {{ isset($category->parent) ? $category->parent->name : '' }}
+        <label for="parent">Parent</label>
+        <select name="parent" class="form-control select2">
+            @if(isset($category) && $category->parent)
+            <option selected="selected" value="{{ $category->parent->name }}">
+                {{ $category->parent->name }}
             </option>
+            @elseif(old('parent'))
+            <option selected="selected" value="{{ old('parent') }}">
+                {{ old('parent') }}
+            </option>
+            @endif
         </select>
     </div>
 </div>
@@ -36,7 +42,21 @@
                     page: params.page,
                     type: 'root',
                 }
-            }
+            },
+            processResults: function (response, params) {
+                params.page = params.page || 1;
+                return {
+                    results: $.map(response.data, function (item) {
+                        return {
+                            text: item['name'],
+                            id: item['name']
+                        }
+                    }),
+                    pagination: {
+                        more: response.to < response.total
+                    }
+                };
+            },
         }
     });
 </script>

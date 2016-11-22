@@ -7,14 +7,15 @@ use Cartalyst\Tags\TaggableTrait;
 use Cartalyst\Tags\TaggableInterface;
 use Plank\Mediable\Mediable;
 use App\Traits\HasImages;
+use App\Traits\VnDateTrait;
 
 class Product extends Model implements TaggableInterface
 {
-    use Sluggable, TaggableTrait, Mediable, HasImages;
+    use Sluggable, TaggableTrait, Mediable, HasImages, VnDateTrait;
 
     public $incrementing = false;
 
-    protected $fillable = ['id', 'name', 'code', 'author', 'description', 'meta_title', 'meta_description', 'featured'];
+    protected $fillable = ['id', 'name', 'code', 'description', 'meta_title', 'meta_description', 'featured'];
     protected $casts = [
         'featured' => 'boolean',
     ];
@@ -40,6 +41,16 @@ class Product extends Model implements TaggableInterface
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function designer()
+    {
+        return $this->belongsTo(Designer::class);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $this->getDate($value);
     }
 
     public function getMetaTitleAttribute($value)

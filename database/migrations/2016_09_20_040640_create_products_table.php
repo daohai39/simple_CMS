@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('code');
-            $table->string('author');
+            $table->uuid('designer_id');
             $table->uuid('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->boolean('featured')->default(false);

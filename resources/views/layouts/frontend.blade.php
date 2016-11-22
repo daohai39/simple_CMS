@@ -4,6 +4,9 @@
     	<meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="{{ $settings['meta-description'] or 'Decoks' }}">
+        <meta name="title"  content="{{ $settings['meta-title'] or 'Decoks' }}" />
+
 		<title>Khai Pham - @yield('title')</title>
 
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -40,9 +43,7 @@
         <script src="{{ asset('assets/js/frontend/jquery.themepunch.revolution.min.js') }}"></script>
         <script src="{{ asset('assets/js/frontend/plugins.js') }}"></script>
         <script src="{{ asset('assets/js/frontend/custom.js') }}"></script>
-        <script src="{{ asset('assets/js/frontend/add-on.js') }}"></script>
         @stack('post-scripts')
-
         <script>
             $.ajaxSetup({
                 headers: {
@@ -50,5 +51,14 @@
                 }
             });
         </script>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     </body>
 </html>

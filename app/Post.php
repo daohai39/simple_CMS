@@ -7,10 +7,11 @@ use Cartalyst\Tags\TaggableTrait;
 use Cartalyst\Tags\TaggableInterface;
 use Plank\Mediable\Mediable;
 use App\Traits\HasImages;
+use App\Traits\VnDateTrait;
 
 class Post extends Model implements TaggableInterface
 {
-    use Sluggable, TaggableTrait, Mediable, HasImages;
+    use Sluggable, TaggableTrait, Mediable, HasImages, VnDateTrait;
 
     const STATUS_DRAFT = 'DRAFT';
     const STATUS_PUBLISH = 'PUBLISH';
@@ -18,11 +19,12 @@ class Post extends Model implements TaggableInterface
 
     public $incrementing = false;
 
-    protected $fillable = ['id', 'title', 'content', 'featured', 'status', 'description', 'meta_title', 'meta_description'];
+    protected $fillable = ['id', 'author', 'title', 'content', 'featured', 'status', 'description', 'meta_title', 'meta_description'];
     protected $casts = [
         'featured' => 'boolean',
     ];
     protected $attributes = [
+        'author' => '',
         'featured' => false,
         'status' => self::STATUS_DRAFT,
     ];
@@ -61,6 +63,11 @@ class Post extends Model implements TaggableInterface
     public function setMetaDescriptionAttribute($value)
     {
         $this->attributes['meta_description'] = str_limit($value, 150);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return $this->getDate($value);
     }
 
 }

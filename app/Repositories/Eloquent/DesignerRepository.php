@@ -10,4 +10,9 @@ class DesignerRepository extends AbstractRepository implements DesignerRepositor
     {
         parent::__construct($designer);
     }
+
+    public function paginateNameLike($name, $perpage = null, $columns = ['*'])
+    {
+        return $this->paginateWhere(['name', 'like', "%{$name}%"], $perpage, $columns);
+    }
 }

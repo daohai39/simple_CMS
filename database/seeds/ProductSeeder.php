@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'id' => (string) Uuid::uuid4(),
                 'name' => $this->faker->words(3, true),
                 'code' => $this->faker->postcode,
-                'author' => $this->faker->name,
+                'designer_id' => App\Designer::inRandomOrder()->first()->id,
                 'category_id' => $category->id,
                 'featured' => $this->faker->randomElement([true, false]),
                 'description' => $this->faker->paragraphs(3, true),

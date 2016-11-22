@@ -23,97 +23,59 @@
 
 <div class="clearfix"></div>
 
-@foreach($covers as $cover)
-    @if($loop->index % 2 == 0)
-    <section class="services gray container-fluid">
-        <div>
-            <div class="left-image"></div>
-        </div>
-        <div class="container">
-            <div class="right-text col-sm-12">
-                <h4>{{ $cover->heading or '' }}</h4>
-                <p><em>{{ $cover->content or '' }}</p>
-                <br>
-                @if($cover->url)
-                <a href="{{ $cover->url }}">READ MORE...</a>
-                @endif
-            </div>
-        </div>
-    </section>
-    <div class="clearfix"></div>
-    @else
-    <section class="call-to-action-2 container-fluid">
-        <div class="container">
-        <div class="left-text push-sm-right col-sm-12">
-            <h4>{{ $cover->heading or '' }}</h4>
-            <p><em>{{ $cover->content or '' }}</p>
-            <br>
-            @if($cover->url)
-                <a href="{{ $cover->url }}">READ MORE...</a>
-            @endif
-        </div>
-            <div class="right-image pull-sm-left col-sm-12"></div>
-        </div>
-    </section>
-    <div class="clearfix"></div>
-    @endif
-@endforeach
-
-
 
 <section class="portfolio">
 	<div class="container">
 		<div class="section-heading-white">
-			<h2>Popular Products</h2>
-			<div class="section-dec"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div id="owl-portfolio" class="owl-carousel owl-theme">
-                    @foreach($featuredProducts as $product)
-					<div class="item">
-				  		<a href="{{ route('frontend.slug.show', ['slug' => $product->slug]) }}">
-                            <figure>
-                                <img alt="portfolio" src="files/images/01-portfolio.jpg">
-                                <figcaption>
-                                    <h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->description }}</p>
-                                </figcaption>
-                            </figure>
-                        </a>
-    				</div>
-                    @endforeach
-				</div>
-			</div>
-		</div>
-		<div class="owl-navigation">
-		  <a class="btn prev fa fa-angle-left"></a>
-		  <a class="btn next fa fa-angle-right"></a>
-		</div>
-	</div>
-</section>
-
-<section class="testimonials">
-	<div class="container">
-		<div class="section-heading">
-			<h2>Recent Posts</h2>
+			<h2>Featured Products</h2>
 			<div class="section-dec"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div id="owl-demo" class="owl-carousel owl-theme">
-                    @foreach($featuredPosts as $post)
+                    @foreach($featuredProducts as $product)
 					<div class="item">
-				  		<div class="testimonials-post">
-                            <a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}"><h6>{{ $post->title }}</h6></a>
-				  			<p>{{ $post->description }}</p>
-				  		</div>
-				    </div>
+                        <figure>
+                            <img alt="portfolio" src="{{ $product->thumbnail or asset('files/images/01-portfolio.jpg') }}">
+                            <figcaption>
+                                <h3>{{ $product->name }}</h3>
+                                <p>{{ str_limit($product->description, 100) }}</p>
+                            </figcaption>
+                        </figure>
+                    </div>
                     @endforeach
 				</div>
 			</div>
 		</div>
 	</div>
+</section>
+
+
+<section class="blog-posts">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Latest Posts</h2>
+            <div class="section-dec"></div>
+        </div>
+        @foreach($featuredPosts as $post)
+        <div class="blog-item">
+            <div class="col-md-4">
+                <a href="{{ route('frontend.post.show', $post->slug) }}"><img src="{{ $post->thumbnail or asset('files/images/01-portfolio.jpg') }}" alt=""></a>
+                <h3><a href="blog-single.html">{{ str_limit($post->title, 25) }}</a></h3>
+                <span>
+                    @if($post->author)
+                        <a href="">{{ $post->author or '' }}</a> -
+                    @endif
+                    <a href="">{{ $post->created_at }}</a>
+                </span>
+                <p>{{ str_limit($post->description, 100) }}</p>
+                <div class="read-more">
+                    <a href="{{ route('frontend.post.show', $post->slug) }}">Read more</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
 </section>
 @endsection
 

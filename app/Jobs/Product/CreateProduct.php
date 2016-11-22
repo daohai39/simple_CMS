@@ -2,6 +2,7 @@
 namespace App\Jobs\Product;
 
 use App\Contracts\Repositories\CategoryRepositoryInterface;
+use App\Contracts\Repositories\DesignerRepositoryInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;
 use App\Product;
 use Illuminate\Bus\Queueable;
@@ -18,7 +19,7 @@ class CreateProduct
     public $rules = [
         'name' => 'required | min:3 | unique:products,name',
         'code' => 'required | min:1 | unique:products,code',
-        'author' => 'required | min:3',
+        'designer_id' => 'required | exists:designers,id',
         'category_id' => 'required | exists:categories,id',
         'featured' => 'required | boolean',
     ];
@@ -38,12 +39,15 @@ class CreateProduct
      *
      * @return void
      */
-    public function handle(CategoryRepositoryInterface $categories)
+    public function handle(CategoryRepositoryInterface $categories, DesignerRepositoryInterface $designers)
     {
         $category = $categories->find($this->attributes['category_id']);
+        $designer = $designers->find($this->attributes['designer_id']);
 
         $product = new Product($this->attributes);
-        $product->category()->associate($category)->save();
+        $product->category()->associate($category);
+        $product->designer()->associate($designer);
+        $product->save();
 
         $product->setTags($this->attributes['tags']);
         $product->syncImages($this->attributes['images_id']);

@@ -13,7 +13,6 @@ Route::get('/img/{path}', ['as' => 'image', 'uses' => function(League\Glide\Serv
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
     Route::get('/', ['as' => 'dashboard', 'uses' => 'BackendController@dashboard']);
 
-    Route::resource('cover-page', 'CoverPageController', ['except' => ['show']]);
     Route::resource('slider', 'SliderController', ['except' => ['show']]);
     Route::resource('customer', 'CustomerController', ['except' => ['show']]);
     Route::resource('post', 'PostController', ['except' => ['show'] ]);

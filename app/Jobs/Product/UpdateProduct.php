@@ -3,6 +3,7 @@
 namespace App\Jobs\Product;
 
 use App\Contracts\Repositories\CategoryRepositoryInterface;
+use App\Contracts\Repositories\DesignerRepositoryInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;
 use Illuminate\Bus\Queueable;
 
@@ -19,7 +20,7 @@ class UpdateProduct
     public $rules = [
         'name' => 'required | min:3 | unique:products,name',
         'code' => 'required | min:1',
-        'author' => 'required | min:3',
+        'designer_id' => 'required | exists:designers,id',
         'category_id' => 'required | exists:categories,id',
         'featured' => 'required | boolean',
     ];
@@ -43,12 +44,14 @@ class UpdateProduct
      *
      * @return void
      */
-    public function handle(ProductRepositoryInterface $products, CategoryRepositoryInterface $categories)
+    public function handle(ProductRepositoryInterface $products, CategoryRepositoryInterface $categories, DesignerRepositoryInterface $designers)
     {
         $category = $categories->find($this->attributes['category_id']);
-        $product = $products->find($this->id);
+        $designer = $designers->find($this->attributes['designer_id']);
 
+        $product = $products->find($this->id);
         $product->category()->associate($category);
+        $product->designer()->associate($designer);
         $product->update($this->attributes);
 
         $product->setTags($this->attributes['tags']);

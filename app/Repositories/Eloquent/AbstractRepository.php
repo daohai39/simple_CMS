@@ -18,6 +18,11 @@ abstract class AbstractRepository implements AbstractRepositoryInterface
         return $this->model()->all();
     }
 
+    public function firstOrCreate($attributes)
+    {
+        return $this->model()->firstOrCreate($attributes);
+    }
+
     public function getFillable()
     {
         return $this->model()->getFillable();
@@ -27,6 +32,11 @@ abstract class AbstractRepository implements AbstractRepositoryInterface
 	{
 		return $this->model()->findOrFail($id, $columns);
 	}
+
+    public function findBy($column, $value)
+    {
+        return $this->model()->where($column, $value)->first();
+    }
 
 	public function paginate($perpage = null, $columns = ['*'])
 	{

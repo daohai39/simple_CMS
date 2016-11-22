@@ -3,10 +3,10 @@
 		<div class="content">
 			<nav class="responsive-menu">
 				<ul>
-					<li>
+					<!-- <li>
 						<input type="text" name="search" placeholder="Search here">
-					</li>
-					<li><a href="{{ route('frontend.post.index') }}">Tin Tức</a></li>
+					</li> -->
+					<li><a href="{{ route('frontend.post.index') }}">Bài Viết</a></li>
 					<li><a href="{{ route('frontend.slug.show', ['slug' => 'san-pham-thong-minh']) }}">Sản Phẩm Thông Minh</a></li>
 					<li class="menu-item-has-children"><a href="#">Phòng Xông Hơi</a>
 						<ul class="sub-menu">
