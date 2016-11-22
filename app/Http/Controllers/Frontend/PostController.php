@@ -21,7 +21,7 @@ class PostController extends Controller
 
 	public function index()
 	{
-		$posts = $this->posts->paginate();
+		$posts = $this->posts->published()->paginate();
 		return view('frontend.post.index',['posts' => $posts]);
 	}
 
@@ -29,8 +29,7 @@ class PostController extends Controller
 	{
 		$post = $this->posts->findBySlug($post_slug);
 		if($post) {
-            $featuredPosts = $this->posts->featured()->limit(3)->get();
-
+            $featuredPosts = $this->posts->published()->featured()->limit(3)->get();
 			return view('frontend.post.show', compact('post', 'featuredPosts'));
 		}
 		return abort(404);

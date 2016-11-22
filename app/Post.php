@@ -44,6 +44,11 @@ class Post extends Model implements TaggableInterface
         return $query->whereFeatured(true);
     }
 
+    public function scopePublished($query)
+    {
+        return $query->whereStatus(self::STATUS_PUBLISH);
+    }
+
     public function getMetaTitleAttribute($value)
     {
         if(! $value) {
