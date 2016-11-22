@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <form action="{{ route('admin.setting.update', ['id' => $setting->id]) }}" method="POST" class="form-horizontal">
                 <input type="hidden" name="_method" value="PATCH">
                 @include('backend.setting._form')

@@ -8,7 +8,7 @@
 							<ul>
                                 @foreach($sliders as $slider)
 								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
-									<img src="{{ $slider->images->first()->url or '' }}" data-fullwidthcentering="on" alt="slide">
+									<img src="{{ $slider->images->first()->url or asset('files/images/01-slide.jpg') }}" data-fullwidthcentering="on" alt="slide">
 									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">{{ $slider->heading or '' }}</div>
 									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">{{ $slider->description or '' }}</div>
                                     @if($slider->url)
@@ -36,7 +36,7 @@
                     @foreach($featuredProducts as $product)
 					<div class="item">
                         <figure>
-                            <img alt="portfolio" src="{{ $product->thumbnail or asset('files/images/01-portfolio.jpg') }}">
+                            <img alt="portfolio" src="{{ $product->thumbnail !== null ? $product->thumbnail->getUrl() : asset('files/images/01-portfolio.jpg') }}">
                             <figcaption>
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ str_limit($product->description, 100) }}</p>
@@ -60,7 +60,7 @@
         @foreach($featuredPosts as $post)
         <div class="blog-item">
             <div class="col-md-4">
-                <a href="{{ route('frontend.post.show', $post->slug) }}"><img src="{{ $post->thumbnail or asset('files/images/01-portfolio.jpg') }}" alt=""></a>
+                <a href="{{ route('frontend.post.show', $post->slug) }}"><img src="{{ $post->thumbnail !== null ? $post->thumbnail->getUrl() : asset('files/images/01-portfolio.jpg') }}" alt=""></a>
                 <h3><a href="blog-single.html">{{ str_limit($post->title, 25) }}</a></h3>
                 <span>
                     @if($post->author)

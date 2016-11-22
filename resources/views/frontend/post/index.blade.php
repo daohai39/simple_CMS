@@ -20,7 +20,7 @@
 					<div class="col-md-4">
 						<div class="blog-item">
 							<a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}">
-                                <img src="{{ $post->thumbnail or asset('files/images/01-portfolio.jpg') }}" alt="{{ $post->title }}">
+                                <img src="{{ $post->thumbnail !== null ? $post->thumbnail->getUrl() : asset('files/images/01-portfolio.jpg') }}" alt="{{ $post->title }}">
                             </a>
 							<h3>
                                 <a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}">{{ $post->title }}</a>

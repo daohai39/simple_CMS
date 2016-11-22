@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <form action="{{ route('admin.project.store') }}" method="POST" class="form-horizontal">
                 @include('backend.project._form')
                 <div class="box-footer">
