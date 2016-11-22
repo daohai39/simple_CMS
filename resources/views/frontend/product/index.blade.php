@@ -20,7 +20,7 @@
 				    	<div class="item col-md-3 col-sm-6 col-xs-12 furniture">
 				    		<a href="{{ route('frontend.slug.show', ['slug' => $product->slug]) }}">
 						  		<figure>
-			    					<img alt="{{ $product->name }}" src="{{ $product->thumbnail or asset('files/images/01-portfolio.jpg') }}">
+			    					<img alt="{{ $product->name }}" src="{{ $product->thumbnail !== null ? $product->thumbnail->getUrl() : asset('files/images/01-portfolio.jpg') }}">
 			    					<figcaption>
 			        					<h3> {{ $product->name }}</h3>
 			        					<p>{{ str_limit($product->description, 150) }}</p>

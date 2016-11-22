@@ -60,7 +60,7 @@
                         @foreach($featuredPosts as $post)
                             <li class="recent-post-item">
                                 <a href="{{ route('frontend.post.show', $post->slug) }}">
-                                    <img src="{{ $post->thumbnail or asset('files/images/01-portfolio.jpg') }}" alt="">
+                                    <img src="{{ $post->thumbnail !== null ? $post->thumbnail->getUrl() : asset('files/images/01-portfolio.jpg') }}" alt="">
                                     <span class="post-title">{{ str_limit($post->title, 25) }}</span>
                                 </a>
                                 <span class="post-info">
