@@ -31,14 +31,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.', 'na
     Route::post('/media/image/thumbnail', ['as' => 'media.image.thumbnail', 'uses' => 'MediaController@changeThumbnail']);
 });
 
-
+Route::get('project/{id}', ['as' => 'project.show', 'uses' => 'Backend\ProjectController@show']);
 
 Route::group(['namespace'=>'Frontend', 'as' => 'frontend.'], function(){
     Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
-
-    Route::get('post',['as'=>'post.index','uses'=>'PostController@index']);
-    Route::get('product',['as'=>'product.index','uses'=>'ProductController@index']);
-    Route::get('post/{post_slug}',['as'=>'post.show','uses'=>'PostController@show']);
+    Route::get('bai-viet',['as'=>'post.index','uses'=>'PostController@index']);
+    Route::get('bai-viet/{post_slug}',['as'=>'post.show','uses'=>'PostController@show']);
     Route::get('{slug}',['as'=>'slug.show','uses'=>'SlugController@index']);
 });
 

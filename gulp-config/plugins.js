@@ -1,6 +1,10 @@
 const plugins = {
   bower: [
     {
+      src: 'bootstrap-colorpicker/dist',
+      output: 'colorpicker'
+    },
+    {
       src: 'summernote/dist',
       output: 'summernote'
     },

@@ -1,13 +1,13 @@
 @extends('layouts.frontend')
 
-@section('title','post' )
+@section('title', 'Bài Viết')
 
 @section('content')
     <section class="page-heading wow fadeIn" data-wow-duration="1.5s" style="background-image: url('{{ asset('files/images/01-heading.jpg') }}')">
         <div class="container">
             <div class="page-name">
-                <h1>Our Posts</h1>
-                <span></span>
+                <h1>Bài Viết</h1>
+                <span>Khai Pham Architecture</span>
             </div>
         </div>
     </section>
@@ -23,12 +23,12 @@
                                 <img src="{{ $post->thumbnail !== null ? $post->thumbnail->getUrl() : asset('files/images/01-portfolio.jpg') }}" alt="{{ $post->title }}">
                             </a>
 							<h3>
-                                <a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}">{{ $post->title }}</a>
+                                <a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}">{{ str_limit($post->title, 30) }}</a>
                             </h3>
 							<span><a href="#">{{ $post->created_at }}</a></span>
-							<p>{{ $post->description }}</p>
+							<p>{{ str_limit($post->description, 100) }}</p>
 							<div class="read-more">
-								<a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}">Read more</a>
+								<a href="{{ route('frontend.post.show', ['slug' => $post->slug]) }}">Xem Thêm</a>
 							</div>
 						</div>
 					</div>

@@ -1,6 +1,6 @@
 <div class="box-body">
     {{ csrf_field() }}
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="box-body">
                 <div class="form-group">
                     <label for="author">Author *</label>
@@ -60,15 +60,8 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="box-body">
-            <div class="form-group">
-                <label for="content">Content *</label>
-                <wysiwyg>
-                    <textarea name="content" required="required" class="form-control" slot="textarea">{{ isset($post) ? $post->content : old('content') }}</textarea>
-                </wysiwyg>
-            </div>
-
             <div class="form-group">
                 <label for="images_id[]">Images</label>
                 <upload-image
@@ -77,6 +70,12 @@
                         :item = "{{ $post }}"
                     @endif
                 ></upload-image>
+            </div>
+            <div class="form-group">
+                <label for="content">Content *</label>
+                <wysiwyg>
+                    <textarea name="content" required="required" class="form-control" slot="textarea">{{ isset($post) ? $post->content : old('content') }}</textarea>
+                </wysiwyg>
             </div>
         </div>
     </div>

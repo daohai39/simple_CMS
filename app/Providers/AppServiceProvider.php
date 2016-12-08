@@ -42,8 +42,15 @@ class AppServiceProvider extends ServiceProvider
         // Register view composer for frontend
         view()->composer('frontend.*', function ($view) {
             $view->with('settings', app('App\Contracts\Repositories\SettingRepositoryInterface')->all()->mapWithKeys(function ($setting) {
+                if($setting['key'] == 'logo')
+                    return [$setting['key'] => $setting->images->first()->getUrl()];
+
                 return [$setting['key'] => $setting['value']];
             }));
+        });
+
+        view()->composer('backend.*', function ($view) {
+            $view->with('me', \Auth::user());
         });
     }
 

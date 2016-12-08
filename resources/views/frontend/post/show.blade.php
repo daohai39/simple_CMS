@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('title', $post->title)
 
 @section('content')
@@ -7,7 +6,7 @@
     <div class="container">
         <div class="page-name">
             <h1>{{ $post->title }}</h1>
-            <span>Another post from {{ $post->author }}</span>
+            <span>Tác Giả: {{ $post->author }}</span>
         </div>
     </div>
 </section>
@@ -35,7 +34,17 @@
                     <div class="blog-single-content">
                         <h3><a href="">{{ $post->title }}</a></h3>
                         <span><a href="#">{{ $post->created_at }}</a></span>
-                        <p>{{ $post->content }}</p>
+                        <div class="clearfix"></div>
+                        <span>
+                            @foreach($post->tags as $tag)
+                                @if(! $loop->last)
+                                <a href="">{{ $tag->name }}</a>,
+                                @else
+                                <a href="">{{ $tag->name }}</a>
+                                @endif
+                            @endforeach
+                        </span>
+                        <p>{!! $post->content !!}</p>
                     </div>
 
                     <div class="fb-comments" data-href="{{ url()->current() }}" data-width="100%" data-numposts="5"></div>
@@ -44,7 +53,7 @@
 
             <div class="col-md-4">
                 <div class="widget-item">
-                    <h2>Share this post</h2>
+                    <h2>Chia Sẻ</h2>
                     <div class="dec-line">
                     </div>
                     <div class="social-icons">
@@ -54,7 +63,7 @@
                     </div>
                 </div>
                 <div class="widget-item">
-                    <h2>Recent Posts</h2>
+                    <h2>Bài Viết Gần Đây</h2>
                     <div class="dec-line"></div>
                     <ul class="recent-item">
                         @foreach($featuredPosts as $post)

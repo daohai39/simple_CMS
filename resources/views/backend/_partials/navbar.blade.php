@@ -21,14 +21,14 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                      <img src="{{ asset('assets/vendor/adminlte/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                    <span class="hidden-xs">Decoks Admin</span>
+                    <span class="hidden-xs">{{ $me->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="{{ asset('assets/vendor/adminlte/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                 <p>
-                  Decoks Admin
+                  {{ $me->name }}
                 </p>
               </li>
                 <div class="pull-right">

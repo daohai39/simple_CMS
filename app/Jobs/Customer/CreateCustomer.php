@@ -17,8 +17,6 @@ class CreateCustomer
         'id' => 'required',
         'name' => 'required|min:3',
         'email' => 'required|email|unique:customers',
-        'phone' => 'required|min:7',
-        'address' => 'required',
     ];
 
     public function __construct(array $attributes)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Contracts\DataTables\ProjectDataTableInterface;
+use App\Contracts\Repositories\CustomerRepositoryInterface;
 use App\Contracts\Repositories\ProjectRepositoryInterface;
 use App\Jobs\Project\CreateProject;
 use App\Jobs\Project\DeleteProject;
@@ -18,11 +19,13 @@ class ProjectController extends BackendController
 
     private $projects;
     private $dataTable;
+    private $customers;
 
-    public function __construct(ProjectRepositoryInterface $projects, ProjectDataTableInterface $dataTable)
+    public function __construct(ProjectRepositoryInterface $projects, ProjectDataTableInterface $dataTable, CustomerRepositoryInterface $customers)
     {
         $this->projects = $projects;
         $this->dataTable = $dataTable;
+        $this->customers = $customers;
     }
 
     /**
@@ -48,6 +51,12 @@ class ProjectController extends BackendController
         return view('backend.project.create');
     }
 
+    public function show($id)
+    {
+        $project = $this->projects->find($id);
+        return view('backend.project.show', compact('project'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -57,7 +66,11 @@ class ProjectController extends BackendController
     public function store(Request $request)
     {
         $id = Uuid::uuid4()->toString();
-        $attributes = array_merge(['id' => $id], $request->all());
+        $attributes = array_merge($request->all(), [
+            'id' => $id,
+            'customer_id' => $this->customers->firstOrcreate(['name' => $request->customer])->id,
+        ]);
+
         $this->executeCommand(new CreateProject($attributes));
         flash('Create Successfully', 'success');
         return redirect()->route('admin.project.edit', ['id' => $id]);
@@ -84,7 +97,11 @@ class ProjectController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $this->executeCommand(new UpdateProject($id, $request->all()));
+        $attributes = array_merge($request->all(), [
+            'customer_id' => $this->customers->firstOrcreate(['name' => $request->customer])->id,
+        ]);
+
+        $this->executeCommand(new UpdateProject($id, $attributes));
         flash('Edited Successfully', 'success');
         return redirect()->route('admin.project.edit', ['id' => $id]);
     }

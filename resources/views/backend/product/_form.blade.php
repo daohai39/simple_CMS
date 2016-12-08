@@ -79,13 +79,6 @@
     <div class="col-md-6">
         <div class="box-body">
             <div class="form-group">
-                <label for="description">Description</label>
-                <wysiwyg>
-                    <textarea class="form-control" name="description" slot="textarea">{!! isset($product) ? $product->description : old('description') !!}</textarea>
-                </wysiwyg>
-            </div>
-
-            <div class="form-group">
                 <label for="images_id[]">Images</label>
                 <upload-image
                     resource="product"
@@ -93,6 +86,12 @@
                         :item="{{ $product }}"
                     @endif
                 ></upload-image>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <wysiwyg>
+                    <textarea class="form-control" name="description" slot="textarea">{!! isset($product) ? $product->description : old('description') !!}</textarea>
+                </wysiwyg>
             </div>
         </div>
     </div>

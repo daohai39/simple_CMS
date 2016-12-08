@@ -8,6 +8,7 @@ use App\Jobs\Media\DeleteMedia;
 use App\Jobs\Media\UploadDocument;
 use App\Jobs\Media\UploadImage;
 use App\Traits\ExecuteCommandTrait;
+use Approached\LaravelImageOptimizer\ImageOptimizer;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -31,26 +32,15 @@ class MediaController extends BackendController
         ]));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeImage(Request $request)
+    public function storeImage(Request $request, ImageOptimizer $imageOptimizer)
     {
+        $imageOptimizer->optimizeUploadedImageFile($request->image);
         return $this->executeCommand(new UploadImage([
             'id' => Uuid::uuid4()->toString(),
             'file' => $request->image
         ]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $this->executeCommand(new DeleteMedia($id));

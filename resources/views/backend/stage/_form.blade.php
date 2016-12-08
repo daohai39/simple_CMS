@@ -1,5 +1,5 @@
 {{ csrf_field() }}
-<div class="box-body">
+
     <input type="hidden" name="project_id" value="{{ isset($stage) ? $stage->project->id : $project_id }}">
     <div class="col-md-6">
         <div class="box-body">
@@ -14,7 +14,6 @@
                 <input type="text" name="name" required="required" class="form-control" placeholder="" value="{{ isset($stage) ? $stage->name : old('name') }}">
             </div>
 
-<<<<<<< HEAD
         <div class="form-group">
             <label for="description">Description<span required="required">*</span></label>
             <textarea rows="10" name="description" required="required" class="form-control">{{ isset($stage) ? $stage->description : old('description') }}</textarea>
@@ -30,35 +29,17 @@
                 @endif
             ></upload-image>
         </div>
-=======
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea rows="10" name="description" required="required" class="form-control">{{ isset($stage) ? $stage->description : old('description') }}</textarea>
-            </div>
 
-            <div class="form-group">
-                <label for="images_id[]">Images</label>
-                <upload-image
-                    resource = "stage"
-                    :thumbnailable = "false"
-                    :single = "true"
-                    @if(isset($stage))
-                        :item = "{{ $stage }}"
-                    @endif
-                ></upload-image>
-            </div>
->>>>>>> 3ae4004f0ba52337c6b2c597d4199f5b285a5f31
-
-            <div class="form-group">
-                <label for="documents_id[]">Documents</label>
-                <upload-document
-                    resource = "stage"
-                    :thumbnailable = "false"
-                    @if(isset($stage))
-                        :item = "{{ $stage }}"
-                    @endif
-                ></upload-document>
-            </div>
+        <div class="form-group">
+            <label for="documents_id[]">Documents</label>
+            <upload-document
+                resource = "stage"
+                :thumbnailable = "false"
+                @if(isset($stage))
+                    :item = "{{ $stage }}"
+                @endif
+            ></upload-document>
+        </div>
         </div>
     </div>
 
@@ -108,7 +89,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 @push('pre-styles')

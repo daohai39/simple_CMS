@@ -7,10 +7,15 @@
 
     <div class="form-group" id="setting-value">
         <label for="value">Description</label>
-        @if ($setting->type == 'textarea')
-            <wysiwyg>
-                <textarea name="value" class="form-control" slot="textarea">{{ isset($setting) ? $setting->value : old('value') }}</textarea>
-            </wysiwyg>
+        @if (isset($setting) && $setting->type == 'image')
+            <upload-image
+                resource = "setting"
+                :thumbnailable = "false"
+                :single = "true"
+                @if(isset($setting))
+                    :item = "{{ $setting }}"
+                @endif
+            ></upload-image>
         @else
             <input type="text" name="value" id="text" class="form-control"  value="{{ isset($setting) ? $setting->value : old('value') }}">
         @endif
@@ -18,13 +23,11 @@
 </div>
 
 @push('pre-styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/summernote/summernote.css') }}">
+
 @endpush
 
 @push('pre-scripts')
-    <script src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/summernote/summernote.min.js') }}"></script>
+
 @endpush
 
 @push('post-scripts')

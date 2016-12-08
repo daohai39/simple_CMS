@@ -16,15 +16,15 @@ class UpdateCustomer
     public $attributes;
     public $rules = [
         'name' => 'required|min:3',
-        'email' => 'required|email',
-        'phone' => 'required|min:7',
-        'address' => 'required',
+        'email' => 'required|email|unique:customers,email',
     ];
 
     public function __construct($id, array $attributes)
     {
         $this->id = $id;
         $this->attributes = $attributes;
+
+        $this->rules['email'] = $this->rules['email'].",{$id}";
     }
 
     /**

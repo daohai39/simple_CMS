@@ -68,6 +68,9 @@ class Project extends Model
      */
     public function getIsCompletedAttribute($value)
     {
+        if($this->stages->isEmpty())
+            return false;
+
         foreach($this->stages as $stage) {
             if(! $stage->isCompleted)
                 return false;

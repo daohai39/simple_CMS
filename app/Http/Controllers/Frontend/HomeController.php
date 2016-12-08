@@ -24,8 +24,8 @@ class HomeController extends Controller
     public function index()
     {
         $sliders = $this->sliders->all();
-        $featuredProducts = $this->products->featured()->get();
-        $featuredPosts = $this->posts->featured()->limit(3)->get();
+        $featuredProducts = $this->products->featured()->limit(9)->get();
+        $featuredPosts = $this->posts->featured()->published()->limit(9)->get();
 
         // dd(compact('sliders'));
         return view('frontend.home', compact('sliders', 'featuredProducts', 'featuredPosts'));

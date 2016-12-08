@@ -17,8 +17,7 @@
             <table id="sliders-table" class="table dt-responsive nowrap" cellspacing="0"  width="100%">
                 <thead>
                     <tr>
-                        <th>Description</th>
-                        <th>Url</th>
+                        <th>Heading</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -39,8 +38,7 @@
     var table = new DataTables("#sliders-table", {
         ajax: laroute.route('admin.slider.index'),
         columns: [
-            { data: 'description', name: 'description' },
-            { data: 'url', name: 'url' },
+            { data: 'heading', name: 'heading' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false}
         ],
         order: [[1, 'asc']]

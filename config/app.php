@@ -179,12 +179,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Cartalyst\Tags\TagsServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Plank\Mediable\MediableServiceProvider::class,
+        Approached\LaravelImageOptimizer\ServiceProvider::class,
 
     ],
 
@@ -233,6 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Image' => Intervention\Image\Facades\Image::class,
         'MediaUploader' => Plank\Mediable\MediaUploaderFacade::class,
     ],
 

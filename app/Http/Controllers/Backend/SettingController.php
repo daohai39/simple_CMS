@@ -44,6 +44,7 @@ class SettingController extends BackendController
     public function edit($id)
     {
         $setting = $this->setting->find($id);
+        $setting->load('images');
         return view('backend.setting.edit', compact('setting'));
     }
 

@@ -18,7 +18,7 @@
             uploadImage: function(image) {
                 var self = this;
                 var data = new FormData();
-                data.append("images", image);
+                data.append("image", image);
                 $.ajax({
                     url: router.route('admin.media.image.store'),
                     cache: false,
@@ -27,6 +27,7 @@
                     data: data,
                     type: "post",
                     success: function(image) {
+                        console.log(image);
                         var img = $('<img>').attr('src', image.url);
                         $(self.rawNode).summernote("insertNode", img[0]);
                     },

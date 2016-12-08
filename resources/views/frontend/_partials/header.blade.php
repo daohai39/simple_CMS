@@ -2,13 +2,15 @@
 	<div id="main-header" class="main-header header-sticky">
 		<div class="inner-header clearfix">
 			<div class="logo">
-				<a href="{{ route('frontend.index') }}"><img src="{{ asset('files/images/logo.png') }}" width="100px" alt="Logo"></a>
+				<a href="{{ route('frontend.index') }}"><img src="{{ $settings['logo'] }}" style="width:100px" alt="{{ $settings['name'] }}"></a>
+                <h1 class="pull-right hidden-lg hidden-xs" style="font-weight: 300;">{{ $settings['name'] }}</h1>
 			</div>
-			<div class="header-right-toggle pull-right hidden-md hidden-lg">
+			<div class="header-right-toggle pull-right hidden-lg">
 				<a href="javascript:void(0)" class="side-menu-button"><i class="fa fa-bars"></i></a>
 			</div>
-			<nav class="main-navigation pull-right hidden-xs hidden-sm">
+			<nav class="main-navigation pull-right hidden-xs hidden-sm hidden-md">
 				<ul>
+                    <li><a href="{{ route('frontend.post.show', ['slug' => 'gioi-thieu']) }}">Giới Thiệu</a></li>
     				<li><a href="{{ route('frontend.post.index') }}">Bài Viết</a></li>
     				<li><a href="{{ route('frontend.slug.show', ['slug' => 'san-pham-thong-minh']) }}">Sản Phẩm Thông Minh</a></li>
     				<li><a href="#" class="has-submenu">Phòng Xông Hơi</a>

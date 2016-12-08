@@ -17,9 +17,9 @@ class CreateCustomersTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('address');
+            $table->string('email')->unique()->nullable()->default(null);
+            $table->string('phone')->nullable()->default(null);
+            $table->string('address')->nullable()->default(null);
             $table->timestamps();
         });
     }

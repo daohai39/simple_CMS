@@ -1,8 +1,15 @@
 <?php
 
+use App\Image;
+use App\Jobs\Media\UploadImage;
 use Illuminate\Database\Seeder;
+use Ramsey\Uuid\Uuid;
+use App\Traits\ExecuteCommandTrait;
+
 class SettingSeeder extends Seeder
 {
+    use ExecuteCommandTrait;
+
     /**
      * Run the database seeds.
      *
@@ -11,25 +18,51 @@ class SettingSeeder extends Seeder
     public function run()
     {
         factory(App\Setting::class)->create([
-            'name' => 'Facebook',
-            'key' => 'facebook',
-            'value' => 'http://facebook.com',
+            'name' => 'name',
+            'key' => 'name',
+            'value' => 'Khai Pham Architecture',
             'type' => 'text',
             'default' => true,
         ]);
 
         factory(App\Setting::class)->create([
-            'name' => 'Logo',
-            'key' => 'logo',
-            'value' => 'link/to/logo',
+            'name' => 'title',
+            'key' => 'title',
+            'value' => 'Khai Pham Architecture | Noi That Decoks',
             'type' => 'text',
             'default' => true,
         ]);
+
+        factory(App\Setting::class)->create([
+            'name' => 'meta-title',
+            'key' => 'meta-title',
+            'value' => 'Khai Pham Architecture | Nội thất Decoks',
+            'type' => 'text',
+            'default' => true,
+        ]);
+
+        factory(App\Setting::class)->create([
+            'name' => 'Facebook',
+            'key' => 'facebook',
+            'value' => 'https://www.facebook.com/khai.pham.169',
+            'type' => 'text',
+            'default' => true,
+        ]);
+
+        $logo = factory(App\Setting::class)->create([
+            'name' => 'Logo',
+            'key' => 'logo',
+            'value' => null,
+            'type' => 'image',
+            'default' => true,
+        ]);
+        $logoImage = $this->uploadImage('source', 'logo.png');
+        $logo->attachImage($logoImage);
 
         factory(App\Setting::class)->create([
             'name' => 'Phone',
             'key' => 'phone',
-            'value' => '04-6259-7009',
+            'value' => '04-6259-7009 / 093-454-479 / 096-5555-966',
             'type' => 'text',
             'default' => true,
         ]);
@@ -45,15 +78,7 @@ class SettingSeeder extends Seeder
         factory(App\Setting::class)->create([
             'name' => 'Address',
             'key' => 'address',
-            'value' => '531 Trương Định ,Hoàng Mai ,Hà Nội',
-            'type' => 'text',
-            'default' => true,
-        ]);
-
-        factory(App\Setting::class)->create([
-            'name' => 'meta-title',
-            'key' => 'meta-title',
-            'value' => 'Nội thất Decoks | Khai Pham Architecture',
+            'value' => '531 Trương Định, Hoàng Mai, Hà Nội',
             'type' => 'text',
             'default' => true,
         ]);
@@ -73,5 +98,27 @@ class SettingSeeder extends Seeder
             'type' => 'textarea',
             'default' => true,
         ]);
+    }
+
+    public function uploadImage($disk, $filename)
+    {
+        $file = explode('.', $filename);
+        $name = $file[0];
+        $extension = $file[1];
+
+        $image = new Image();
+        $image->id = Uuid::uuid4()->toString();
+        $image->disk = $disk;
+        $image->directory = '';
+        $image->filename = $name;
+        $image->extension = $extension;
+        $image->mime_type = \Storage::disk($disk)->getMimeType($filename);
+        $image->aggregate_type = 'image';
+        $image->size = \Storage::disk($disk)->getSize($filename);
+
+        return $this->executeCommand(new UploadImage([
+            'id' => Uuid::uuid4()->toString(),
+            'file' => $image->toArray(),
+        ]));
     }
 }

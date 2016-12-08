@@ -31,7 +31,7 @@ class SlugController extends Controller
                 return view('frontend.product.index', ['category' => $category, 'products' => $category->childrenProducts()->paginate(16)]);
             }
 
-            $products = $this->products->paginateByCategorySlug($slug, 16);
+            $products = $this->products->paginateByCategorySlug($slug, 12);
             return view('frontend.product.index', ['category' => $category, 'products' => $products]);
         }
         return abort(404);

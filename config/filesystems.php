@@ -49,6 +49,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'source' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/sources'),
+            'prefix' => 'storage/sources',
+            'visibility' => 'public',
+        ],
+
         'document' => [
             'driver' => 'local',
             'root' => storage_path('app/public/documents'),
@@ -59,13 +66,6 @@ return [
         'upload' => [
             'driver' => 'local',
             'root' => storage_path('app/uploads'),
-            'visibility' => 'public',
-        ],
-
-        'source' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/sources'),
-            'prefix' => 'storage/sources',
             'visibility' => 'public',
         ],
 

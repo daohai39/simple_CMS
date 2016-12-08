@@ -26,7 +26,7 @@ class ProjectDataTable extends AbstractDataTable implements ProjectDataTableInte
                 if($customer = $project->customer) {
                     return '<a href="'.route('admin.customer.edit', ['id' => $customer->id]).'">'.$customer->name.'</a>';
                 }
-                return 'No Customer';
+                return null;
             })
             ->hasActions(['update', 'delete'])
             ->make();

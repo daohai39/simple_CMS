@@ -19,12 +19,12 @@
                 </a>
             </li>
 
-            <li class="treeview">
+            <!-- <li class="treeview">
                 <a href="{{ route('admin.tag.index') }}">
                     <i class="fa fa-tags"></i>
                     <span>Tag</span>
                 </a>
-            </li>
+            </li> -->
 
             <li class="treeview">
                 <a href="{{ route('admin.post.index') }}">

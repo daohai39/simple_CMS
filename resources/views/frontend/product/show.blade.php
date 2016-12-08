@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('title', $product->name)
 
 @section('content')
@@ -7,7 +6,7 @@
     <div class="container">
         <div class="page-name">
             <h1>{{ $product->name }}</h1>
-            <span>Designer: {{ $product->designer->name  }}</span>
+            <span>Thiết Kế: {{ $product->designer->name  }}</span>
         </div>
     </div>
 </section>
@@ -35,10 +34,16 @@
 
 					<div class="single-content">
 						<h3><a href="#">{{ $product->name }}</a></h3>
-						<span>
-                            <a href="#">{{ $product->created_at }}</a>
+                        <span>
+                            @foreach($product->tags as $tag)
+                                @if(! $loop->last)
+                                <a href="">{{ $tag->name }}</a>,
+                                @else
+                                <a href="">{{ $tag->name }}</a>
+                                @endif
+                            @endforeach
                         </span>
-						<p>{{ $product->description }}</p>
+						<p>{!! $product->description !!}</p>
 					</div>
 
                     <div class="fb-comments" data-href="{{ url()->current() }}" data-width="100%" data-numposts="5"></div>
@@ -54,13 +59,13 @@
 						</div>
 					</div>
 					<div class="info project-name">
-						<span>Project name: <em>{{ $product->name }}</em></span>
+						<span>Tên: <em>{{ $product->name }}</em></span>
 					</div>
 					<div class="info data-share">
-						<span>Data shared: <em>{{ $product->created_at }}</em></span>
+						<span>Ngày Đăng: <em>{{ $product->created_at }}</em></span>
 					</div>
 					<div class="info category">
-						<span>Category: <em>{{ $product->category->name }}</em></span>
+						<span>Danh Mục: <em>{{ $product->category->name }}</em></span>
 					</div>
 					<div class="info share-on">
 						<div class="social-icons">

@@ -17,10 +17,10 @@ class UpdateProject
     public $attributes = [
         'images_id' => [],
         'documents_id' => [],
-        'customer_id' => null,
     ];
     public $rules = [
         'name' => 'required|min:3',
+        'customer_id' => 'nullable|exists:customers,id'
     ];
 
 

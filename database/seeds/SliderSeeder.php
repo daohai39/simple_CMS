@@ -22,35 +22,21 @@ class SliderSeeder extends Seeder
         $this->makeSlider(
             'Khai Pham Architecture',
             'Công ty chuyên thiết kế và thi công nội thất hiện đại, chuyên nghiệp...',
-            null,
+            'noi-that-phong-khach.jpg',
             route('frontend.slug.show', ['slug' => 'phong-khach'])
         );
 
         $this->makeSlider(
-            null,
-            'Nội thất phòng khách',
-            null,
-            route('frontend.slug.show', ['slug' => 'phong-khach'])
-        );
-
-        $this->makeSlider(
-            null,
-            'Phòng bé gái',
-            null,
+            'Nội thất phòng ngủ',
+            'Phòng ngủ bé gái',
+            'phong-con-gai.jpg',
             route('frontend.slug.show', ['slug' => 'phong-ngu'])
         );
 
         $this->makeSlider(
-            null,
-            'Phòng ngủ',
-            null,
-            route('frontend.slug.show', ['slug' => 'phong-ngu'])
-        );
-
-        $this->makeSlider(
-            null,
-            'Phòng ngủ sang trọng',
-            null,
+            'Nội thất phòng ngủ',
+            'Phòng ngủ bé trai',
+            'phong-con-trai.jpg',
             route('frontend.slug.show', ['slug' => 'phong-ngu'])
         );
     }

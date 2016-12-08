@@ -16,11 +16,11 @@ class CreateProject
     public $attributes = [
         'images_id' => [],
         'documents_id' => [],
-        'customer_id' => null,
     ];
     public $rules = [
         'id' => 'required',
         'name' => 'required|min:3',
+        'customer_id' => 'nullable|exists:customers,id'
     ];
 
 

@@ -4,10 +4,27 @@
     	<meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	    <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="{{ $settings['meta-description'] or 'Decoks' }}">
-        <meta name="title"  content="{{ $settings['meta-title'] or 'Decoks' }}" />
+        <title>{{ $settings['title'] }} - @yield('title')</title>
+        <meta name="description" content="{{ $settings['meta-description'] or 'Khai Pham Architecture | Noi That Decoks' }}">
+        <meta name="title"  content="{{ $settings['name'] or 'Khai Pham Architecture | Noi That Decoks' }}" />
 
-		<title>Khai Pham - @yield('title')</title>
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ url('storage/sources/apple-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ url('storage/sources/apple-icon-60x60.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ url('storage/sources/apple-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{ url('storage/sources/apple-icon-76x76.png') }}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ url('storage/sources/apple-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{ url('storage/sources/apple-icon-120x120.png') }}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ url('storage/sources/apple-icon-144x144.png') }}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{ url('storage/sources/apple-icon-152x152.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url('storage/sources/apple-icon-180x180.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{{ url('storage/sources/android-icon-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url('storage/sources/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{ url('storage/sources/favicon-96x96.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url('storage/sources/favicon-16x16.png') }}">
+        <meta name="msapplication-TileImage" content="{{ url('storage/sources/ms-icon-144x144.png') }}">
+        <link rel="manifest" href="{{ url('storage/sources/manifest.json') }}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">

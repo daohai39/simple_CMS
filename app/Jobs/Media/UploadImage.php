@@ -79,7 +79,7 @@ class UploadImage
 
         if($this->attributes['file'] instanceof UploadedFile) {
             $rules = array_merge($rules, [
-                'file' => 'required|image|max:5000'
+                'file' => 'required|image'
             ]);
         }
 

@@ -18,7 +18,11 @@ class CreateSlidersTable extends Migration
             $table->primary('id');
             $table->string('url');
             $table->string('heading')->nullable()->default(null);
+            $table->string('heading_size')->nullable()->default(null);
+            $table->string('heading_color')->nullable()->default(null);
             $table->string('description')->nullable()->default(null);
+            $table->string('description_size')->nullable()->default(null);
+            $table->string('description_color')->nullable()->default(null);
             $table->timestamps();
         });
     }

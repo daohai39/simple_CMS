@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('title', $category->name)
 
 @section('content')
@@ -7,7 +6,7 @@
         <div class="container">
             <div class="page-name">
                 <h1>{{ $category->name }}</h1>
-                <span></span>
+                <span>Thiết kế bởi Khai Pham Architecture</span>
             </div>
         </div>
     </section>

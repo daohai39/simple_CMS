@@ -57,13 +57,10 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $id = Uuid::uuid4()->toString();
-        $attributes = [
+        $attributes = array_merge($request->all(), [
             'id' => $id,
             'image_id' => $request->images_id,
-            'url' => $request->url,
-            'heading' => $request->heading,
-            'description' => $request->description,
-        ];
+        ]);
 
         $this->executeCommand(new CreateSlider($attributes));
         flash('Created Successfully', 'success');
@@ -92,12 +89,9 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $attributes = [
+        $attributes = array_merge($request->all(), [
             'image_id' => $request->images_id,
-            'url' => $request->url,
-            'heading' => $request->heading,
-            'description' => $request->description,
-        ];
+        ]);
 
         $this->executeCommand(new UpdateSlider($id, $attributes));
         flash('Edited Successfully', 'success');

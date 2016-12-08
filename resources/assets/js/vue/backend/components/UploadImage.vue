@@ -169,6 +169,7 @@
                     if(self.thumbnailable) {
                         self.imageThumbnailable(image, index);
                     }
+
                     if(self.previewable) {
                         self.imagePreviewable(image, index);
                     }
@@ -221,7 +222,7 @@
         },
         ready: function () {
             this.initDz()
-            this.dzMockImages().then(!this.single ? this.imagesRendering : null)
+            this.dzMockImages().then(this.imagesRendering)
         }
     }
 </script>

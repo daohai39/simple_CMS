@@ -25,6 +25,11 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $this->makeProducts(200);
+
+        $featured = App\Product::inRandomOrder()->limit(9)->get()->filter(function ($item, $key) {
+            $item->featured = true;
+            $item->save();
+        });
     }
 
     private function makeProducts($total = 30)
@@ -41,7 +46,7 @@ class ProductSeeder extends Seeder
                 'code' => $this->faker->postcode,
                 'designer_id' => App\Designer::inRandomOrder()->first()->id,
                 'category_id' => $category->id,
-                'featured' => $this->faker->randomElement([true, false]),
+                'featured' => false,
                 'description' => $this->faker->paragraphs(3, true),
                 'tags' => $this->faker->words(rand(0, 10)),
             ]));

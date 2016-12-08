@@ -4,22 +4,22 @@
 	      <div class="row">
 	        <div class="about col-md-8 col-xs-12">
                 @if(isset($settings['about']))
-	        	<h3>About us</h3>
+	        	<h3>Giới Thiệu Chung</h3>
 		        <p>
 		          	{{ $settings['about'] or '' }}
 		        </p>
                 @endif
 	        </div>
 	        <div class="address col-md-4 col-xs-12">
-	        	<h3>Contact us</h3>
+	        	<h3>Liên hệ</h3>
 	        	<ul class="socials">
                     @if(isset($settings['address']))
-                    <li><span class="footer-header">Address: </span>{{ $settings['address'] }}</li>
+                    <li><span class="footer-header">Địa Chỉ: </span>{{ $settings['address'] }}</li>
                     <div class="clearfix"></div>
                     @endif
 
 		            @if(isset($settings['phone']))
-                    <li><span class="footer-header">Phone: </span>{{ $settings['phone'] }}</li>
+                    <li><span class="footer-header">Điện Thoại: </span>{{ $settings['phone'] }}</li>
                     <div class="clearfix"></div>
                     @endif
 

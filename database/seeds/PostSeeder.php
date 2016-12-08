@@ -25,6 +25,17 @@ class PostSeeder extends Seeder
     public function run()
     {
         $this->makePosts();
+
+        $this->executeCommand(new CreatePost([
+            'id'               => (string) Uuid::uuid4(),
+            'author'           => 'Khai Pham Architecture',
+            'title'            => 'Giới Thiệu',
+            'content'          => $this->faker->paragraph,
+            'featured'         => false,
+            'status'           => Post::STATUS_PUBLISH,
+            'description'      => $this->faker->paragraph,
+            'tags'             => [],
+        ]));
     }
 
     private function makePosts($total = 30)

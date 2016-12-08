@@ -10,10 +10,10 @@
     </div>
     <div class="form-group">
         <label for="name">Phone Number<span required="required">*</span></label>
-        <input type="text" name="phone" required="required" class="form-control" placeholder="" value="{{ isset($customer) ? $customer->phone : old('phone') }}">
+        <input type="text" name="phone" class="form-control" placeholder="" value="{{ isset($customer) ? $customer->phone : old('phone') }}">
     </div>
     <div class="form-group">
         <label for="name">Address</label>
-        <input type="text" name="address" required="required" class="form-control" placeholder="" value="{{ isset($customer) ? $customer->address : old('address') }}">
+        <input type="text" name="address" class="form-control" placeholder="" value="{{ isset($customer) ? $customer->address : old('address') }}">
     </div>
 </div>

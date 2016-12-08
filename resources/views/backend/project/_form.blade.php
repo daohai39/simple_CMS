@@ -1,11 +1,3 @@
-@push('pre-styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
-@endpush
-
-@push('pre-scripts')
-    <script src="{{ asset('assets/vendor/select2/select2.full.min.js') }}"></script>
-@endpush
-
 <div class="box-body">
     {{ csrf_field() }}
 
@@ -15,11 +7,20 @@
     </div>
 
     <div class="form-group">
-        <label for="customer_id">Customer</label>
-        <select name="customer_id" class="form-control select2" id="select2-project-customer">
-            <option selected="selected" value="{{ isset($project->customer) ? $project->customer->id : old('customer_id') }}">
-                {{ isset($project->customer) ? $project->customer->name : '' }}
+        <label for="customer">Customer</label>
+        <select name="customer" multiple="multiple" required="required" class="form-control select2" id="select2-project-customer">
+            @if(isset($project) && $project->customer)
+            <option selected="selected" value="{{ $project->customer->name }}">
+                {{ $project->customer->name }}
+                @if($project->customer->email)
+                    - {{ $project->customer->email }}
+                @endif
             </option>
+            @elseif(old('customer'))
+            <option selected="selected" value="{{ old('customer') }}">
+                {{ old('customer') }}
+            </option>
+            @endif
         </select>
     </div>
 
@@ -43,6 +44,8 @@
 <script>
     select2 = new Select2("#select2-project-customer", {
         placeholder: "Customer ...",
+        tags: true,
+        maximumSelectionLength: 1,
         allowClear: true,
         ajax: {
             url: laroute.route("admin.customer.create"),
@@ -50,9 +53,26 @@
                 return {
                     q: params.term,
                     page: params.page,
-                    type: 'root',
                 }
-            }
+            },
+            processResults: function (response, params) {
+                params.page = params.page || 1;
+                return {
+                    results: $.map(response.data, function (item) {
+                        var text = '';
+                        if(item['email']) {
+                            text = item['name']+' - '+item['email'];
+                        }
+                        return {
+                            text: text || item['name'],
+                            id: item['name']
+                        }
+                    }),
+                    pagination: {
+                        more: response.to < response.total
+                    }
+                };
+            },
         }
     });
 </script>
