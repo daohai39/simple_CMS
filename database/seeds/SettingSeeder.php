@@ -56,8 +56,6 @@ class SettingSeeder extends Seeder
             'type' => 'image',
             'default' => true,
         ]);
-        $logoImage = $this->uploadImage('source', 'logo.png');
-        $logo->attachImage($logoImage);
 
         factory(App\Setting::class)->create([
             'name' => 'Phone',

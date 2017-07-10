@@ -42,15 +42,12 @@ class ProjectSeeder extends Seeder
     public function makeStage($project_id, $total = 4)
     {
         for($i = 0 ; $i < $total; $i ++) {
-            $finished_at = $this->faker->date('d/m/Y');
 
             $this->executeCommand(new CreateStage([
                 'id' => (string) Uuid::uuid4(),
                 'project_id' => $project_id,
                 'name' => $this->faker->words(3, true),
                 'description' => $this->faker->paragraphs(3, true),
-                'started_at' => $this->faker->date('d/m/Y', $finished_at-1),
-                'finished_at' => $finished_at,
                 'expected_cost' => $this->faker->randomFloat(3, 0, null),
                 'actual_cost' => $this->faker->randomFloat(3, 0, null),
                 'paid' => $this->faker->randomElement([true, false]),
